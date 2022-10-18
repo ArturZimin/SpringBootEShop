@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Authorization</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <style>.but_login{border-radius: 10%;height: 3em; width: 6em;}</style>
+</head>
+
+<body>
+
+<form th:action="@{/auth}" method="post">
+    <div>
+        <h1>Authorization-form</h1>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="username" id="floatingInput" required>
+            <label for="floatingInput">username</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" name="password" id="floatingPassword" required>
+            <label for="floatingPassword">Password</label>
+        </div>
+        <br/>
+
+        <button class="but_login" type="submit">Log in</button>
+    </div>
+</form>
+
+</body>
+
+</html>
