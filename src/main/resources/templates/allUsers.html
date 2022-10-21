@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="2">
+    <tr>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Role</td>
+        <td>Address</td>
+        <td>Phone</td>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}">Name</td>
+        <td th:text="${user.email}">Email</td>
+        <td th:text="${user.role}">Role</td>
+        <td th:text="${user.address}">Address</td>
+        <td th:text="${user.phone}">Phone</td>
+    </tr>
+</table>
+
+<div th:insert="~{parts/menu::#_nav_menu}"></div>
+</body>
+</html>

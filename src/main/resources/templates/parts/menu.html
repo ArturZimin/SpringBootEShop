@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="_nav_menu">
+    <label>Menu -> </label>
+
+    <a th:href="@{/login}"> | Log in |</a>
+    <a th:href="@{/logout}">| Log out |</a>
+    <a th:href="@{/users/registration}">| Registration |</a>
+    <!--{/logout} передается в config для разлогирования-->
+    <a th:href="@{/users/get/all}">| Show all users |</a>
+    <a th:href="@{/users/new}">| Add user |</a>
+    <a th:href="@{/delete/users}">| Delete user |</a>
+    <a th:href="@{/change/users}">| Change user |</a>
+</div>
+</body>
+</html>

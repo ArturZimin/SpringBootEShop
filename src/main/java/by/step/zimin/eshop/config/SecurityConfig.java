@@ -42,11 +42,12 @@ public class SecurityConfig  {
         return http.csrf(csrf->csrf.disable())
                 .authorizeRequests(auth->{
                     try {
-                        auth.antMatchers("/users/new").hasAuthority(Role.ADMIN.name());
+                        auth.antMatchers("/users/new","/users/get/all").hasAuthority(Role.ADMIN.name());
                         auth.anyRequest().permitAll();
                         auth.and()
                                 .formLogin()
                                 .loginPage("/login") //если не админ переходит на стр атентификации
+                                .failureUrl("/loginError")//если произошли какие-либо файлы выводим страничку
                                 .loginProcessingUrl("/auth")
                                 .permitAll()
                                 .and()
@@ -62,25 +63,27 @@ public class SecurityConfig  {
 
     }
 
-
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
-    }
-
-
-    @Basic
-    private AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider auth=new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userService);
-        auth.setPasswordEncoder(passwordEncoder());
-        return  auth;
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
 
         return new BCryptPasswordEncoder();
     }
+
+
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.authenticationProvider(authenticationProvider());
+//    }
+
+
+//    @Basic
+//    private AuthenticationProvider authenticationProvider(){
+//        DaoAuthenticationProvider auth=new DaoAuthenticationProvider();
+//        auth.setUserDetailsService(userService);
+//        auth.setPasswordEncoder(passwordEncoder());
+//        return  auth;
+//    }
+
+
 
 
 
