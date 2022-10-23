@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+
+</head>
+
+<body>
+<div th:insert="~{parts/menu::#_nav_menu}"></div>
+
+<table border="1" align="left">
+    <tr>
+        <td>Title</td>
+        <td>Price</td>
+    </tr>
+<!--    через foreach перебираем список-->
+    <tr th:each="product : ${products}">
+        <td th:text="${product.title}">Phone</td>
+        <td th:text="${product.price}">650</td>
+    </tr>
+</table>
+
+</body>
+
+</html>

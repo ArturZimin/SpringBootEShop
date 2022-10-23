@@ -42,16 +42,17 @@ public class SecurityConfig  {
         return http.csrf(csrf->csrf.disable())
                 .authorizeRequests(auth->{
                     try {
-                        auth.antMatchers("/users/new","/users/get/all").hasAuthority(Role.ADMIN.name());
-                        auth.anyRequest().permitAll();
+                        auth.antMatchers("/users/get/all").hasAnyAuthority(Role.MANAGER.name(),Role.ADMIN.name());//showAllUsers can only manager and ADMIN
+                        auth.antMatchers("/users/new").hasAuthority(Role.ADMIN.name());//and admin
+                        auth.anyRequest().permitAll();//разрешить все
                         auth.and()
                                 .formLogin()
                                 .loginPage("/login") //если не админ переходит на стр атентификации
-                                .failureUrl("/loginError")//если произошли какие-либо файлы выводим страничку
+                                .failureUrl("/error")//если произошли какие-либо файлы выводим страничку
                                 .loginProcessingUrl("/auth")
-                                .permitAll()
+                                .permitAll()//разрешить все
                                 .and()
-                                .  logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .  logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))//разлогирование
                                 .logoutSuccessUrl("/").deleteCookies("JSESSIONID")
                                 .invalidateHttpSession(true);
                     } catch (Exception e) {

@@ -8,14 +8,25 @@
 <div id="_nav_menu">
     <label>Menu -> </label>
 
-    <a th:href="@{/login}"> | Log in |</a>
-    <a th:href="@{/logout}">| Log out |</a>
+<!--    <a th:href="@{/login}"> | Log in |</a>-->
+<!--    <a th:href="@{/logout}">| Log out |</a>-->
     <a th:href="@{/users/registration}">| Registration |</a>
     <!--{/logout} передается в config для разлогирования-->
-    <a th:href="@{/users/get/all}">| Show all users |</a>
-    <a th:href="@{/users/new}">| Add user |</a>
-    <a th:href="@{/delete/users}">| Delete user |</a>
-    <a th:href="@{/change/users}">| Change user |</a>
+    <a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')"><a th:href="@{/users/get/all}">| Show all users |</a></a>
+    <a sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/users/new}">| Add user |</a></a>
+<!--    <a th:href="@{/delete/users}">| Delete user |</a>-->
+<!--    <a th:href="@{/change/users}">| Change user |</a>-->
+
+    <div sec:authorize="isAuthenticated()">
+        <img src="../../static/css/img/admin.png" align="left">
+    <div>Hello: <span sec:authentication="principal.username">Name</span></div>
+    <div><a th:href="@{/logout}">Log out</a></div>
 </div>
+<div sec:authorize="!isAuthenticated()">
+    <div> Hello: Unknown.Please <a th:href="@{/login}"> | Log in |</a> </div>
+</div>
+</div>
+
+
 </body>
 </html>
