@@ -5,20 +5,27 @@
     <title>Title</title>
 </head>
 <body>
-<table border="2">
+<table border="7px" cellspacing="4px" >
+    <th>All users table</th>
     <tr>
+        <td>Id</td>
         <td>Name</td>
+        <td>Password</td>
         <td>Email</td>
         <td>Role</td>
         <td>Address</td>
         <td>Phone</td>
+        <td>function</td>
     </tr>
     <tr th:each="user : ${users}">
+        <td th:text="${user.id}">Id</td>
         <td th:text="${user.username}">Name</td>
+        <td th:text="${user.password}">Password</td>
         <td th:text="${user.email}">Email</td>
         <td th:text="${user.role}">Role</td>
         <td th:text="${user.address}">Address</td>
         <td th:text="${user.phone}">Phone</td>
+        <td><a th:href="@{/users/delete/{userId}/user(userId=${user.id})}">Delete</a></td>
     </tr>
 </table>
 <br/>

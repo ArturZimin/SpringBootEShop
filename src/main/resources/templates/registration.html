@@ -11,42 +11,44 @@
 
 <body>
 
-<form  th:action="@{/users/registration}" th:object="${user}" method="post">
-    <div>
-        <h1>Registration-form</h1>
-        <br/>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control"  name="username" id="username" minlength="5" maxlength="20" required/>
-            <label for="username">username (Name Surname ,from 5 to 20 symbols)</label>
-        </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" name="password" id="floatingPassword" minlength="4" maxlength="20" required/>
-            <label for="floatingPassword">Password</label>
-        </div>
-        <br/>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="8" required/>
-            <label for="email">email (example@gmail.com)</label>
-        </div>
+<form th:action="@{/users/registration}" th:object="${user}" method="post" id="_form">
 
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="address" id="address" />
-            <label for="address">address (only for deliver ->Minsk region, ul.Kalinovskogo 11/12) </label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="phone" id="phone" min="7" max="15" value="+375" required>
-            <label for="phone">phone ( +375295557722 )</label>
-        </div>
+    <h1>Registration-form</h1>
+    <br/>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="username" id="username" minlength="5" maxlength="20" required/>
+        <label for="username">username (Name Surname ,from 5 to 20 symbols)</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" name="password" id="floatingPassword" minlength="4" maxlength="20"
+               required/>
+        <label for="floatingPassword">Password (min 4 symbols)</label>
+    </div>
 
-        <button class="log_in" type="submit">Registration</button>
-        <br/></div>
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="8" required/>
+        <label for="email">email (example@gmail.com)</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="address" id="address"/>
+        <label for="address">address (only for deliver ->Minsk region, ul.Kalinovskogo 11/12) </label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="phone" id="phone" min="7" max="15" value="+375" required>
+        <label for="phone">phone ( +375295557722 )</label>
+    </div>
+
+    <button id="_but" type="submit">Registration</button>
+    <br/></div>
+
+    <div th:insert="~{parts/menu::#_nav_menu}"></div>
+
+
+
+
 </form>
-<div th:insert="~{parts/menu::#_nav_menu}"></div>
-
-
 <script src="../static/css/js/script.js"/>
-
-
 </body>
 
 </html>

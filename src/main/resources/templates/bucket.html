@@ -1,0 +1,32 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<div th:insert="~{parts/menu::#_nav_menu}"></div>
+<h2>Count product in bucket</h2>
+<h3 > <b  th:text="${bucket.sum}">1000</b></h3>
+
+<table border="2" >
+    <tr>
+        <td>Title</td>
+        <td>Amount</td>
+        <td>Price</td>
+        <td>Sum</td>
+        <td></td>
+    </tr>
+    <tr th:each="detail:${bucket.details}">
+        <td th:text="${detail.title}">Title</td>
+        <td th:text="${detail.amount}">Amount</td>
+        <td th:text="${detail.price}">Price</td>
+        <td th:text="${detail.sum}">Sum</td>
+        <td><a th:href="@{/buckets/delete/product/{id}(id=${detail.productId})}">Remove</a></td>
+    </tr>
+
+</table>
+
+</html>

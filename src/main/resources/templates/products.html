@@ -14,11 +14,14 @@
     <tr>
         <td>Title</td>
         <td>Price</td>
+        <td></td>
     </tr>
 <!--    через foreach перебираем список-->
     <tr th:each="product : ${products}">
+
         <td th:text="${product.title}">Phone</td>
         <td th:text="${product.price}">650</td>
+        <td ><a th:href="@{/products/{id}/bucket(id=${product.id})}">Add to bucket</a></td>
     </tr>
 </table>
 

@@ -4,6 +4,10 @@
     box-sizing:border-box;
 }
 
+
+/*===================================================================
+header
+=====================================================================*/
 header, main, aside, footer{
     padding:25px 25px;
     border:1px solid #000;
@@ -18,6 +22,18 @@ header{
 
 }
 
+
+.div_header{
+    display: block;
+    height: 10%;
+    width: 35%;
+
+}
+
+/*===================================================================
+authorization
+=====================================================================*/
+
 .div_autorization{
 
     display: block;
@@ -30,39 +46,24 @@ header{
 }
 
 
-.div_header{
-    display: block;
-    height: 10%;
-    width: 35%;
-
-}
-
-.log_in{
-    margin: 0.5em;
-    height: 5em;
-    width: 7em;
-    border-radius: 1em;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: 600;
-    color:white;
-
-    background-color: rgb(87, 73, 54);
-}
 
 
-.div_buttons_register_login{
-    display: block;
-    height: fit-content;
-    width: 20%;
-    position: relative;
-    left:  85em;
-}
+
+
+
+/*===================================================================
+main
+=====================================================================*/
 main{
     grid-area: main;
     height:600px;
     background-image:url(../img/Apple-Logo-1.jpg);
 }
 
+
+/*===================================================================
+aside
+=====================================================================*/
 aside{
     grid-area: sidebar;
     height:600px;
@@ -110,6 +111,29 @@ address{
 h3{
     font-size:1.5em;
 
+}
+/*=========================================================
+all buttons
+===========================================================*/
+#_but {
+
+    border-radius: 8cm;
+    width: 8vw;
+    height: 4vh;
+}
+
+#_but:hover{
+    border-bottom-color: crimson;
+    background-color: #f3919f;
+
+}
+
+/*=========================================================
+all forms
+===========================================================*/
+
+#_form{
+    margin-left: 2px;
 }
 
 

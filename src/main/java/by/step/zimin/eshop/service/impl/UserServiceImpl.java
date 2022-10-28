@@ -2,15 +2,20 @@ package by.step.zimin.eshop.service.impl;
 
 
 import by.step.zimin.eshop.dto.UserDto;
+import by.step.zimin.eshop.model.Bucket;
+import by.step.zimin.eshop.model.Product;
+import by.step.zimin.eshop.model.Role;
 import by.step.zimin.eshop.model.User;
 import by.step.zimin.eshop.repository.UserRepository;
 import by.step.zimin.eshop.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,20 +31,30 @@ public class UserServiceImpl implements UserService {
 
 
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
+
     @Override
+    @Transactional
     public boolean save(UserDto userDto) {
-            //собираем нашего юзера
-        if (validationUserDto(userDto)){
-        User user = userDtoToUser(userDto);
-           userRepository.save(user);
+
+        //if create or register
+        if (validationUserDto(userDto)) {
+            User user = userDtoToUser(userDto);
+            userRepository.save(user);
             return true;
-        }else {
+        } else {
             return false;
         }
+    }
+
+    @Override
+    @Transactional
+    public void save(User user) {
+        userRepository.save(user);
     }
 
     @Override
@@ -49,12 +64,31 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public User findByName(String name) {
+        return userRepository.findFirstByUsername(name);
+    }
 
+    @Override
+    @Transactional
+    public void updateUser(UserDto userDto) {
+        if (userDto.getId() != null) {
+            Role roleUser = userRepository.findById(userDto.getId()).get().getRole();
+            System.out.println(roleUser);
+            userDto.setRole(roleUser);
+            User user = userDtoToUser(userDto);
+            userRepository.save(user);
+        }
 
+    }
+
+    @Override
     public User userDtoToUser(UserDto userDto) {
+
         //собираем нашего юзера из dto
         User user = User.builder()
-                .userName(userDto.getUsername())
+                .id(userDto.getId())
+                .username(userDto.getUsername())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .email(userDto.getEmail())
                 .role(userDto.getRole())
@@ -64,9 +98,13 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+
+    @Override
     public UserDto toDto(User user) {
         return UserDto.builder()
-                .username(user.getUserName())
+                .id(user.getId())
+                .username(user.getUsername())
+                .password(user.getPassword())
                 .email(user.getEmail())
                 .address(user.getAddress())
                 .role(user.getRole())
@@ -74,17 +112,43 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
+    @Override
+    @Transactional
+    public Boolean deleteProductFromBucketById(Long productId, Long userId) {
+        List<Product> productList = userRepository.findById(userId).get().getBucket().getProductList();//достаем лист продуктов у юзера
 
-    public Boolean validationUserDto(UserDto userDto){
-
-        if (validationName(userDto.getUsername())&&
-        validationEmail(userDto.getEmail())&&
-//        validationPassword(userDto.getPassword())&&
-        validationPhone(userDto.getPhone())){
-            return true;
+        Boolean isRemove = false;
+        for (Product p : productList) {
+            if (p.getId() == productId) {
+                productList.remove(p);
+                isRemove = true;
+                break;
+            }
         }
-        else {
-           return false;
+        User user = userRepository.findById(userId).get();//находим юзера
+        user.getBucket().setProductList(productList);//сеттим список продуктов с удаленным продуктом
+        userRepository.save(user);//сохраняем
+
+        return isRemove;
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(Long userId) {
+        User user = userRepository.findById(userId).get();
+        userRepository.delete(user);
+    }
+
+
+    public Boolean validationUserDto(UserDto userDto) {
+
+        if (validationName(userDto.getUsername()) &&
+                validationEmail(userDto.getEmail()) &&
+//        validationPassword(userDto.getPassword())&&
+                validationPhone(userDto.getPhone())) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -109,7 +173,6 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
-
 
 
     public Boolean validationEmail(String email) {
@@ -147,7 +210,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findFirstByUserName(username);
+        User user = userRepository.findFirstByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with name:" + username);
         }
@@ -156,7 +219,7 @@ public class UserServiceImpl implements UserService {
         roles.add(new SimpleGrantedAuthority(user.getRole().name()));
 
         return new org.springframework.security.core.userdetails.User(
-                user.getUserName(),
+                user.getUsername(),
                 user.getPassword(),
                 roles
         );

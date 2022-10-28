@@ -5,65 +5,69 @@
     <title>Add new user form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <style>
-        .div_form{margin: 10em 20em;}
-        .but_login{border-radius: 10%;height: 3em; width: 6em;}
-    </style>
+    <link rel="stylesheet" href="../css/style.css">
+
 </head>
 <body>
 
-<form th:action="@{/users/new}" th:object="${user}" method="post">
-<div class="div_form">
-        <h1 id="h1_add_user">Add new user - form</h1>
+<form th:action="@{/users/new}" th:object="${user}" method="post" id="_form">
+
+    <h1 id="h1_add_user">Add new user - form</h1>
     <br/>
     <div class="form-floating mb-3">
-        <input type="text" name="username" class="form-control" id="username" th:field="*{username}" required>
-        <label for="username">username</label>
+        <input type="text" name="username" class="form-control" id="username" th:field="*{username}" minlength="5" required/>
+        <label for="username">username (Name Surname ,from 5 to 20 symbols)</label>
     </div>
-    <br/>
-    <div class="form-floating"><input type="password" name="password" class="form-control" id="password" th:field="*{password}" required>
-        <label for="password">password</label>
+
+    <div class="form-floating"><input type="password" name="password" class="form-control" id="password"
+                                      th:field="*{password}"  minlength="4" required/>
+        <label for="password">password (min 4 symbols)</label>
     </div>
-    <br/>
-        <div class="form-floating mb-3">
-            <input type="text" name="address" class="form-control" id="address" th:field="*{address}" required >
-            <label for="address">address</label>
-        </div>
-    <br/>
-        <div class="form-floating mb-3">
-            <input type="text" name="phone" class="form-control" id="phone" th:field="*{phone}" required>
-            <label for="phone">phone</label>
-        </div>
-    <br/>
-        <div class="form-floating mb-3">
-            <input type="email" name="email" class="form-control" id="email" th:field="*{email}" required>
-            <label for="email">email</label>
-        </div>
-    <br/>
+
+    <div class="form-floating mb-3">
+        <input type="text" name="address" class="form-control" id="address" th:field="*{address}" required/>
+        <label for="address">address (only for deliver ->Minsk region, ul.Kalinina 11/1)</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" name="phone" class="form-control" id="phone" th:field="*{phone}" minlength="7" maxlength="15" required/>
+        <label for="phone">phone ( +375295557722 )</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="email" name="email" class="form-control" id="email" th:field="*{email}" minlength="8" required/>
+        <label for="email">email (example@gmail.com)</label>
+    </div>
+
 
     <div class="form-check">
-        <input th:field="*{role}" value="MANAGER" class="form-check-input" type="radio" name="flexRadioDefault" id="manager" checked />
+        <input th:field="*{role}" value="MANAGER" class="form-check-input" type="radio" name="role"
+               id="manager" checked/>
         <label class="form-check-label" for="manager">
             manager
         </label>
     </div>
-    <br/>
+
     <div class="form-check">
-        <input  th:field="*{role}" value="USER" class="form-check-input" type="radio" name="flexRadioDefault" id="client"  checked/>
+        <input th:field="*{role}" value="USER" class="form-check-input" type="radio" name="role"
+               id="client" checked/>
         <label class="form-check-label" for="client">
             user
         </label>
     </div>
-    <br/>
+
     <div class="form-check">
-        <input  th:field="*{role}" value="ADMIN" class="form-check-input" type="radio" name="flexRadioDefault" id="admin" checked />
+        <input th:field="*{role}" value="ADMIN" class="form-check-input" type="radio" name="role"
+               id="admin" checked/>
         <label class="form-check-label" for="admin">admin</label>
     </div>
+
+
+    <button id="_but" type="submit">Add</button>
     <br/>
 
-        <button class="but_login" type="submit">Add</button>
-<div/>
 </form>
+
+<div th:insert="~{parts/menu::#_nav_menu}"></div>
 </body>
 </html>
