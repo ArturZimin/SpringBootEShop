@@ -2,25 +2,25 @@ package by.step.zimin.eshop.controller;
 
 import by.step.zimin.eshop.dto.ProductDto;
 import by.step.zimin.eshop.service.ProductService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
 @Controller
 @RequestMapping("/products")
+@AllArgsConstructor
 public class ProductController {
 
 
     private final ProductService productService;
 
-
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
 
 
     @GetMapping
@@ -42,20 +42,37 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    @GetMapping("/add/products/form")
+    @GetMapping("/add/form")
     public String getFormAddProduct(){
-        return "addProductsForm";
+        return "addProduct";
     }
 
-    @PostMapping("/add/products")
-    public String addProductByAllProducts(@RequestBody ProductDto productDto,Model model){
+
+
+    @PostMapping("/add")
+    public String addProductByAllProducts(@RequestParam("image") MultipartFile file, ProductDto productDto, Model model, Principal principal) throws IOException {
         if (productDto==null){
             throw new RuntimeException("The product is null!");
-
-        }else {
-            Boolean isAdd=productService.addProduct(productDto);
-            model.addAttribute("isAdd",isAdd);
-            return "addProductsForm";
         }
+
+        System.out.println(productDto);
+            Boolean isAdd=productService.addProduct(file,productDto);
+            model.addAttribute("isAdd",isAdd);
+            return "addProduct";
+
     }
 }
+/**
+ * @PostMapping("/profile-picture")
+ *     public ResponseEntity uploadImage(@RequestParam("file") MultipartFile imageFile, @ModelAttribute UserDTO requestDto) {
+ *      try {
+ *           UserDTO created  =userDetailsService.saveImg(requestDto, file.getBytes());
+ *           return new ResponseEntity<>(created, HttpStatus.OK);
+ *
+ *     } catch (IOException e) {
+ *         // TODO Auto-generated catch block
+ *         e.printStackTrace();
+ *     }
+ *     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+ * }
+ */

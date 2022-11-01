@@ -2,16 +2,15 @@ package by.step.zimin.eshop.service.impl;
 
 
 import by.step.zimin.eshop.dto.ProductDto;
-import by.step.zimin.eshop.model.Bucket;
-import by.step.zimin.eshop.model.Product;
-import by.step.zimin.eshop.model.User;
+import by.step.zimin.eshop.model.*;
 import by.step.zimin.eshop.repository.ProductRepository;
-import by.step.zimin.eshop.service.BucketService;
-import by.step.zimin.eshop.service.ProductService;
-import by.step.zimin.eshop.service.UserService;
+import by.step.zimin.eshop.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,11 +22,17 @@ public class ProductServiceImpl implements ProductService {
     private final UserService userService;
     private final BucketService bucketService;
 
+    private final ProductDetailsService productDetailsService;
+    private final ProcessorService processorService;
+    private final CategoryService categoryService;
 
-    public ProductServiceImpl(ProductRepository productRepository, UserService userService, BucketService bucketService) {
+    public ProductServiceImpl(ProductRepository productRepository, UserService userService, BucketService bucketService, ProductDetailsService productDetailsService, ProcessorService processorService, CategoryService categoryService) {
         this.productRepository = productRepository;
         this.userService = userService;
         this.bucketService = bucketService;
+        this.productDetailsService = productDetailsService;
+        this.processorService = processorService;
+        this.categoryService = categoryService;
     }
 
 
@@ -59,8 +64,56 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public Boolean addProduct(ProductDto productDto) {
-        Product product = toProduct(productDto);
+    public Boolean addProduct(MultipartFile file,ProductDto productDto) throws IOException {
+
+
+        ProductDetails productDetails=ProductDetails.builder()
+                .color(productDto.getColor())
+                .frontCamera(productDto.getFrontCamera())
+                .rearCamera(productDto.getRearCamera())
+                .accumulatorCapacity(productDto.getAccumulatorCapacity())
+                .countSim(productDto.getCountSim())
+                .displaySize(productDto.getDisplaySize())
+                .inMemory(productDto.getInMemory())
+                .ramMemory(productDto.getRamMemory())
+                .versionOS(productDto.getVersionOS())
+                .operationSystem(productDto.getOperationSystem())
+                .yearProduction(productDto.getYearProduction())
+                .build();
+
+        System.out.println(productDetails);
+        productDetailsService.addProductDetails(productDetails);
+
+        Processor processor= Processor.builder()
+                .name(productDto.getName())
+                .countCore(productDto.getCountCore())
+                .frequency(productDto.getFrequency())
+                .build();
+
+        System.out.println(processor);
+        processorService.addProcessor(processor);
+
+        Category category=Category.builder()
+                .categoryTitle(productDto.getCategoryTitle())
+                .podCategory(productDto.getPodCategory())
+                .build();
+
+        System.out.println(category);
+        categoryService.addCategory(category);
+
+        Product product =Product.builder()
+                .imageProduct(file.getBytes())
+                .amount(productDto.getAmount())
+                .price(productDto.getPrice())
+                .currencyType(productDto.getCurrencyType())
+                .productDetails(productDetails)
+                .category(category)
+                .processor(processor)
+                .title(productDto.getTitle())
+                .build();
+
+
+
         Product productSaved = productRepository.save(product);
         if (productSaved.getId() != null) {
             return true;
@@ -82,11 +135,12 @@ public class ProductServiceImpl implements ProductService {
                 .id(productDto.getId())
                 .title(productDto.getTitle())
                 .price(productDto.getPrice())
-                .categories(productDto.getCategories())
+                .category(productDto.getCategory())
                 .imageProduct(productDto.getImageProduct())
                 .currencyType(productDto.getCurrencyType())
                 .productDetails(productDto.getProductDetails())
                 .processor(productDto.getProcessor())
+                .amount(productDto.getAmount())
                 .build();
         return product;
     }
@@ -97,10 +151,11 @@ public class ProductServiceImpl implements ProductService {
                 .title(product.getTitle())
                 .price(product.getPrice())
                 .imageProduct(product.getImageProduct())
-                .categories(product.getCategories())
+                .category(product.getCategory())
                 .currencyType(product.getCurrencyType())
                 .productDetails(product.getProductDetails())
                 .processor(product.getProcessor())
+                .amount(product.getAmount())
                 .build();
         return dto;
     }

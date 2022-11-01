@@ -2,13 +2,11 @@ package by.step.zimin.eshop.service.impl;
 
 
 import by.step.zimin.eshop.dto.UserDto;
-import by.step.zimin.eshop.model.Bucket;
 import by.step.zimin.eshop.model.Product;
 import by.step.zimin.eshop.model.Role;
 import by.step.zimin.eshop.model.User;
 import by.step.zimin.eshop.repository.UserRepository;
 import by.step.zimin.eshop.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -155,7 +153,6 @@ public class UserServiceImpl implements UserService {
     public Boolean validationPhone(String phone) {
         String checkPhone = "[\\d+]{7,15}";
         if (phone.matches(checkPhone)) {
-            System.out.println("phone true");
             return true;
         } else {
             return false;
@@ -166,8 +163,6 @@ public class UserServiceImpl implements UserService {
     public Boolean validationName(String name) {
         String checkName = "([a-zA-Z ]{5,20})";
         if (name.matches(checkName)) {
-            System.out.println("name true");
-
             return true;
         } else {
             return false;
@@ -178,8 +173,6 @@ public class UserServiceImpl implements UserService {
     public Boolean validationEmail(String email) {
         String checkEmail = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w{2,8})+$";
         if (email.matches(checkEmail)) {
-            System.out.println("email true");
-
             return true;
         } else {
             return false;
@@ -196,8 +189,6 @@ public class UserServiceImpl implements UserService {
                 pass.matches(check3) &&
                 pass.length() >= 4 &&
                 pass.length() <= 20) {
-            System.out.println("password true");
-
             return true;
         } else {
             return false;

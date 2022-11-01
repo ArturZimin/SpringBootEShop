@@ -4,6 +4,7 @@ import by.step.zimin.eshop.dto.UserDto;
 import by.step.zimin.eshop.model.Role;
 import by.step.zimin.eshop.model.User;
 import by.step.zimin.eshop.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,15 +17,11 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("/users") //http://localhost:8080/users
+@AllArgsConstructor
 public class UserController {
 
 
     private final UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
 
     @GetMapping("/new")//http://localhost:8080/users/new
@@ -39,7 +36,7 @@ public class UserController {
             return "redirect:/";//return index.html  (на основную страницу)
         } else {
             model.addAttribute("user", userDto);
-            return "addUser";//возвращаемся на страничку user.html
+            return "addUser";//возвращаемся на страничку
         }
     }
 

@@ -6,8 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.awt.*;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.time.Year;
 
 @Entity
@@ -29,15 +28,15 @@ public class ProductDetails {
     private Double displaySize;
 
     @Column(name = "year_production")
-    private Year yearProduction;
+    private Date yearProduction;
     @Column(name = "in_memory")
     private Integer inMemory;
     @Column(name = "ram_memory")
     private Integer ramMemory;
     @Column(name = "front_camera")
-    private Integer frontCamera;
+    private Double frontCamera;
     @Column(name = "rear_camera")
-    private Integer rearCamera;
+    private Double rearCamera;
     @Enumerated(EnumType.STRING)
     private OperationSystem operationSystem;
     private Double versionOS;

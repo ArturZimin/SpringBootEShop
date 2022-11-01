@@ -19,6 +19,7 @@
         <input type="text" class="form-control" name="username" id="username" minlength="5" maxlength="20" required/>
         <label for="username">username (Name Surname ,from 5 to 20 symbols)</label>
     </div>
+
     <div class="form-floating">
         <input type="password" class="form-control" name="password" id="floatingPassword" minlength="4" maxlength="20"
                required/>
@@ -42,7 +43,7 @@
     <button id="_but" type="submit">Registration</button>
     <br/></div>
 
-    <div th:insert="~{parts/menu::#_nav_menu}"></div>
+    <div th:insert="~{fragments/menu::#_nav_menu}"></div>
 
 
 

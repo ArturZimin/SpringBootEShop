@@ -1,7 +1,9 @@
 package by.step.zimin.eshop.service;
 
 import by.step.zimin.eshop.dto.ProductDto;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ProductService {
@@ -9,5 +11,5 @@ public interface ProductService {
 
     void addProductToUserBucket(Long productId, String username);
 
-    Boolean addProduct(ProductDto productDto);
+    Boolean addProduct(MultipartFile file,ProductDto productDto) throws IOException;
 }

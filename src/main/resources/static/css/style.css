@@ -57,7 +57,7 @@ main
 main{
     grid-area: main;
     height:600px;
-    background-image:url(../img/Apple-Logo-1.jpg);
+
 }
 
 
@@ -117,14 +117,15 @@ all buttons
 ===========================================================*/
 #_but {
 
-    border-radius: 8cm;
+    border-radius: 8px;
     width: 8vw;
     height: 4vh;
 }
 
 #_but:hover{
-    border-bottom-color: crimson;
-    background-color: #f3919f;
+
+    background-color: red;
+    color: white;
 
 }
 

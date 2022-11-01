@@ -1,5 +1,22 @@
 package by.step.zimin.eshop.model;
-
 public enum Color {
-    WHITE,BLACK,GRAY,BLUE,RED,GREEN,GOLD,YELLOW
+    WHITE("The color is  white."),
+    BLACK("The color is black."),
+    GRAY("The color is gray."),
+    BLUE("The color is blue."),
+    RED("The color is red."),
+    GREEN("The color is GREEN."),
+    GOLD("The color is GOLD."),
+    YELLOW("The color is YELLOW.");
+
+    private String color;
+
+    private   Color (String color) {
+        this.color=color;
+    }
+
+    public String getCurrency(){
+        return color;
+    }
 }
+
