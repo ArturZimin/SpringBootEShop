@@ -1,12 +1,245 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
-    <title>E-SHOP</title>
+    <title>Main page</title>
+    <!-- Correct stylesheet -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+
+    <!--     Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
 </head>
 <body>
-<div th:insert="~{fragments/menu::#_nav_menu}"></div>
+<!--<div th:insert="~{fragments/menu::#_nav_menu}"></div>-->
+
+
+<!-- HEADER -->
+<header id="header_fragment">
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container" id="header_nav_fragment">
+            <ul class="header-links pull-left">
+                <li><a href="#"><i class="fa fa-phone"></i>&#9990; Contact</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i>&#128386;Email</a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i>Address</a></li>
+                <li><a href="#"><i class="fa fa-dollar"></i>&#36; USD</a></li>
+                <li><a href="#" class="link_weather"><i></i>&#9729; Weather</a></li>
+
+                <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/users/get/all}">Show all users</a></li>
+                <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users/new}">Add user</a></li>
+                <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/products/add/form}">Add products</a></li>
+                <li><a th:href="@{/products}">All products</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="logout_right">  Log out </a></li>
+                <li><a sec:authorize="!isAuthenticated()" th:href="@{/users/registration}">Registration</a></li>
+
+                <li><a href="#" sec:authorize="isAuthenticated()" th:href="@{/users/update}" sec:authentication="principal.username" class="my_account">&#10155; User name </a></li>
+                <li><a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="my_account">Please: Log in </a></li>
+
+
+
+            </ul>
+        </div>
+    </div>
+    <!-- /TOP HEADER -->
+
+
+    <!-- Bucket and search -->
+    <div class="bucket_search">
+
+        <div class="div_img_hotdeal">
+            <a href="#"><img alt="icon" src="/img/s-mart.png" height="170" width="170"></a>
+            <a href="#"><img src="/img/product07.png" height="200px" width="200px"></a>
+            <a href="#"><img src="/img/product02.png" height="200px" width="200px"/></a>
+            <a href="#"><img src="/img/product04.png" height="200px" width="200px"/></a>
+            <a href="#"><img src="/img/product01.png" height="200px" width="200px"/></a>
+            <a href="#"><img src="/img/product09.png" height="200px" width="200px"/></a>
+            <a href="#" sec:authorize="isAuthenticated()" th:href="@{/buckets/get}"><img src="/img/backet.jpg" height="200px" width="200px" alt="icon_bucket"/>
+                <div class="counter"><b><span>Bucket:</span></b><b><span >0</span></b></div></a>
+        </div>
+
+
+        <div>
+            <hr/>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="header-search">
+            <diV>
+                <form style="padding: 0 ; ">
+                    <select class="input-select">
+                        <option value="0">All Categories</option>
+                        <option value="1">Phone</option>
+                        <option value="2">Notebook</option>
+                        <option value="3">Laptop</option>
+                        <option value="4">Watch</option>
+                        <option value="5">Accessory</option>
+                    </select>
+                    <input type="text" name="search" class="input_search" placeholder="Nokia 3310">
+                    <button class="search-btn" type="submit">Search</button>
+                </form>
+            </diV>
+        </div>
+        <!-- /SEARCH BAR -->
+
+    </div>
+    <!-- Bucket -->
+</header>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <div class="nav_nav">
+        <!-- NAV -->
+        <ul class="main-nav nav navbar-nav">
+
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Laptops</a></li>
+            <li><a href="#">Smartphones</a></li>
+            <li><a href="#">Cameras</a></li>
+            <li><a href="#">Accessories</a></li>
+
+        </ul>
+        <!-- /NAV -->
+    </div>
+</nav>
+<!-- /NAVIGATION -->
+
+<!-- WEATHER -->
+<div id="weather_fragment" class="div_weather"><a class="weatherwidget-io" href="https://forecast7.com/ru/53d9027d56/minsk/"
+                            data-label_1="MINSK"
+                            data-label_2="WEATHER" data-font="Georgia" data-theme="fall-leaves" data-cloudcolor="">MINSK
+    WEATHER</a>
+    <script>
+        !function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://weatherwidget.io/js/widget.min.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+        }(document, 'script', 'weatherwidget-io-js');
+    </script>
+</div>
+<!-- /WEATHER -->
+<div class="main_products_flex">
+    <div class="product"></div>
+    <div class="product"></div>
+    <div class="product"></div>
+    <div class="product"></div>
+    <div class="product"></div>
+    <div class="product"></div>
+    <div class="product"></div>
+    <div class="product"></div>
+    <div class="product"></div>
+
+</div>
+
+<div id="_map">
+    <iframe
+            src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2488.312569701565!2d27.656037424440353!3d53.93788443439389!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sby!4v1665990083824!5m2!1sru!2sby"
+            width="30%" height="15%" style="border:1em; border-radius: 0.2em; padding-top: 0.2em;" allowfullscreen=""
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <a name="show_map"></a></div>
+
+
+<!-- NEWDISCOUNTS -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>New Discounts</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
+
+<!-- FOOTER -->
+<footer id="footer">
+
+
+    <!-- top footer -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">About Us</h3>
+                        <p></p>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fa fa-map-marker"></i> Minsk , ul Kalinowskogo 17/7</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i>+375333252505</a></li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i>sm@rt@email.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Categories</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Laptops</a></li>
+                            <li><a href="#">Smartphones</a></li>
+                            <li><a href="#">Cameras</a></li>
+                            <li><a href="#">Accessories</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="clearfix visible-xs"></div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Service</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">View Bucket</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /top footer -->
+
+</footer>
+<!-- /FOOTER -->
+
+<script src="/js/script.js"></script>
 </body>
+
+
 </html>
 
 

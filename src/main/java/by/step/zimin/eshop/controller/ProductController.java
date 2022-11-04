@@ -50,14 +50,19 @@ public class ProductController {
 
 
     @PostMapping("/add")
-    public String addProductByAllProducts(@RequestParam("image") MultipartFile file, ProductDto productDto, Model model, Principal principal) throws IOException {
+    public String addProductByAllProducts(@RequestParam("image") MultipartFile file, ProductDto productDto, Model model, Principal principal) {
         if (productDto==null){
             throw new RuntimeException("The product is null!");
         }
 
         System.out.println(productDto);
-            Boolean isAdd=productService.addProduct(file,productDto);
-            model.addAttribute("isAdd",isAdd);
+        Boolean isAdd= null;
+        try {
+            isAdd = productService.addProduct(file,productDto);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("isAdd",isAdd);
             return "addProduct";
 
     }

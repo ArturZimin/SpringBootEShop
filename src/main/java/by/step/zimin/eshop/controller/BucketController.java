@@ -2,8 +2,6 @@ package by.step.zimin.eshop.controller;
 
 import by.step.zimin.eshop.dto.BucketDto;
 import by.step.zimin.eshop.service.BucketService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

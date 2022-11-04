@@ -22,7 +22,7 @@
             <!--    <a th:href="@{/change/users}">| Change user |</a>-->
 
             <div sec:authorize="isAuthenticated()">
-                <img src="../../static/css/img/admin.png" align="left">
+                <img src="../../static/one/img/admin.png" align="left">
                 <div>Hello: <a th:href="@{/users/update}"><span sec:authentication="principal.username">User name</span></a></div>
                 <div><a th:href="@{/logout}">Log out</a></div>
             </div>

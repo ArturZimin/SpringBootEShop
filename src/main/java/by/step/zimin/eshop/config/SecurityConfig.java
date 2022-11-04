@@ -42,14 +42,14 @@ public class SecurityConfig  {
         return http.csrf(csrf->csrf.disable())
                 .authorizeRequests(auth->{
                     try {
-                        auth.antMatchers("/users/get/all").hasAnyAuthority(Role.MANAGER.name(),Role.ADMIN.name());//showAllUsers can only manager and ADMIN
-                        auth.antMatchers("/users/new").hasAuthority(Role.ADMIN.name());//and admin
+                        auth.antMatchers("/products/add/form").hasAnyAuthority(Role.MANAGER.name(),Role.ADMIN.name());//showAllUsers can only manager and ADMIN
+                        auth.antMatchers("/users/new","/users/get/all").hasAuthority(Role.ADMIN.name());//and admin
                         auth.anyRequest().permitAll();//разрешить все
                         auth.and()
                                 .formLogin()
-                                .loginPage("/login") //если не админ переходит на стр атентификации
+                                .loginPage("/login") //если не зарегистрирован переходит на стр атентификации
                                 .failureUrl("/error")//если произошли какие-либо файлы выводим страничку
-                                .loginProcessingUrl("/auth")
+                                .loginProcessingUrl("/auth")//идентификация пользователя
                                 .permitAll()//разрешить все
                                 .and()
                                 .  logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))//разлогирование
@@ -63,6 +63,12 @@ public class SecurityConfig  {
                 .build();
 
     }
+
+
+    /*   /login GET - the login form
+/login POST - process the credentials and if valid authenticate the user
+/login?error GET - redirect here for failed authentication attempts
+/login?logout GET - redirect here after successfully logging out*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {
