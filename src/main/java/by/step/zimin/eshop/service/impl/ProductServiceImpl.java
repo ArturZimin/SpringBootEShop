@@ -106,6 +106,7 @@ public class ProductServiceImpl implements ProductService {
         categoryService.addCategory(category);
 
         Product product =Product.builder()
+                .id(productDto.getId())
                 .imageProduct(Base64.getEncoder().encodeToString(file.getBytes()))
                 .amount(productDto.getAmount())
                 .price(productDto.getPrice())
@@ -164,6 +165,49 @@ public class ProductServiceImpl implements ProductService {
     public Long getAmount(Long id) {
         Product product=productRepository.findById(id).get();
         return product.getAmount();
+    }
+
+//    @Override
+//    public Integer changeProductById(Long id) {
+//        Product product=productRepository.findById(id).get();
+//        if (product!=null){
+//
+//        }
+//        return null;
+//    }
+
+    @Override
+    public ProductDto getProductById(Long productId) {
+        Product product=productRepository.findById(productId).get();
+        if (product!=null){
+
+            ProductDto productDto=ProductDto.builder()
+                    .id(product.getId())
+                    .title(product.getTitle())
+                    .price(product.getPrice())
+                    .imageProduct(Base64.getEncoder().encodeToString(product.getImageProduct().getBytes()))
+                    .amount(product.getAmount())
+                    .currencyType(product.getCurrencyType())
+                    .categoryTitle(product.getCategory().getCategoryTitle())
+                    .podCategory(product.getCategory().getPodCategory())
+                    .name(product.getProcessor().getName())
+                    .countCore(product.getProcessor().getCountCore())
+                    .frequency(product.getProcessor().getFrequency())
+                    .accumulatorCapacity(product.getProductDetails().getAccumulatorCapacity())
+                    .versionOS(product.getProductDetails().getVersionOS())
+                    .operationSystem(product.getProductDetails().getOperationSystem())
+                    .rearCamera(product.getProductDetails().getRearCamera())
+                    .frontCamera(product.getProductDetails().getFrontCamera())
+                    .ramMemory(product.getProductDetails().getRamMemory())
+                    .inMemory(product.getProductDetails().getInMemory())
+                    .yearProduction(product.getProductDetails().getYearProduction())
+                    .displaySize(product.getProductDetails().getDisplaySize())
+                    .countSim(product.getProductDetails().getCountSim())
+                    .color(product.getProductDetails().getColor())
+                    .build();
+            return productDto;
+        }
+        throw new RuntimeException("The product by id: "+productId+" not found!");
     }
 
     public List<ProductDto> productListToProductListDto(List<Product> product) {

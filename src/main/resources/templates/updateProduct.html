@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Add product - form</title>
+    <title>Update product page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
@@ -17,37 +17,42 @@
 
     <form th:action="@{/products/add}" th:object="${productDto}" method="post" id="_form" enctype="multipart/form-data" accept-charset="UTF-8">
         <div class="div_h1_all_form">
-            <h1 id="h1_all_form" >Add product - form</h1>
+            <h1 id="h1_all_form" >Update product - form</h1>
         </div>
         <br/>
 
+        <div class="form-floating mb-3" >
+            <input type="text" name="id" th:field="*{id}" class="form-control" id="id" value="" readonly/>
+            <label for="id">id</label>
+        </div>
+
         <div class="form-floating mb-3">
-            <input type="text" name="title" class="form-control" id="title" value=""/>
+            <input type="text" name="title" th:field="*{title}" class="form-control" id="title" value=""/>
             <label for="title">title (Nokia 3310)</label>
         </div>
         <br/>
         <div class="form-floating">
-            <input type="number" step="0.01" name="price" class="form-control" id="price"/>
+            <input type="number" step="0.01" name="price" th:field="*{price}" class="form-control" id="price"/>
             <label for="price">price (330.00 usd)</label>
         </div>
 
 
         <br/>
         <div class="form-floating mb-3">
-            <input type="number" name="amount" class="form-control" id="amount"/>
+            <input type="number" name="amount" th:field="*{amount}" class="form-control" id="amount"/>
             <label for="amount">amount (120)</label>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="file" name="image" class="form-control" id="image"/>
+            <input type="file" name="image"  class="form-control" id="image"/>
             <label for="image">image</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" name="categoryTitle" class="form-control" id="categoryTitle"/>
+            <input type="text" name="categoryTitle" th:field="*{categoryTitle}" class="form-control" id="categoryTitle"/>
             <label for="categoryTitle">category title (Technical or Car)</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" name="podCategory" class="form-control" id="podCategory"/>
+            <input type="text" name="podCategory" th:field="*{podCategory}" class="form-control" id="podCategory"/>
             <label for="podCategory"> pod category title (phone or notebook)</label>
         </div>
 
@@ -55,13 +60,13 @@
         <div><label><b>Currency type: &#8595;</b></label></div>
         <div>
 
-            <input type="radio" name="currencyType" value="DOLLAR"/>
+            <input type="radio" name="currencyType" th:field="*{currencyType}" value="DOLLAR"/>
             <label>usd</label>
-            <input type="radio" name="currencyType" value="EURO"/>
+            <input type="radio" name="currencyType" th:field="*{currencyType}" value="EURO"/>
             <label>eur</label>
-            <input type="radio" name="currencyType" value="RUBLE"/>
+            <input type="radio" name="currencyType" th:field="*{currencyType}" value="RUBLE"/>
             <label>rub</label>
-            <input type="radio" name="currencyType" value="BELRUBLE"/>
+            <input type="radio" name="currencyType" th:field="*{currencyType}" value="BELRUBLE"/>
             <label>byn</label>
 
         </div>
@@ -77,51 +82,51 @@
         </div>
         <div>
             <label>red</label>
-            <input type="radio" name="color" value="RED"/>
+            <input type="radio" name="color" th:field="*{color}" value="RED"/>
             <label>blue</label>
-            <input type="radio" name="color" value="BLUE"/>
+            <input type="radio" name="color" th:field="*{color}" value="BLUE"/>
             <label>gold</label>
-            <input type="radio" name="color" value="GOLD"/>
+            <input type="radio" name="color" th:field="*{color}" value="GOLD"/>
             <label>black</label>
-            <input type="radio" name="color" value="BLACK"/>
+            <input type="radio" name="color" th:field="*{color}" value="BLACK"/>
             <label>white</label>
-            <input type="radio" name="color" value="WHITE"/>
+            <input type="radio" name="color" th:field="*{color}" value="WHITE"/>
             <label>gray</label>
-            <input type="radio" name="color" value="GRAY"/>
+            <input type="radio" name="color" th:field="*{color}" value="GRAY"/>
             <label>yellow</label>
-            <input type="radio" name="color" value="YELLOW"/>
+            <input type="radio" name="color" th:field="*{color}" value="YELLOW"/>
         </div>
         <br/>
         <div class="form-floating mb-3">
-            <input type="number" name="countSim" id="countSim" class="form-control"/>
+            <input type="number" name="countSim" id="countSim" th:field="*{countSim}" class="form-control"/>
             <label for="countSim">count sim kart (1 or 2)</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="number" step="0.01" name="displaySize" id="displaySize" class="form-control"/>
+            <input type="number" step="0.01" name="displaySize" th:field="*{displaySize}" id="displaySize" class="form-control"/>
             <label for="displaySize">display size in inch (15.3 inch)</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="date" name="yearProduction" id="yearProduction" class="form-control"/>
+            <input type="date" name="yearProduction" th:field="*{yearProduction}"  id="yearProduction" class="form-control"/>
             <label for="yearProduction">date of production (february 2022)</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="number"  name="inMemory" id="inMemory" class="form-control"/>
+            <input type="number"  name="inMemory" th:field="*{inMemory}" id="inMemory" class="form-control"/>
             <label for="inMemory">PAM memory (500 gb)</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="number"  name="ramMemory" id="ramMemory" class="form-control"/>
+            <input type="number"  name="ramMemory" th:field="*{ramMemory}" id="ramMemory" class="form-control"/>
             <label for="ramMemory">RAM memory (8 gb)</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="number" step="0.01" name="frontCamera" id="frontCamera" class="form-control"/>
+            <input type="number" step="0.01" name="frontCamera" th:field="*{frontCamera}"  id="frontCamera" class="form-control"/>
             <label for="frontCamera">front camera in pixels (12 Mpx)</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="number" step="0.01" name="rearCamera" id="rearCamera" class="form-control"/>
+            <input type="number" step="0.01" name="rearCamera" th:field="*{rearCamera}" id="rearCamera" class="form-control"/>
             <label for="rearCamera">rear camera in pixels (48 Mpx)</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="number" name="accumulatorCapacity" id="accumulatorCapacity" class="form-control"/>
+            <input type="number" name="accumulatorCapacity" th:field="*{accumulatorCapacity}" id="accumulatorCapacity" class="form-control"/>
             <label for="accumulatorCapacity">capacity of accumulator in milli amperes(4400 mA)</label>
         </div>
 
@@ -131,34 +136,34 @@
         </div>
         <div>
             <label>Windows</label>
-            <input type="radio" name="operationSystem" value="WINDOWS"/>
+            <input type="radio" name="operationSystem" th:field="*{operationSystem}" value="WINDOWS"/>
             <label>Android</label>
-            <input type="radio" name="operationSystem" value="ANDROID"/>
+            <input type="radio" name="operationSystem" th:field="*{operationSystem}" value="ANDROID"/>
             <label>Linux</label>
-            <input type="radio" name="operationSystem" value="LINUX"/>
+            <input type="radio" name="operationSystem" th:field="*{operationSystem}" value="LINUX"/>
             <label>IOS</label>
-            <input type="radio" name="operationSystem" value="IOS"/>
+            <input type="radio" name="operationSystem" th:field="*{operationSystem}" value="IOS"/>
 
         </div>
         <br/>
         <div class="form-floating mb-3">
-            <input type="number" step="0.01" name="versionOS" id="versionOS" class="form-control"/>
+            <input type="number" step="0.01" name="versionOS" th:field="*{versionOS}" id="versionOS" class="form-control"/>
             <label for="versionOS">version OS (10 or 12.4)</label>
         </div>
         <br/>
         <div><label><b>Processor: &#8595;</b></label></div>
 
-        <div class="form-floating " th:object="${processor}">
+        <div class="form-floating " >
             <div class="form-floating mb-3">
-                <input type="text" name="name" id="name" class="form-control"/>
+                <input type="text" name="name" th:field="*{name}"id="name" class="form-control"/>
                 <label for="name">brand and version of processor (Intel core i5)</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="number" name="countCore" id="countCore" class="form-control"/>
+                <input type="number" name="countCore" th:field="*{countCore}" id="countCore" class="form-control"/>
                 <label for="countCore">count core (4)</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="number"  name="frequency" id="frequency" class="form-control"/>
+                <input type="number"  name="frequency" th:field="*{frequency}" id="frequency" class="form-control"/>
                 <label for="frequency">frequency (50 Hz)</label>
             </div>
         </div>

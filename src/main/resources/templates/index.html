@@ -58,6 +58,8 @@
             <a href="#"><img class="header_img" src="/img/product09.png" ></a>
             <a href="#" sec:authorize="isAuthenticated()" th:href="@{/buckets/get}"><img class="header_img" src="/img/backet.jpg"  alt="icon_bucket">
                 <div class="counter"><b><span>Bucket:</span></b><b><span >0</span></b></div></a>
+            <a href="#" sec:authorize="!isAuthenticated()" th:href="@{/login}"><img class="header_img" src="/img/backet.jpg"  alt="icon_bucket">
+                <div class="counter"><b><span>Bucket:</span></b><b><span >0</span></b></div></a>
         </div>
 
 

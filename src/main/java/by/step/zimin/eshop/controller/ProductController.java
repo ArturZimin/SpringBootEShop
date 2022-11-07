@@ -3,7 +3,6 @@ package by.step.zimin.eshop.controller;
 import by.step.zimin.eshop.dto.ProductDto;
 import by.step.zimin.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -91,15 +90,33 @@ public class ProductController {
     public String deleteProduct(@PathVariable Long id, @PathVariable String page, Model model, Principal principal) {
 
         Integer response = productService.deleteProduct(id);
+        model.addAttribute("response", response);
         if (page.equals("phones")) {
-            model.addAttribute("response", response);
             return "redirect:/products/get/" + page;
         } else {
-            model.addAttribute("response", response);
             return "index";
         }
 
     }
+
+    @GetMapping("/get/form/change/{productId}/{page}")
+    public String getFormForChangeProduct(@PathVariable Long productId,@PathVariable String page, Model model,Principal principal) {
+        ProductDto productDto=productService.getProductById(productId);
+        model.addAttribute("productDto",productDto);
+        model.addAttribute("page",page);
+        return "updateProduct";
+    }
+
+//    @PostMapping("/change")
+//    public String changeProduct(@PathVariable Long id,@PathVariable String page,Model model,Principal principal){
+//        Integer response=productService.changeProductById(id);
+//        model.addAttribute("response",response);
+//        if (page.equals("phones")){
+//            return "redirect:/products/get/" + page;
+//        }else {
+//            return "index";
+//        }
+//    }
 }
 /**
  * @PostMapping("/profile-picture") public ResponseEntity uploadImage(@RequestParam("file") MultipartFile imageFile, @ModelAttribute UserDTO requestDto) {

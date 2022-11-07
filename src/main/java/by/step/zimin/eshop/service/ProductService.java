@@ -24,4 +24,8 @@ public interface ProductService {
 
 
     Long getAmount(Long id);
+
+//    Integer changeProductById(Long id);
+
+    ProductDto getProductById(Long productId);
 }
