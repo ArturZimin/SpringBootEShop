@@ -12,4 +12,16 @@ public interface ProductService {
     void addProductToUserBucket(Long productId, String username);
 
     Boolean addProduct(MultipartFile file,ProductDto productDto) throws IOException;
+
+    List<ProductDto> getPhones();
+
+    Integer deleteProduct(Long id);
+
+    
+
+    void minusOneForAmount(Long id);
+
+
+
+    Long getAmount(Long id);
 }

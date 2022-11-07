@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Data
@@ -29,11 +28,11 @@ public class Product {
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    private byte[] imageProduct;
+    private String imageProduct;
 
-    private Long  amount;
+    private Long amount;
 
-   @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private Category category;
 
     @OneToOne
@@ -41,7 +40,13 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     private Processor processor;
 
-
+    public BigDecimal getPrice() {
+        if (this.price == null) {
+            return new BigDecimal("0.0");
+        } else {
+            return price;
+        }
+    }
 }
 
 

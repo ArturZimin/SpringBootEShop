@@ -18,23 +18,27 @@
 <div th:insert="~{index::#header_nav_fragment}"></div>
 <div th:insert="~{index::#weather_fragment}"></div>
 
-<form th:action="@{/auth}" method="post" id="_form">
+<div class="div_all_form">
+    <form th:action="@{/auth}" method="post" id="_form">
 
-    <h1>Authorization-form</h1>
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="username" id="floatingInput" required>
-        <label for="floatingInput">username</label>
-    </div>
-    <div class="form-floating">
-        <input type="password" class="form-control" name="password" id="floatingPassword" required>
-        <label for="floatingPassword">Password</label>
-    </div>
-    <br/>
+        <div class="div_h1_all_form">
+            <h1 id="h1_all_form" >Authorization - form</h1>
+        </div>
 
-    <button id="_but" type="submit">Log in</button>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="username" id="floatingInput" required>
+            <label for="floatingInput">username</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" name="password" id="floatingPassword" required>
+            <label for="floatingPassword">Password</label>
+        </div>
+        <br/>
+        <button class="form_but" type="submit">&#9886;Log in&#9887;</button>
 
-</form>
 
+    </form>
+</div>
 <script src="/js/script.js"></script>
 </body>
 

@@ -1,32 +1,20 @@
 package by.step.zimin.eshop.dto;
 
-import by.step.zimin.eshop.model.*;
+import by.step.zimin.eshop.model.Color;
+import by.step.zimin.eshop.model.OperationSystem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.sql.Date;
-import java.time.Year;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductDto {
-
+public class ProductDetailsDto {
     private Long id;
-    private String title;
-    private BigDecimal price;
-    private String imageProduct;
-    private CurrencyType currencyType;
-    private Category category;
-    private ProductDetails productDetails;
-    private Processor processor;
-    private Long amount;
-
-//    product details
     private Color color;
     private Integer countSim;
     private Double displaySize;
@@ -38,14 +26,4 @@ public class ProductDto {
     private OperationSystem operationSystem;
     private Double versionOS;
     private Integer accumulatorCapacity;
-
-
-//    processor
-    private String name;
-    private Integer countCore;
-    private Integer frequency;
-
-    //category
-    private String categoryTitle;
-    private String podCategory;
 }

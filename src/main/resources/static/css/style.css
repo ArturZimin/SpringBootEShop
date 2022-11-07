@@ -11,8 +11,24 @@ img:hover{
 }
 
 img{
-    opacity: 0.7;
+    opacity: 0.9;
 }
+
+.header_img{
+    height: 10em;
+    width: 10em;
+}
+
+/**======================================================
+IMAGES PHONES.html
+========================================================*/
+
+.img_on_phones{
+    height: 20em;
+    width: 20em;
+}
+
+
 /** ==============================================
     HEADER
 ===================================================*/
@@ -85,6 +101,7 @@ NAVIGATION
 
 .nav_nav{
     display: -ms-flexbox;
+    flex-wrap: nowrap;
 
 }
 
@@ -106,19 +123,13 @@ NAVIGATION
 
 .div_img_hotdeal{
     display: flex;
-
+padding-top: 2px;
     justify-content: space-around;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     margin-top: 2.2%;
 
 }
-#icon_shop{
-    display: inline-block;
-    position: absolute;
-    top: 7vh;
 
-
-}
 hr{
     margin-bottom: 0.2%;
 }
@@ -164,4 +175,39 @@ WEATHER
     display: none;
     padding-top: 0.2%;
     flex-basis: 120px;
+}
+
+
+/**=====================================================
+ALL FORMS
+=========================================================*/
+
+.div_all_form{
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.div_h1_all_form{
+    border-radius: 10px;
+    border: 2px black;
+    box-shadow: 4px 4px red;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+#h1_all_form{
+    color: red;
+    text-align: center;
+}
+
+.form_but{
+    border-radius: 7px;
+height: 3.3em;
+    width: 7em;
+    background-color: rgb(174, 2, 2);
+    color: white;
+}
+
+.form_but:hover{
+    background-color: red;
+
 }

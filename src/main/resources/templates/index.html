@@ -24,19 +24,19 @@
             <ul class="header-links pull-left">
                 <li><a href="#"><i class="fa fa-phone"></i>&#9990; Contact</a></li>
                 <li><a href="#"><i class="fa fa-envelope-o"></i>&#128386;Email</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i>Address</a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i>&#128376;Address</a></li>
                 <li><a href="#"><i class="fa fa-dollar"></i>&#36; USD</a></li>
-                <li><a href="#" class="link_weather"><i></i>&#9729; Weather</a></li>
+                <li><a href="#" class="link_weather"><i></i>&#8451; Weather&#9728;</a></li>
 
-                <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/users/get/all}">Show all users</a></li>
-                <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users/new}">Add user</a></li>
-                <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/products/add/form}">Add products</a></li>
-                <li><a th:href="@{/products}">All products</a></li>
-                <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="logout_right">  Log out </a></li>
-                <li><a sec:authorize="!isAuthenticated()" th:href="@{/users/registration}">Registration</a></li>
+                <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/users/get/all}">&rArr;Show all users</a></li>
+                <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users/new}">&#10070;Add user</a></li>
+                <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/products/add/form}">&#9776;Add products</a></li>
+                <li><a th:href="@{/products}">&#10147;All products</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="logout_right">&#10008; Log out </a></li>
+                <li><a sec:authorize="!isAuthenticated()" th:href="@{/users/registration}">&#9998;Registration</a></li>
 
-                <li><a href="#" sec:authorize="isAuthenticated()" th:href="@{/users/update}" sec:authentication="principal.username" class="my_account">&#10155; User name </a></li>
-                <li><a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="my_account">Please: Log in </a></li>
+                <li><a href="#" sec:authorize="isAuthenticated()" th:href="@{/users/update}"   sec:authentication="principal.username" class="my_account">&#10155; User name </a></li>
+                <li><a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="my_account">&#10155;Please: Log in </a></li>
 
 
 
@@ -50,13 +50,13 @@
     <div class="bucket_search">
 
         <div class="div_img_hotdeal">
-            <a href="#"><img alt="icon" src="/img/s-mart.png" height="170" width="170"></a>
-            <a href="#"><img src="/img/product07.png" height="200px" width="200px"></a>
-            <a href="#"><img src="/img/product02.png" height="200px" width="200px"/></a>
-            <a href="#"><img src="/img/product04.png" height="200px" width="200px"/></a>
-            <a href="#"><img src="/img/product01.png" height="200px" width="200px"/></a>
-            <a href="#"><img src="/img/product09.png" height="200px" width="200px"/></a>
-            <a href="#" sec:authorize="isAuthenticated()" th:href="@{/buckets/get}"><img src="/img/backet.jpg" height="200px" width="200px" alt="icon_bucket"/>
+            <a href="#"><img class="header_img" alt="icon" src="/img/s-mart.png" ></a>
+            <a href="#"><img class="header_img" src="/img/product07.png" ></a>
+            <a href="#"><img class="header_img" src="/img/product02.png" ></a>
+            <a href="#"><img class="header_img" src="/img/product04.png" ></a>
+            <a href="#"><img class="header_img" src="/img/product01.png" ></a>
+            <a href="#"><img class="header_img" src="/img/product09.png" ></a>
+            <a href="#" sec:authorize="isAuthenticated()" th:href="@{/buckets/get}"><img class="header_img" src="/img/backet.jpg"  alt="icon_bucket">
                 <div class="counter"><b><span>Bucket:</span></b><b><span >0</span></b></div></a>
         </div>
 
@@ -97,7 +97,7 @@
 
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#">Laptops</a></li>
-            <li><a href="#">Smartphones</a></li>
+            <li><a th:href="@{/products/get/phones}">Phones</a></li>
             <li><a href="#">Cameras</a></li>
             <li><a href="#">Accessories</a></li>
 

@@ -5,8 +5,12 @@ import by.step.zimin.eshop.dto.UserDto;
 import by.step.zimin.eshop.model.Product;
 import by.step.zimin.eshop.model.Role;
 import by.step.zimin.eshop.model.User;
+import by.step.zimin.eshop.repository.ProductRepository;
 import by.step.zimin.eshop.repository.UserRepository;
+import by.step.zimin.eshop.service.ProductService;
 import by.step.zimin.eshop.service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,12 +30,17 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
+    private final ProductRepository productRepository;
 
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+
+
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ProductRepository productRepository) {
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+
+        this.productRepository = productRepository;
     }
 
 
@@ -125,6 +134,11 @@ public class UserServiceImpl implements UserService {
         }
         User user = userRepository.findById(userId).get();//находим юзера
         user.getBucket().setProductList(productList);//сеттим список продуктов с удаленным продуктом
+        Product product=productRepository.findById(productId).get();
+        product.setAmount(product.getAmount()+1L);
+        productRepository.save(product);
+
+
         userRepository.save(user);//сохраняем
 
         return isRemove;

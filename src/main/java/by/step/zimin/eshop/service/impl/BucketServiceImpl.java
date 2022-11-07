@@ -54,7 +54,7 @@ public class BucketServiceImpl implements BucketService {
     @Override
     @Transactional
     public void addProduct(Bucket bucket, List<Long> productIds) {//list id of product
-        List<Product> products = bucket.getProductList();
+        List<Product> products = bucket.getProductList();//add to list all product from bucket
         List<Product> newProductList = products == null ? new ArrayList<>() : new ArrayList<>(products);
         newProductList.addAll(getProductById(productIds));
         bucket.setProductList(newProductList);

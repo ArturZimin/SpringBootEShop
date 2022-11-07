@@ -6,17 +6,18 @@
     <title>Add product page</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/one/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+
 
 
 </head>
 <!--enctype="multipart/form-data"   accept-charset="UTF-8"-->
 <body>
-<div style="margin-left: 15%;margin-right: 15%">
+<div class="div_all_form" >
 
     <form th:action="@{/products/add}" th:object="${productDto}" method="post" id="_form" enctype="multipart/form-data" accept-charset="UTF-8">
-        <div style="border-radius: 10px; border: 2px black;box-shadow: 4px 4px red; margin-top: 2%;margin-bottom: 2%">
-            <h1 id="h1_add_product" style="color: red;text-align: center">Add product - form</h1>
+        <div class="div_h1_all_form">
+            <h1 id="h1_all_form" >Add product - form</h1>
         </div>
         <br/>
 
@@ -162,9 +163,8 @@
             </div>
         </div>
 
-        <br/>
 
-        <button id="_but" type="submit">add product</button>
+        <button class="form_but" type="submit">add product</button>
         <br/>
 
     </form>

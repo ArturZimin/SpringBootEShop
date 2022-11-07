@@ -22,9 +22,19 @@ public class ProductController {
     private final ProductService productService;
 
 
+    @GetMapping("/get/phones")
+    public String getAllPhones(Model model, Principal principal) {
+        List<ProductDto> listPhones = productService.getPhones();
+        if (listPhones == null) {
+            throw new RuntimeException("The phones not found!");
+        }
+
+        model.addAttribute("phones", listPhones);
+        return "phones";
+    }
 
     @GetMapping
-    public String list(Model model) {
+    public String getListProducts(Model model) {
         List<ProductDto> list = productService.getAll();//достали все продукты из bd и положили в list
         model.addAttribute("products", list);//sent list to products.html
         return "products";
@@ -33,51 +43,74 @@ public class ProductController {
     /**
      * method add bucket to  user
      */
-    @GetMapping("/{id}/bucket")
-    public String addProductToBucket(@PathVariable Long id, Principal principal ){
-        if (principal==null){
-            return "redirect:/products";
+    @GetMapping("/{id}/{page}/bucket")
+    public String addProductToBucket(@PathVariable Long id, @PathVariable String page, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login" ;
         }
-        productService.addProductToUserBucket(id,principal.getName());
-        return "redirect:/products";
+        Long amount=productService.getAmount(id);
+        if (amount > 0) {
+            productService.minusOneForAmount(id);
+            productService.addProductToUserBucket(id, principal.getName());
+
+        } else {
+            return "redirect:/" + page;
+        }
+        if (page.equals("phones")) {
+            return "redirect:/products/get/" + page;//перенаправление ->/get/phones
+        } else {
+            return "redirect:/" + page;
+        }
     }
 
     @GetMapping("/add/form")
-    public String getFormAddProduct(){
+    public String getFormAddProduct() {
         return "addProduct";
     }
 
 
-
     @PostMapping("/add")
     public String addProductByAllProducts(@RequestParam("image") MultipartFile file, ProductDto productDto, Model model, Principal principal) {
-        if (productDto==null){
+        if (productDto == null) {
             throw new RuntimeException("The product is null!");
         }
 
         System.out.println(productDto);
-        Boolean isAdd= null;
+        Boolean isAdd = null;
         try {
-            isAdd = productService.addProduct(file,productDto);
+            isAdd = productService.addProduct(file, productDto);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        model.addAttribute("isAdd",isAdd);
-            return "addProduct";
+        model.addAttribute("isAdd", isAdd);
+        return "addProduct";
+
+    }
+
+    @GetMapping("/delete/{id}/{page}")
+    public String deleteProduct(@PathVariable Long id, @PathVariable String page, Model model, Principal principal) {
+
+        Integer response = productService.deleteProduct(id);
+        if (page.equals("phones")) {
+            model.addAttribute("response", response);
+            return "redirect:/products/get/" + page;
+        } else {
+            model.addAttribute("response", response);
+            return "index";
+        }
 
     }
 }
 /**
- * @PostMapping("/profile-picture")
- *     public ResponseEntity uploadImage(@RequestParam("file") MultipartFile imageFile, @ModelAttribute UserDTO requestDto) {
- *      try {
- *           UserDTO created  =userDetailsService.saveImg(requestDto, file.getBytes());
- *           return new ResponseEntity<>(created, HttpStatus.OK);
- *
- *     } catch (IOException e) {
- *         // TODO Auto-generated catch block
- *         e.printStackTrace();
- *     }
- *     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+ * @PostMapping("/profile-picture") public ResponseEntity uploadImage(@RequestParam("file") MultipartFile imageFile, @ModelAttribute UserDTO requestDto) {
+ * try {
+ * UserDTO created  =userDetailsService.saveImg(requestDto, file.getBytes());
+ * return new ResponseEntity<>(created, HttpStatus.OK);
+ * <p>
+ * } catch (IOException e) {
+ * // TODO Auto-generated catch block
+ * e.printStackTrace();
+ * }
+ * return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
  * }
  */

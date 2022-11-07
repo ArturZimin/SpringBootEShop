@@ -12,7 +12,6 @@ import java.security.Principal;
 
 @Controller
 @RequestMapping("/buckets")
-
 public class BucketController {
 
     private  BucketDto bucketDto;

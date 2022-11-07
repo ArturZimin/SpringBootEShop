@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,12 +53,14 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException("User not found : " + username);
         }
 
-        Bucket bucket = user.getBucket();
+        Bucket bucket = user.getBucket();//create bucket from user bucket
         if (bucket == null) {
-            Bucket newBucket = bucketService.createBucket(user, Collections.singletonList(productId));
+            Bucket newBucket = bucketService.createBucket(user, Collections.singletonList(productId));//только для чтения список(не изменяемый)
+
             user.setBucket(newBucket);
             userService.save(user);
         } else {
+
             bucketService.addProduct(bucket, Collections.singletonList(productId));
         }
 
@@ -102,7 +106,7 @@ public class ProductServiceImpl implements ProductService {
         categoryService.addCategory(category);
 
         Product product =Product.builder()
-                .imageProduct(file.getBytes())
+                .imageProduct(Base64.getEncoder().encodeToString(file.getBytes()))
                 .amount(productDto.getAmount())
                 .price(productDto.getPrice())
                 .currencyType(productDto.getCurrencyType())
@@ -121,6 +125,45 @@ public class ProductServiceImpl implements ProductService {
             return false;
         }
 
+    }
+
+    @Override
+    public List<ProductDto> getPhones() {
+        List<Product> listPhones=productRepository.findAllByCategory_PodCategory("phone");
+        List<ProductDto> listPhonesDto=productListToProductListDto(listPhones);
+
+        return listPhonesDto;
+    }
+
+    @Override
+    public Integer deleteProduct(Long id) {
+        Product product=productRepository.findById(id).get();
+        if (product==null){
+
+            return 404;
+
+        }else {
+            productRepository.delete(product);
+            return 200;
+        }
+    }
+
+
+
+    @Override
+    public void minusOneForAmount(Long id) {
+        Product product=productRepository.findById(id).get();
+        Long amount=product.getAmount();
+        product.setAmount(--amount);
+        productRepository.save(product);
+    }
+
+
+
+    @Override
+    public Long getAmount(Long id) {
+        Product product=productRepository.findById(id).get();
+        return product.getAmount();
     }
 
     public List<ProductDto> productListToProductListDto(List<Product> product) {

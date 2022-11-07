@@ -21,7 +21,7 @@
 
         <td th:text="${product.title}">Phone</td>
         <td th:text="${product.price}">650</td>
-        <td ><a th:href="@{/products/{id}/bucket(id=${product.id})}">Add to bucket</a></td>
+        <td ><a th:href="@{/products/{id}/{page}/bucket(id=${product.id},page='products')}">Add to bucket</a></td>
     </tr>
 </table>
 
