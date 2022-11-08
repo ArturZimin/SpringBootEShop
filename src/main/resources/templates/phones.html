@@ -17,7 +17,10 @@
 </head>
 <body>
 
-
+ <div th:insert="~{fragments/menu::#_nav_menu}"></div>
+ <hr/>
+ <div th:insert="~{index::#fragment_header_bucket}"></div>
+ <hr/>
 <table class="table" >
     <thead class="thead-dark">
     <tr>
@@ -63,16 +66,17 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td th:text="${phone.productDetails.inMemory}">title</td>
-                    <td th:text="${phone.productDetails.ramMemory}">Color</td>
-                    <td th:text="${phone.productDetails.frontCamera}">Count sim</td>
-                    <td th:text="${phone.productDetails.rearCamera}+' inch'">Display size</td>
-                    <td th:text="${phone.productDetails.operationSystem}+' inch'">Display size</td>
+                    <td th:text="${phone.productDetails.inMemory}+' GB.'">title</td>
+                    <td th:text="${phone.productDetails.ramMemory}+' GB.'">Color</td>
+                    <td th:text="${phone.productDetails.frontCamera}+' Mpx'">Count sim</td>
+                    <td th:text="${phone.productDetails.rearCamera}+' Mpx'">Display size</td>
+                    <td th:text="${phone.productDetails.operationSystem}">Display size</td>
                 </tr>
                 </tbody>
 
                 <thead class="table-primary">
-                <tr><th>Version operation system:</th>
+                <tr>
+                    <th>Version operation system:</th>
                     <th>Accumulator capacity:</th>
                     <th>Processor name:</th>
                     <th>Count core in processor:</th>
@@ -81,27 +85,26 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td th:text="${phone.productDetails.operationSystem}">title</td>
+                    <td th:text="${phone.productDetails.versionOS}+' v.'">title</td>
                     <td th:text="${phone.productDetails.accumulatorCapacity}+' mA'">Color</td>
                     <td th:text="${phone.processor.name}">Count sim</td>
-                    <td th:text="${phone.processor.countCore}+' inch'">Display size</td>
-                    <td th:text="${phone.processor.frequency}+' inch'">Display size</td>
+                    <td th:text="${phone.processor.countCore}">Display size</td>
+                    <td th:text="${phone.processor.frequency}+' Hz'">Display size</td>
                 </tr>
                 </tbody>
             </table>
         </td>
 
-        <td sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
-            <button><a th:href="@{/products/delete/{id}/{page}(id=${phone.id},page='phones')}">Delete product</a></button>
-            <br/>
-            <button><a th:href="@{/products/get/form/change/{id}/{page}(id=${phone.id},page='phones')}" >Change product</a></button>
+        <td  sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
+            <button class="form_but"><a  class="a_phones_button" th:href="@{/products/delete/{id}/{page}(id=${phone.id},page='phones')}">Delete product</a></button>
+            <button class="form_but"><a  class="a_phones_button" th:href="@{/products/get/form/change/{id}/{page}(id=${phone.id},page='phones')}" >Change product</a></button>
         </td>
         <td sec:authorize="isAuthenticated">
-            <button><a th:href="@{/products/{id}/{page}/bucket(id=${phone.id},page='phones')}">Add to bucket</a>
+            <button class="form_but"><a  class="a_phones_button" th:href="@{/products/{id}/{page}/bucket(id=${phone.id},page='phones')}">Add to bucket</a>
             </button>
         </td>
         <td sec:authorize="!isAuthenticated">
-            <button><a th:href="@{/login}">&#10155;Please: Log in </a></button>
+            <button class="form_but"><a th:href="@{/login}"  class="a_phones_button"> &#10155;Please: Log in</a></button>
         </td>
     </tr>
 

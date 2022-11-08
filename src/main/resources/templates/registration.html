@@ -6,49 +6,55 @@
     <title>Registration-form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 
 <body>
+<!--<div th:insert="~{index::#header_nav_fragment}"></div>-->
+<div th:insert="~{fragments/menu::#_nav_menu}"></div>
+<hr/>
+<div class="div_all_form">
+    <form th:action="@{/users/registration}" th:object="${user}" method="post" id="_form">
+        <div class="div_h1_all_form">
+            <h1 id="h1_all_form">Registration - form</h1>
+        </div>
+        <br/>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="username" id="username" minlength="5" maxlength="20"
+                   required/>
+            <label for="username">username (Name Surname ,from 5 to 20 symbols)</label>
+        </div>
 
-<form th:action="@{/users/registration}" th:object="${user}" method="post" id="_form">
+        <div class="form-floating">
+            <input type="password" class="form-control" name="password" id="floatingPassword" minlength="4"
+                   maxlength="20"
+                   required/>
+            <label for="floatingPassword">Password (min 4 symbols)</label>
+        </div>
 
-    <h1>Registration-form</h1>
-    <br/>
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="username" id="username" minlength="5" maxlength="20" required/>
-        <label for="username">username (Name Surname ,from 5 to 20 symbols)</label>
-    </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="8" required/>
+            <label for="email">email (example@gmail.com)</label>
+        </div>
 
-    <div class="form-floating">
-        <input type="password" class="form-control" name="password" id="floatingPassword" minlength="4" maxlength="20"
-               required/>
-        <label for="floatingPassword">Password (min 4 symbols)</label>
-    </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="address" id="address"/>
+            <label for="address">address (only for deliver ->Minsk region, ul.Kalinovskogo 11/12) </label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="phone" id="phone" min="7" max="15" value="+375" required>
+            <label for="phone">phone ( +375295557722 )</label>
+        </div>
 
-    <div class="form-floating mb-3">
-        <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="8" required/>
-        <label for="email">email (example@gmail.com)</label>
-    </div>
+        <button class="form_but" type="submit">Registration</button>
+        <br/>
 
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="address" id="address"/>
-        <label for="address">address (only for deliver ->Minsk region, ul.Kalinovskogo 11/12) </label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="phone" id="phone" min="7" max="15" value="+375" required>
-        <label for="phone">phone ( +375295557722 )</label>
-    </div>
-
-    <button id="_but" type="submit">Registration</button>
-    <br/></div>
-
-    <div th:insert="~{fragments/menu::#_nav_menu}"></div>
+    </form>
+</div>
 
 
 
 
-</form>
 <script src="../static/one/js/script.js"/>
 </body>
 

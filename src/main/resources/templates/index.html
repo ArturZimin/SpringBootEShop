@@ -47,9 +47,9 @@
 
 
     <!-- Bucket and search -->
-    <div class="bucket_search">
+    <div class="bucket_search" >
 
-        <div class="div_img_hotdeal">
+        <div class="div_img_hotdeal" id="fragment_header_bucket">
             <a href="#"><img class="header_img" alt="icon" src="/img/s-mart.png" ></a>
             <a href="#"><img class="header_img" src="/img/product07.png" ></a>
             <a href="#"><img class="header_img" src="/img/product02.png" ></a>
@@ -68,7 +68,7 @@
         </div>
 
         <!-- SEARCH BAR -->
-        <div class="header-search">
+        <div class="header-search" id="fragment_header_search_bar">
             <diV>
                 <form style="padding: 0 ; ">
                     <select class="input-select">
@@ -97,7 +97,7 @@
         <!-- NAV -->
         <ul class="main-nav nav navbar-nav">
 
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a th:href="@{/}">Home</a></li>
             <li><a href="#">Laptops</a></li>
             <li><a th:href="@{/products/get/phones}">Phones</a></li>
             <li><a href="#">Cameras</a></li>

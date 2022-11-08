@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Error page 500</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
-<div >
-    <p th:text="${error}"> ErrorMessage </p>
-    </div>
+<div th:insert="~{fragments/menu::#_nav_menu}"></div>
+<div>
+    <p th:text="'Something went wrong! Details: '+${error}"> ErrorMessage </p>
+</div>
+<!--<div>-->
+<!--    <p th:text="'Something went wrong! Details: '+${errorMessage}"> ErrorMessage </p>-->
+<!--</div>-->
+
+
 </body>
 </html>

@@ -16,29 +16,27 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-public class SecurityConfig  {
-
-
+public class SecurityConfig {
 
 
     @Bean
-    public SecurityFilterChain configure(HttpSecurity http) throws Exception{
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
         //with help lambda
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeRequests(auth->{
+                .authorizeRequests(auth -> {
                     try {
-                        auth.antMatchers("/products/add/form").hasAnyAuthority(Role.MANAGER.name(),Role.ADMIN.name());//showAllUsers can only manager and ADMIN
-                        auth.antMatchers("/users/new","/users/get/all").hasAuthority(Role.ADMIN.name());//and admin
-                        auth.anyRequest().permitAll();//разрешить все
-                        auth.and()
+                        auth.antMatchers("/products/add/form").hasAnyAuthority(Role.MANAGER.name(), Role.ADMIN.name())//showAllUsers can only manager and ADMIN
+                                .antMatchers("/users/new", "/users/get/all").hasAuthority(Role.ADMIN.name())//and admin
+                                .anyRequest().permitAll()//разрешить все
+                                .and()
                                 .formLogin()
                                 .loginPage("/login") //если не зарегистрирован переходит на стр атентификации
                                 .failureUrl("/error")//если произошли какие-либо файлы выводим страничку
                                 .loginProcessingUrl("/auth")//идентификация пользователя
                                 .permitAll()//разрешить все
                                 .and()
-                                .  logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))//разлогирование
+                                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))//разлогирование
                                 .logoutSuccessUrl("/").deleteCookies("JSESSIONID")
                                 .invalidateHttpSession(true);
                     } catch (Exception e) {
@@ -61,11 +59,6 @@ public class SecurityConfig  {
 
         return new BCryptPasswordEncoder();
     }
-
-
-
-
-
 
 
 }

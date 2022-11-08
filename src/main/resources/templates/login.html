@@ -15,14 +15,14 @@
 </head>
 
 <body>
-<div th:insert="~{index::#header_nav_fragment}"></div>
-<div th:insert="~{index::#weather_fragment}"></div>
+<div th:insert="~{fragments/menu::#_nav_menu}"></div>
+
 
 <div class="div_all_form">
     <form th:action="@{/auth}" method="post" id="_form">
 
         <div class="div_h1_all_form">
-            <h1 id="h1_all_form" >Authorization - form</h1>
+            <h1 id="h1_all_form">Authorization - form</h1>
         </div>
 
         <div class="form-floating mb-3">
@@ -39,7 +39,9 @@
 
     </form>
 </div>
-<script src="/js/script.js"></script>
+
+<!--<div th:text="${loginError}" ><h3>Message</h3></div>-->
+
 </body>
 
 </html>

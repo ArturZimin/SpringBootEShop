@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Bucket page</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
 
 </body>
 <div th:insert="~{fragments/menu::#_nav_menu}"></div>
+<hr/>
 <h2>final sum: </h2>
 <h3 > <b  th:text="${bucket.sum}">1000</b>$</h3>
 

@@ -2,6 +2,7 @@ package by.step.zimin.eshop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -14,13 +15,14 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/login") //если запрос по ссылку на логин
+    @RequestMapping("/login") //если запрос по ссылке на логин
     public String login() {
-
-        return "login";//то переходит на login.html
+            //то переходит на login.html
+            return "login";
     }
+
     @RequestMapping("/users/registration")
-    public String registration(){
+    public String registration() {
         return "registration";
     }
 

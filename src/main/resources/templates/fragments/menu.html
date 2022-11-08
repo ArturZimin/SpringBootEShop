@@ -7,29 +7,22 @@
 <body>
 <div id="_nav_menu">
 
-    <label>Menu -> </label>
     <ul>
-        <li><a th:href="@{/users/registration}">| Registration |</a></li>
-        <!--{/logout} передается в config для разлогирования-->
-        <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')"><a th:href="@{/users/get/all}">| Show all users |</a></a>
-        </li>
-        <li><a sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/users/new}">| Add user |</a></a></li>
-        <li> <a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')"><a th:href="@{/products/add/form}">| Add products form |</a></a></li>
-        <li><a th:href="@{/products}">All products</a></li>
-        <li><a href="#" sec:authorize="isAuthenticated()"><a th:href="@{/buckets/get}">| Bucket |</a></a></li>
-        <ul>
-            <!--    <a th:href="@{/delete/users}">| Delete user |</a>-->
-            <!--    <a th:href="@{/change/users}">| Change user |</a>-->
+        <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/users/get/all}">&rArr;Show all users</a></li>
+        <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users/new}">&#10070;Add user</a></li>
+        <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/products/add/form}">&#9776;Add products</a></li>
+        <li><a th:href="@{/products}">&#10147;All products</a></li>
+        <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="logout_right">&#10008; Log out </a></li>
+        <li><a sec:authorize="!isAuthenticated()" th:href="@{/users/registration}">&#9998;Registration</a></li>
+        <li><a href="#" sec:authorize="isAuthenticated()" th:href="@{/users/update}"   sec:authentication="principal.username" class="my_account">&#10155; User name </a></li>
+        <li><a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="my_account">&#10155;Please: Log in </a></li>
 
-            <div sec:authorize="isAuthenticated()">
-                <img src="../../static/one/img/admin.png" align="left">
-                <div>Hello: <a th:href="@{/users/update}"><span sec:authentication="principal.username">User name</span></a></div>
-                <div><a th:href="@{/logout}">Log out</a></div>
-            </div>
-            <div sec:authorize="!isAuthenticated()">
-                <div> Hello: Unknown.Please <a th:href="@{/login}"> | Log in |</a></div>
-            </div>
-        </ul>
+        <li ><a th:href="@{/}">Home</a></li>
+        <li><a href="#">Laptops</a></li>
+        <li><a th:href="@{/products/get/phones}">Phones</a></li>
+        <li><a href="#">Cameras</a></li>
+        <li><a href="#">Accessories</a></li>
+    </ul>
 </div>
 
 
