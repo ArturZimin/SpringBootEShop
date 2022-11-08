@@ -14,4 +14,5 @@ public interface BucketService {
     BucketDto getBucketByUser(String name);
 
     void deleteProduct(Long id, String name);
+    Long getAmountInBucket( String name);
 }

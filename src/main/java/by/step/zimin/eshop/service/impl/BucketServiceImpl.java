@@ -73,7 +73,8 @@ public class BucketServiceImpl implements BucketService {
 
         List<Product> productList = user.getBucket().getProductList();//находим продуктЛист у юзера
         for (Product product : productList) {//пперебираем его
-            BucketDetailsDto detailsDto = mapByProductId.get(product.getId());//проверяем ли пустая мапа
+            BucketDetailsDto detailsDto = mapByProductId.get(product.getId());
+            //проверяем ли пустая мапа
             if (detailsDto == null) {
 
                 mapByProductId.put(product.getId(), new BucketDetailsDto(product));//добавляем в мапу
@@ -95,6 +96,20 @@ public class BucketServiceImpl implements BucketService {
             throw new RuntimeException("User not found or bucket is null!");
         }
         userService.deleteProductFromBucketById(productId, user.getId());
+
+    }
+
+    @Override
+    public Long getAmountInBucket(String name) {
+        User user = userService.findByName(name);//находим узера
+        if (user == null || user.getBucket() == null) {//проверяем на налл
+            return 0L;
+        }else{
+
+            Integer amount= user.getBucket().getProductList().size();
+            Long result=amount.longValue();
+            return result;
+        }
 
     }
 }

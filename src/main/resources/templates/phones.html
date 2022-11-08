@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>All phones page</title>
-    <!-- Correct stylesheet -->
+
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <!--    Bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -34,8 +34,13 @@
 
     <tbody>
     <tr th:each="phone:${phones}">
-
-        <td scope="row"><img th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}" class="img_on_phones"/></td>
+<!--<img th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}" class="img_on_phones"/>-->
+        <td scope="row">
+           <div id="image_product"><img th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}" class="img_on_phones" /></div>
+            <div id="image_product2"> <img th:src="*{'data:image2/jpeg;base64,'+{phone.imageProduct2}}" class="img_on_phones" /></div>
+            <div  id="image_product3"> <img th:src="*{'data:image3/jpeg;base64,'+{phone.imageProduct3}}" class="img_on_phones"  /></div>
+            <button  class="button_next">Next &#8250;</button>
+            </td>
 
         <td>
             <table class="table" >
@@ -100,7 +105,7 @@
             <button class="form_but"><a  class="a_phones_button" th:href="@{/products/get/form/change/{id}/{page}(id=${phone.id},page='phones')}" >Change product</a></button>
         </td>
         <td sec:authorize="isAuthenticated">
-            <button class="form_but"><a  class="a_phones_button" th:href="@{/products/{id}/{page}/bucket(id=${phone.id},page='phones')}">Add to bucket</a>
+            <button  type="button" class="form_but" id="add_button"><a  class="a_phones_button" th:href="@{/products/{id}/{page}/bucket(id=${phone.id},page='phones')}">Add to bucket</a>
             </button>
         </td>
         <td sec:authorize="!isAuthenticated">
@@ -110,7 +115,7 @@
 
     </tbody>
 </table>
-
+ <script src="/js/script.js"></script>
 
 </body>
 </html>

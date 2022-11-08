@@ -1,6 +1,8 @@
 package by.step.zimin.eshop.controller;
 
+import by.step.zimin.eshop.dto.BucketDto;
 import by.step.zimin.eshop.dto.ProductDto;
+import by.step.zimin.eshop.service.BucketService;
 import by.step.zimin.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ public class ProductController {
 
 
     private final ProductService productService;
+    private final BucketService bucketService;
 
 
     @GetMapping("/get/phones")
@@ -27,7 +30,10 @@ public class ProductController {
         if (listPhones == null) {
             throw new RuntimeException("The phones not found!");
         }
-
+        if (principal!=null){
+            Long amount=  bucketService.getAmountInBucket(principal.getName());
+            model.addAttribute("amount",amount);
+        }
         model.addAttribute("phones", listPhones);
         return "phones";
     }
@@ -69,18 +75,14 @@ public class ProductController {
 
 
     @PostMapping("/add")
-    public String addProductByAllProducts(@RequestParam("image") MultipartFile file, ProductDto productDto, Model model, Principal principal) {
+    public String addProductByAllProducts(@RequestParam("image") MultipartFile image,@RequestParam("image2") MultipartFile image2,@RequestParam("image3") MultipartFile image3, ProductDto productDto, Model model, Principal principal) throws IOException {
         if (productDto == null) {
             throw new RuntimeException("The product is null!");
         }
 
         System.out.println(productDto);
         Boolean isAdd = null;
-        try {
-            isAdd = productService.addProduct(file, productDto);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        isAdd = productService.addProduct(image,image2,image3, productDto);
         model.addAttribute("isAdd", isAdd);
         return "addProduct";
 

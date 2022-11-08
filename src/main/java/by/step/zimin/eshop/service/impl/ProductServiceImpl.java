@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public Boolean addProduct(MultipartFile file,ProductDto productDto) throws IOException {
+    public Boolean addProduct(MultipartFile file,MultipartFile file2,MultipartFile file3,ProductDto productDto) throws IOException {
 
 
         ProductDetails productDetails=ProductDetails.builder()
@@ -108,6 +108,8 @@ public class ProductServiceImpl implements ProductService {
         Product product =Product.builder()
                 .id(productDto.getId())
                 .imageProduct(Base64.getEncoder().encodeToString(file.getBytes()))
+                .imageProduct2(Base64.getEncoder().encodeToString(file2.getBytes()))
+                .imageProduct3(Base64.getEncoder().encodeToString(file2.getBytes()))
                 .amount(productDto.getAmount())
                 .price(productDto.getPrice())
                 .currencyType(productDto.getCurrencyType())
@@ -127,6 +129,8 @@ public class ProductServiceImpl implements ProductService {
         }
 
     }
+
+
 
     @Override
     public List<ProductDto> getPhones() {
@@ -186,6 +190,8 @@ public class ProductServiceImpl implements ProductService {
                     .title(product.getTitle())
                     .price(product.getPrice())
                     .imageProduct(Base64.getEncoder().encodeToString(product.getImageProduct().getBytes()))
+                    .imageProduct2(Base64.getEncoder().encodeToString(product.getImageProduct2().getBytes()))
+                    .imageProduct2(Base64.getEncoder().encodeToString(product.getImageProduct3().getBytes()))
                     .amount(product.getAmount())
                     .currencyType(product.getCurrencyType())
                     .categoryTitle(product.getCategory().getCategoryTitle())
@@ -238,6 +244,8 @@ public class ProductServiceImpl implements ProductService {
                 .title(product.getTitle())
                 .price(product.getPrice())
                 .imageProduct(product.getImageProduct())
+                .imageProduct2(product.getImageProduct2())
+                .imageProduct3(product.getImageProduct3())
                 .category(product.getCategory())
                 .currencyType(product.getCurrencyType())
                 .productDetails(product.getProductDetails())

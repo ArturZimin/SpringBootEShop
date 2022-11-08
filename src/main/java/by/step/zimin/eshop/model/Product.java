@@ -29,6 +29,12 @@ public class Product {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private String imageProduct;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private String imageProduct2;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private String imageProduct3;
 
     private Long amount;
 
@@ -46,6 +52,27 @@ public class Product {
         } else {
             return price;
         }
+    }
+
+    public String getImageProduct() {
+        if (imageProduct==null){
+            return "";
+        }
+        return imageProduct;
+    }
+
+    public String getImageProduct2() {
+        if (imageProduct2==null){
+            return "";
+        }
+        return imageProduct2;
+    }
+
+    public String getImageProduct3() {
+        if (imageProduct3==null){
+            return "";
+        }
+        return imageProduct3;
     }
 }
 

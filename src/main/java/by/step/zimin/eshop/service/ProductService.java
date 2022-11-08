@@ -11,7 +11,7 @@ public interface ProductService {
 
     void addProductToUserBucket(Long productId, String username);
 
-    Boolean addProduct(MultipartFile file,ProductDto productDto) throws IOException;
+    Boolean addProduct(MultipartFile file,MultipartFile file2,MultipartFile file3,ProductDto productDto) throws IOException;
 
     List<ProductDto> getPhones();
 

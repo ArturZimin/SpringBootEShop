@@ -19,7 +19,6 @@ img {
     height: 10em;
     width: 10em;
 }
-
 /**======================================================
 IMAGES PHONES.html
 ========================================================*/
@@ -29,6 +28,13 @@ IMAGES PHONES.html
     width: 20em;
 }
 
+
+#image_product2{
+    display: none;
+}
+#image_product3{
+    display: none;
+}
 
 /** ==============================================
     HEADER
@@ -236,4 +242,10 @@ BUTTONS
 .form_but:hover {
     background-color: red;
     color: white;
+}
+.button_next{
+   border:0 ;
+    height: 3em;
+    width: 5em;
+
 }

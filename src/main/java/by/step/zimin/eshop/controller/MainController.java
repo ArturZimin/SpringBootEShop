@@ -1,5 +1,6 @@
 package by.step.zimin.eshop.controller;
 
+import by.step.zimin.eshop.service.BucketService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,8 +11,18 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
+    private final BucketService bucketService;
+
+    public MainController(BucketService bucketService) {
+        this.bucketService = bucketService;
+    }
+
     @RequestMapping({"", "/"})  //можно 2 способами
-    public String index() {
+    public String index(Model model,Principal principal) {
+        if (principal!=null){
+          Long amount=  bucketService.getAmountInBucket(principal.getName());
+          model.addAttribute("amount",amount);
+        }
         return "index";
     }
 

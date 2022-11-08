@@ -10,25 +10,27 @@
 </body>
 <div th:insert="~{fragments/menu::#_nav_menu}"></div>
 <hr/>
-<h2>final sum: </h2>
-<h3 > <b  th:text="${bucket.sum}">1000</b>$</h3>
+<div style="display: inline-block;float: left">
+    <h2>final sum: </h2>
+    <h3><b th:text="${bucket.sum}">1000</b>$</h3>
 
-<table border="2" >
-    <tr>
-        <td>Title</td>
-        <td>Amount</td>
-        <td>Price</td>
-        <td>Sum</td>
-        <td></td>
-    </tr>
-    <tr th:each="detail:${bucket.details}">
-        <td th:text="${detail.title}">Title</td>
-        <td th:text="${detail.amount}">Amount</td>
-        <td th:text="${detail.price}"?>Price</td>
-        <td th:text="${detail.sum}">Sum</td>
-        <td><a th:href="@{/buckets/delete/product/{id}(id=${detail.productId})}">Remove</a></td>
-    </tr>
+    <table border="2">
+        <tr>
+            <td>Title</td>
+            <td>Amount</td>
+            <td>Price</td>
+            <td>Sum</td>
+            <td></td>
+        </tr>
+        <tr th:each="detail:${bucket.details}">
+            <td th:text="${detail.title}">Title</td>
+            <td th:text="${detail.amount}">Amount</td>
+            <td th:text="${detail.price}" ?>Price</td>
+            <td th:text="${detail.sum}">Sum</td>
+            <td><a th:href="@{/buckets/delete/product/{id}(id=${detail.productId})}">Remove</a></td>
+        </tr>
 
-</table>
-
+    </table>
+</div>
+<div class="treasure"><img class="img_treasure" src="/img/treasure.png" alt="" style="width: 50%; height: 50%; display: inline-block"></div>
 </html>

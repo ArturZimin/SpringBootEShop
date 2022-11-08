@@ -21,11 +21,11 @@ public class BucketDto {
 
 
     public void aggregate(){
-        this.amountProducts=details.size();
+        this.amountProducts=details.size();//Returns:the number of elements in this list
         this.sum=details.stream()
-                .map(BucketDetailsDto::getSum)
-                .mapToDouble(Double::doubleValue)
-                .sum();
+                .map(BucketDetailsDto::getSum)//достаем сумму
+                .mapToDouble(Double::doubleValue)//Params: mapper – a non-interfering, stateless function to apply to each element Returns: the new stream
+                .sum();//return sum of elements this stream
 
     }
 }

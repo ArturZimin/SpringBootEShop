@@ -20,6 +20,8 @@ public class ProductDto {
     private String title;
     private BigDecimal price;
     private String imageProduct;
+    private String imageProduct2;
+    private String imageProduct3;
     private CurrencyType currencyType;
     private Category category;
     private ProductDetails productDetails;
