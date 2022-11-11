@@ -105,8 +105,7 @@
             <button class="form_but"><a  class="a_phones_button" th:href="@{/products/get/form/change/{id}/{page}(id=${phone.id},page='phones')}" >Change product</a></button>
         </td>
         <td sec:authorize="isAuthenticated">
-            <button  type="button" class="form_but" id="add_button"><a  class="a_phones_button" th:href="@{/products/{id}/{page}/bucket(id=${phone.id},page='phones')}">Add to bucket</a>
-            </button>
+            <button type="button" class="form_but" id="add_button"  th:onclick="addToBucket([[${phone.id}]])">Add to bucket</button>
         </td>
         <td sec:authorize="!isAuthenticated">
             <button class="form_but"><a th:href="@{/login}"  class="a_phones_button"> &#10155;Please: Log in</a></button>
@@ -115,6 +114,7 @@
 
     </tbody>
 </table>
+ <div th:insert="~{fragments/menu::#_nav_menu}"></div>
  <script src="/js/script.js"></script>
 
 </body>

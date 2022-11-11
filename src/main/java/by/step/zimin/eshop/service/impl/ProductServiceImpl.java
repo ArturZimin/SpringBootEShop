@@ -41,6 +41,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> getAll() {
         List<Product> productList = productRepository.findAll();
+        if (productList==null){
+            throw new RuntimeException("The products not found!");
+        }
 
         return productListToProductListDto(productList);
     }

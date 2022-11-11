@@ -30,17 +30,21 @@ public class ProductController {
         if (listPhones == null) {
             throw new RuntimeException("The phones not found!");
         }
-        if (principal!=null){
-            Long amount=  bucketService.getAmountInBucket(principal.getName());
-            model.addAttribute("amount",amount);
+        if (principal != null) {
+            Long amount = bucketService.getAmountInBucket(principal.getName());
+            model.addAttribute("amount", amount);
         }
         model.addAttribute("phones", listPhones);
         return "phones";
     }
 
-    @GetMapping
-    public String getListProducts(Model model) {
+    @GetMapping("/get/products")
+    public String getListProducts(Model model, Principal principal) {
         List<ProductDto> list = productService.getAll();//достали все продукты из bd и положили в list
+        if (principal != null) {
+            Long amount = bucketService.getAmountInBucket(principal.getName());
+            model.addAttribute("amount", amount);
+        }
         model.addAttribute("products", list);//sent list to products.html
         return "products";
     }
@@ -48,25 +52,22 @@ public class ProductController {
     /**
      * method add bucket to  user
      */
-    @GetMapping("/{id}/{page}/bucket")
-    public String addProductToBucket(@PathVariable Long id, @PathVariable String page, Principal principal) {
-        if (principal == null) {
-            return "redirect:/login" ;
-        }
-        Long amount=productService.getAmount(id);
-        if (amount > 0) {
-            productService.minusOneForAmount(id);
-            productService.addProductToUserBucket(id, principal.getName());
 
-        } else {
-            return "redirect:/" + page;
-        }
-        if (page.equals("phones")) {
-            return "redirect:/products/get/" + page;//перенаправление ->/get/phones
-        } else {
-            return "redirect:/" + page;
-        }
-    }
+//    @PostMapping("/add/to/bucket")
+//    public String addProductToBucket(@RequestBody() Long id, Principal principal) {
+//
+//        if (principal == null) {
+//            throw new RuntimeException("You need to log in!");
+//        }
+//        Long amount = productService.getAmount(id);
+//        if (amount > 0) {
+//            productService.minusOneForAmount(id);
+//            productService.addProductToUserBucket(id, principal.getName());
+//        } else {
+//            throw new RuntimeException("This product is no  available! Out of stock!");
+//        }
+//        return "The product add to bucket successfully!";
+//    }
 
     @GetMapping("/add/form")
     public String getFormAddProduct() {
@@ -75,22 +76,18 @@ public class ProductController {
 
 
     @PostMapping("/add")
-    public String addProductByAllProducts(@RequestParam("image") MultipartFile image,@RequestParam("image2") MultipartFile image2,@RequestParam("image3") MultipartFile image3, ProductDto productDto, Model model, Principal principal) throws IOException {
+    public String addProductByAllProducts(@RequestParam("image") MultipartFile image, @RequestParam("image2") MultipartFile image2, @RequestParam("image3") MultipartFile image3, ProductDto productDto, Model model, Principal principal) throws IOException {
         if (productDto == null) {
-            throw new RuntimeException("The product is null!");
+            throw new RuntimeException("The product is null! And will be able add to db!");
         }
 
-        System.out.println(productDto);
-        Boolean isAdd = null;
-        isAdd = productService.addProduct(image,image2,image3, productDto);
-        model.addAttribute("isAdd", isAdd);
+        productService.addProduct(image, image2, image3, productDto);
         return "addProduct";
 
     }
 
     @GetMapping("/delete/{id}/{page}")
     public String deleteProduct(@PathVariable Long id, @PathVariable String page, Model model, Principal principal) {
-
         Integer response = productService.deleteProduct(id);
         model.addAttribute("response", response);
         if (page.equals("phones")) {
@@ -102,10 +99,10 @@ public class ProductController {
     }
 
     @GetMapping("/get/form/change/{productId}/{page}")
-    public String getFormForChangeProduct(@PathVariable Long productId,@PathVariable String page, Model model,Principal principal) {
-        ProductDto productDto=productService.getProductById(productId);
-        model.addAttribute("productDto",productDto);
-        model.addAttribute("page",page);
+    public String getFormForChangeProduct(@PathVariable Long productId, @PathVariable String page, Model model, Principal principal) {
+        ProductDto productDto = productService.getProductById(productId);
+        model.addAttribute("productDto", productDto);
+        model.addAttribute("page", page);
         return "updateProduct";
     }
 

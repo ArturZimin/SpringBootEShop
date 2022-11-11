@@ -7,12 +7,12 @@
 </head>
 <body>
 
-</body>
+
 <div th:insert="~{fragments/menu::#_nav_menu}"></div>
 <hr/>
-<div style="display: inline-block;float: left">
-    <h2>final sum: </h2>
-    <h3><b th:text="${bucket.sum}">1000</b>$</h3>
+<div style="display: inline-block;float: left; margin-left: 5px;">
+
+
 
     <table border="2">
         <tr>
@@ -31,6 +31,15 @@
         </tr>
 
     </table>
+    <br/>
+    <h1>Final sum: <b th:text="${bucket.sum}">1000</b>$</h1>
+    <hr/>
+    <button type="button" class="form_but">Buy</button>
+    <hr/>
 </div>
-<div class="treasure"><img class="img_treasure" src="/img/treasure.png" alt="" style="width: 50%; height: 50%; display: inline-block"></div>
+
+<div class="treasure"><img class="img_treasure" src="/img/treasure.png" alt=""
+                           style="width: 50%; height: 50%; display: inline-block"></div>
+
+</body>
 </html>

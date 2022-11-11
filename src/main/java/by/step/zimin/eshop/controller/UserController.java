@@ -31,12 +31,12 @@ public class UserController {
     }
 
     @PostMapping("/new")//http://localhost:8080/users/new
-    public String saveUser(UserDto userDto, Model model) {
+    public String addNewUser(UserDto userDto, Model model) {
         if (userService.save(userDto)) {
             return "redirect:/";//return index.html  (на основную страницу)
         } else {
-            model.addAttribute("user", userDto);
-            return "addUser";//возвращаемся на страничку
+            String response="Check the entered data! ";
+           throw new RuntimeException(response);
         }
     }
 

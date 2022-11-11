@@ -13,6 +13,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Response implements Serializable {
 
-    private Integer code;
+    private Integer responseCode;
     private String message;
 }

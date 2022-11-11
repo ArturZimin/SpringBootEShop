@@ -11,17 +11,18 @@
         <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/users/get/all}">&rArr;Show all users</a></li>
         <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users/new}">&#10070;Add user</a></li>
         <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/products/add/form}">&#9776;Add products</a></li>
-        <li><a th:href="@{/products}">&#10147;All products</a></li>
+
         <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="logout_right">&#10008; Log out </a></li>
         <li><a sec:authorize="!isAuthenticated()" th:href="@{/users/registration}">&#9998;Registration</a></li>
         <li><a href="#" sec:authorize="isAuthenticated()" th:href="@{/users/update}"   sec:authentication="principal.username" class="my_account">&#10155; User name </a></li>
         <li><a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="my_account">&#10155;Please: Log in </a></li>
 
-        <li ><a th:href="@{/}">Home</a></li>
-        <li><a href="#">Laptops</a></li>
-        <li><a th:href="@{/products/get/phones}">Phones</a></li>
-        <li><a href="#">Cameras</a></li>
-        <li><a href="#">Accessories</a></li>
+        <li ><a th:href="@{/}">&#10066;Home</a></li>
+        <li><a th:href="@{/products/get/products}">&#10066;All products</a></li>
+        <li><a href="#">&#10066;Laptops</a></li>
+        <li><a th:href="@{/products/get/phones}">&#10066;Phones</a></li>
+        <li><a href="#">&#10066;Cameras</a></li>
+        <li><a href="#">&#10066;Accessories</a></li>
     </ul>
 </div>
 

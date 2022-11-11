@@ -9,9 +9,10 @@
 
 </head>
 <body>
+<div th:insert="~{fragments/menu::#_nav_menu}"></div>
 
-<div th:insert="~{index::#header_nav_fragment}"></div>
 <hr/>
+
 
 <div class="div_all_form">
     <form th:action="@{/users/new}" th:object="${user}" method="post" id="_form">
@@ -81,6 +82,6 @@
 
     </form>
 </div>
-<div th:insert="~{fragments/menu::#_nav_menu}"></div>
+
 </body>
 </html>

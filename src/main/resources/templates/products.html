@@ -3,29 +3,119 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>All products</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
-</head>
+    <title>All phones page</title>
 
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <!--    Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--     Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+</head>
 <body>
+
 <div th:insert="~{fragments/menu::#_nav_menu}"></div>
 <hr/>
-
-<table border="1" align="left">
+<div th:insert="~{index::#fragment_header_bucket}"></div>
+<hr/>
+<table class="table" >
+    <thead class="thead-dark">
     <tr>
-        <td>Title</td>
-        <td>Price</td>
-        <td></td>
-    </tr>
-<!--    через foreach перебираем список-->
-    <tr th:each="product : ${products}">
+        <th scope="col">Image</th>
+        <th scope="col">Description</th>
 
-        <td th:text="${product.title}">Phone</td>
-        <td th:text="${product.price}">650</td>
-        <td ><a th:href="@{/products/{id}/{page}/bucket(id=${product.id},page='products')}">Add to bucket</a></td>
+        <th scope="col" sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">Change or delete product</th>
+        <th scope="col">Add to bucket</th>
     </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="product:${products}">
+        <!--<img th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}" class="img_on_phones"/>-->
+        <td scope="row">
+            <div id="image_product"><img th:src="*{'data:image/jpeg;base64,'+{product.imageProduct}}" class="img_on_phones" /></div>
+            <div id="image_product2"> <img th:src="*{'data:image2/jpeg;base64,'+{product.imageProduct2}}" class="img_on_phones" /></div>
+            <div  id="image_product3"> <img th:src="*{'data:image3/jpeg;base64,'+{product.imageProduct3}}" class="img_on_phones"  /></div>
+            <button  class="button_next">Next &#8250;</button>
+        </td>
+
+        <td>
+            <table class="table" >
+                <thead class="table-primary">
+                <tr><th>Brand and version</th>
+                    <th>Color</th>
+                    <th>Count sim kart</th>
+                    <th>Display size</th>
+                    <th>Date of production</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${product.title}">title</td>
+                    <td th:text="${product.productDetails.color}">Color</td>
+                    <td th:text="${product.productDetails.countSim}">Count sim</td>
+                    <td th:text="${product.productDetails.displaySize}+' inch'">Display size</td>
+                    <td th:text="${product.productDetails.yearProduction}+' year'">Display size</td>
+                </tr>
+                </tbody>
+                <thead class="table-primary">
+                <tr><th>PAM memory</th>
+                    <th>RAM memory</th>
+                    <th>Front camera</th>
+                    <th>Rear camera</th>
+                    <th>Operation system</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${product.productDetails.inMemory}+' GB.'">title</td>
+                    <td th:text="${product.productDetails.ramMemory}+' GB.'">Color</td>
+                    <td th:text="${product.productDetails.frontCamera}+' Mpx'">Count sim</td>
+                    <td th:text="${product.productDetails.rearCamera}+' Mpx'">Display size</td>
+                    <td th:text="${product.productDetails.operationSystem}">Display size</td>
+                </tr>
+                </tbody>
+
+                <thead class="table-primary">
+                <tr>
+                    <th>Version operation system:</th>
+                    <th>Accumulator capacity:</th>
+                    <th>Processor name:</th>
+                    <th>Count core in processor:</th>
+                    <th>Frequency of processor:</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${product.productDetails.versionOS}+' v.'">title</td>
+                    <td th:text="${product.productDetails.accumulatorCapacity}+' mA'">Color</td>
+                    <td th:text="${product.processor.name}">Count sim</td>
+                    <td th:text="${product.processor.countCore}">Display size</td>
+                    <td th:text="${product.processor.frequency}+' Hz'">Display size</td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+
+        <td  sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
+            <button class="form_but"><a  class="a_phones_button" th:href="@{/products/delete/{id}/{page}(id=${product.id},page='products')}">Delete product</a></button>
+            <button class="form_but"><a  class="a_phones_button" th:href="@{/products/get/form/change/{id}/{page}(id=${product.id},page='products')}" >Change product</a></button>
+        </td>
+        <td sec:authorize="isAuthenticated">
+            <button type="button" class="form_but" id="add_button"  th:onclick="addToBucket([[${product.id}]])">Add to bucket</button>
+        </td>
+        <td sec:authorize="!isAuthenticated">
+            <button class="form_but"><a th:href="@{/login}"  class="a_phones_button"> &#10155;Please: Log in</a></button>
+        </td>
+    </tr>
+
+    </tbody>
 </table>
+<div th:insert="~{fragments/menu::#_nav_menu}"></div>
+<script src="/js/script.js"></script>
 
 </body>
-
 </html>

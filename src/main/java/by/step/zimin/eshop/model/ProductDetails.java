@@ -41,4 +41,11 @@ public class ProductDetails {
     private OperationSystem operationSystem;
     private Double versionOS;
     private Integer accumulatorCapacity;
+
+    public Color getColor() {
+        if (color==null){
+            color=Color.OTHER;
+        }
+        return color;
+    }
 }
