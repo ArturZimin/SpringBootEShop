@@ -24,6 +24,12 @@ public class UserController {
     private final UserService userService;
 
 
+    @GetMapping(value = "/get/registration/form")
+    public String getRegistrationForm() {
+        return "registration";
+    }
+
+
     @GetMapping("/new")//http://localhost:8080/users/new
     public String newUser(Model model) {
         model.addAttribute("user", new UserDto());
@@ -35,8 +41,8 @@ public class UserController {
         if (userService.save(userDto)) {
             return "redirect:/";//return index.html  (на основную страницу)
         } else {
-            String response="Check the entered data! ";
-           throw new RuntimeException(response);
+            String response = "Check the entered data! ";
+            throw new RuntimeException(response);
         }
     }
 
@@ -50,50 +56,51 @@ public class UserController {
 
     @PostMapping("/registration")
     public String registration(UserDto userDto, Model model) {
+        System.out.println(userDto);
         userDto.setRole(Role.USER);
-        if (userService.save(userDto)) {
-            return "redirect:/";
+        User user = userService.registration(userDto);
+        if (user != null) {
+            model.addAttribute("message", "Success! A verification email has been sent to your email address.");
+            return "/login";
         } else {
-            model.addAttribute("user", userDto);
-            return "registration";
+            throw new RuntimeException("The data of the user wrong! Try again!");
         }
     }
 
     @GetMapping("/update")
     public String getUserForUpdate(Model model, Principal principal) {
         if (principal == null) {
-            throw new RuntimeException("You need authorize!");
+            throw new RuntimeException("You need to authorize!");
         }
         User user = userService.findByName(principal.getName());
-
-        model.addAttribute("user", user);
+        UserDto userDto = userService.toDto(user);
+        model.addAttribute("user", userDto);
         return "update";
 
     }
 
     @PostMapping("/update/user")
     @Transactional
-    public String updateUser( UserDto userDto,   Principal principal) {
+    public String updateUser(UserDto userDto, Principal principal) {
+
         System.out.println(userDto);
         if (principal == null) {
-            throw new RuntimeException("You are no authorize");
+            throw new RuntimeException("You are no authorize!");
         }
         userService.updateUser(userDto);
         return "redirect:/update";
     }
 
     @GetMapping("/delete/{userId}/user")
-    public String deleteUserById(@PathVariable Long userId,Model model,Principal principal){
-        if (userId==null){
+    public String deleteUserById(@PathVariable Long userId, Model model, Principal principal) {
+        if (userId == null) {
             throw new RuntimeException("The user not found!");
-        }else {
+        } else {
             userService.deleteUser(userId);
         }
 
         return "redirect:/allUsers";
     }
-
-
 
 
 }

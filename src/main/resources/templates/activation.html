@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Activation - form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+
+    <!--     Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<div th:insert="~{fragments/menu::#_nav_menu}"></div>
+<hr/>
+
+<div class="div_all_form">
+    <div class="div_h1_all_form">
+        <h1 id="h1_all_form">Activation - page</h1>
+    </div>
+
+    <div class="response_message" th:if="${message}">
+        <b><h1 th:text="${message}" style="color: darkblue;">
+            Message </h1></b>
+
+
+        <button type="button"  class="form_but" style="margin-top: 12px;" ><a class="link_login" th:href="@{/login}">&#9886;Log in&#9887;</a></button>
+        <hr/>
+    </div>
+
+    <br/>
+
+
+    <!--<div th:text="${loginError}" ><h3>Message</h3></div>-->
+
+</body>
+
+</html>
+

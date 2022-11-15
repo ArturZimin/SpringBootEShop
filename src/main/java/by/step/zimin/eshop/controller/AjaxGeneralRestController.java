@@ -1,6 +1,7 @@
 package by.step.zimin.eshop.controller;
 
 import by.step.zimin.eshop.dto.ProductDto;
+import by.step.zimin.eshop.response.Response;
 import by.step.zimin.eshop.service.BucketService;
 import by.step.zimin.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/ajax")
 @AllArgsConstructor
-public class MyRESTController {
+public class AjaxGeneralRestController {
 
     @Autowired
     private final ProductService productService;
@@ -23,20 +24,19 @@ public class MyRESTController {
 
     //метод для сохранения
     @PostMapping("/product/add/to/bucket/{id}")//что-то добавляем
-    public ResponseEntity addToBucketWithAjax(@PathVariable Long id, Principal principal) { //request in body
-        System.out.println(id);
+    public Response addToBucketWithAjax(@PathVariable Long id, Principal principal) { //request in body
         if (principal == null) {
             ResponseEntity.badRequest().body(id);
-            return ResponseEntity.badRequest().body("You need to log in!");
+            return new Response(401,"You need to log in!",null); //ResponseEntity.badRequest().body("You need to log in!");
         }
         Long amount = productService.getAmount(id);
         if (amount > 0) {
             productService.minusOneForAmount(id);
             productService.addProductToUserBucket(id, principal.getName());
             Long amountInBucket = bucketService.getAmountInBucket(principal.getName());
-            return ResponseEntity.ok("The product was added successfully!");
+            return new Response(200,"The product was added to bucket successfully!",amountInBucket); //ResponseEntity.ok("The product was added to bucket successfully!");
         } else {
-            return ResponseEntity.badRequest().body("The product amount is 'ZERO' and won't be able added to bucket!");
+            return new Response(404,"The product amount is 'ZERO' and can't be add to bucket!",null);//ResponseEntity.badRequest().body("The product amount is 'ZERO' and can't be add to bucket!");
         }
     }
 }

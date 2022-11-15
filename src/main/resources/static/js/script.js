@@ -1,3 +1,6 @@
+// $('.img_treasure').slideUp('5000');
+//
+// $('.treasure').slideDown('4000');
 /**=======================================================
  * WEATHER appeared
  * =======================================================*/
@@ -20,8 +23,6 @@ $('.link_weather').on('click', function (e) {
 });
 
 
-
-
 /**=====================================================
  * Add to bucket without redirect
  * ====================================================*/
@@ -30,23 +31,22 @@ $('.link_weather').on('click', function (e) {
 // });
 
 
-
 function addToBucket(id) {
     // e.preventDefault();
     // let idProduct = $('#id').val();
-    console.log(id);
     if (id != null) {
         $.ajax({
-            url: "http://localhost:8080/ajax/product/add/to/bucket/"+id,
+            url: "http://localhost:8080/ajax/product/add/to/bucket/" + id,
             method: "POST",
             data: {"id": id},
             contentType: 'application/json',
             success: function (data) {
-                alert(data);
 
+                alert("Code: " + data.responseCode + " , " + data.message);
+                counterPlus(data.amount);
             },
             error: function (data) {
-                alert(data);
+                alert("Error code: " + data.responseCode + " , " + data.message);
             }
             // cache:false,
             // processData: false,
@@ -59,21 +59,122 @@ function addToBucket(id) {
 
 }
 
+const txtCounterInBucket = document.querySelector('#counter_in_bucket');
 
-// $.ajax({
-//     type: "POST",
-//
-//     url: "@{/products/add/to/bucket}",
-//
-//     context: document.body,
-//
-//     success: function(){
-//
-//        echo("")
-//
-//     }
-//
-// });
+//let counterInBucket = +$('#counter_in_bucket');
+
+function counterPlus(number) {
+
+    txtCounterInBucket.innerHTML = number;
+}
+
+
+/**==================================================================
+ * CHECK FORM AND CONFIRMATION BY EMAIL
+ * ================================================================*/
+
+function checkFormAndConfirmationByEmail(event) {
+    let username=$('#username').val();
+    let email=$('#email').val();
+    let address=$('#address').val();
+    let password=$('#password').val();
+    let phone=$('#phone').val();
+
+let user={
+    "username":username,
+        "email":email,
+    "address":address,
+    "password":password,
+    "phone":phone
+    };
+    let jsonUser = JSON.stringify(user);
+
+    let form = document.querySelector(".form_registration");
+    let formData = new FormData(form);
+
+    console.log(username+email+address+password+phone);
+    $.ajax( {
+        url: "http://localhost:8080/email/confirm",
+        method: "POST",
+        data: jsonUser,
+        contentType: 'application/json',
+        dataType: "json",
+        success: function (data) {
+
+            alert("Code: " + data.responseCode + " , " + data.message);
+        },
+        error: function (data) {
+            alert("Error code: " + data.responseCode + " , " + data.message);
+        }
+
+
+    });
+
+}
+
+
+/**=========================================================
+ * REGISTRATION
+ * ========================================================*/
+function registration(e) {
+    let username = $('#username').val();
+    let email = $('#email').val();
+    let address = $('#address').val();
+    let password = $('#password').val();
+    let phone = $('#phone').val();
+
+
+    let user={
+        "username":username,
+        "email":email,
+        "address":address,
+        "password":password,
+        "phone":phone
+    };
+    let jsonUser = JSON.stringify(user);
+
+    let form = document.querySelector(".form_registration");
+    let formData = new FormData(form);
+
+    console.log(username+email+address+password+phone);
+    $.ajax( {
+        url: "http://localhost:8080/users/registration",
+        method: "POST",
+        data: jsonUser,
+        contentType: 'application/json',
+        dataType: "json",
+        success: function (data) {
+
+            alert("Code: " + data.responseCode + " , " + data.message);
+        },
+        error: function (data) {
+            alert("Error code: " + data.responseCode + " , " + data.message);
+        }
+
+
+    });
+
+}
+/**SEND OBJECT
+ * var dataO = {
+    numberId: "1",
+    companyId : "531"
+};
+ var data0 = {numberId: "1", companyId : "531"};
+ var json = JSON2.stringify(dataO);
+
+ $.ajax({
+    type: "POST",
+    url: "TelephoneNumbers.aspx/DeleteNumber",
+    data: json,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(msg) {
+        alert('In Ajax');
+    }
+});*/
+
+
 
 
 /**

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Error page 500</title>
@@ -9,20 +9,25 @@
 <div th:insert="~{fragments/menu::#_nav_menu}"></div>
 <hr/>
 <br/>
-<div  class="div_all_form">
+<div class="div_all_form">
     <div class="div_h1_all_form">
         <h1 id="h1_all_form">Error page</h1>
     </div>
-    <div>
-        <b><h1 th:text="'Something went wrong! Error Details: '+${error}" style="color: darkblue;"> ErrorMessage </h1></b>
+
+    <div th:if="${error!=null}">
+        <b><h1 th:text="'Something went wrong! Error Details: '+${error}" style="color: darkblue;">
+            ErrorMessage </h1></b>
+        <hr/>
     </div>
-    <hr/>
+
     <br/>
-    <div>
+
+    <div th:if="${errorMessage!=null}">
         <b><h1 th:text="'Something went wrong! Exception details: '+${errorMessage} " style="color: darkgreen;">
             ErrorMessage </h1></b>
+        <hr/>
     </div>
-    <hr/>
+
 </div>
 </body>
 </html>

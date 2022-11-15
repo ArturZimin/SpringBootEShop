@@ -5,7 +5,7 @@ package by.step.zimin.eshop.model;
 public enum CurrencyType {
     DOLLAR("usd"),
     EURO("eur"),
-    BELRUBL("byn"),
+    BELRUBLE("byn"),
     RUBLE("rub");
 
     private String currency;

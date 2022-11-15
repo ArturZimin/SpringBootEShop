@@ -20,13 +20,25 @@ public class User {
     private String address;
     private String phone;
     private String email;
+    private Boolean enable;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToOne(cascade = CascadeType.REMOVE)
     private Bucket bucket;
+
+
+    public  Boolean isEnabled(){
+        if (this.enable){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
+
+
 
 
 /**

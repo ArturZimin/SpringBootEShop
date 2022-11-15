@@ -2,6 +2,7 @@ package by.step.zimin.eshop.service.impl;
 
 import by.step.zimin.eshop.dto.BucketDetailsDto;
 import by.step.zimin.eshop.dto.BucketDto;
+import by.step.zimin.eshop.dto.UserDto;
 import by.step.zimin.eshop.model.Bucket;
 import by.step.zimin.eshop.model.Product;
 import by.step.zimin.eshop.model.User;

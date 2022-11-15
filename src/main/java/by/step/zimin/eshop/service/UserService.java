@@ -10,13 +10,12 @@ public interface UserService extends UserDetailsService {
 
     boolean save(UserDto userDto);
 
-    void save(User user);
+    User save(User user);
 
     List<UserDto> getAllUser();
 
-
+    User registration(UserDto userDto);
     User findByName(String name);
-
 
     void updateUser(UserDto userDto);
 
@@ -27,4 +26,6 @@ public interface UserService extends UserDetailsService {
     Boolean deleteProductFromBucketById(Long productId, Long userId);
 
     void deleteUser(Long userId);
+
+    void mapUserDtoToUser(UserDto userDto, User user);
 }

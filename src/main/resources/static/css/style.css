@@ -91,6 +91,17 @@ li a {
     text-decoration: none;
 }
 
+.link_login{
+    color: white;
+    text-decoration: none;
+}
+
+.link_login:hover{
+
+    color: white;
+    text-decoration: none;
+}
+
 li a:hover {
     background-color: #111111;
     color: red;
@@ -212,6 +223,11 @@ ALL FORMS
     margin-right: 15%;
 }
 
+.response_message{
+    background-color: aquamarine;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
 .div_h1_all_form {
     border-radius: 10px;
     border: 2px black;
@@ -266,7 +282,7 @@ MAIN PRODUCTS
     justify-content: space-between;
     flex-wrap: wrap;
     flex-direction: row;
-
+margin-left: 20%;
 
 }
 
@@ -279,6 +295,7 @@ MAIN PRODUCTS
     transition: 0.2s all;
     max-width: 25%;
     max-height: 30%;
+    flex-shrink: 1;
 }
 
 .product:hover {
@@ -393,14 +410,15 @@ MAIN PRODUCTS
     width: 40px;
     height: 40px;
     line-height: 40px;
-    background: transparent;
+    /*background: transparent;*/
+    background: #e7e5e5;
     border: none;
     -webkit-transition: 0.2s all;
     transition: 0.2s all;
 }
 
 .product .product-body .product-btns>button:hover {
-    background-color: #E4E7ED;
+    background-color: red;
     color: #D10024;
     border-radius: 50%;
 }
@@ -504,4 +522,19 @@ INDEX.htm ADD TO BUCKET BUTTON
 .a_index_button :hover{
     color: red;
     text-decoration: none;
+}
+
+/**====================================================
+PRODUCT PRICE
+=======================================================*/
+#span_product_price{
+    padding-left: 7%;
+    color: red;
+    text-shadow: #5b5a5a;
+    font-style: normal;
+    font-size: larger;
+    font-family: Tahoma;
+    font-weight: bold;
+
+
 }

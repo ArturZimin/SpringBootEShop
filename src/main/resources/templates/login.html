@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -23,6 +23,9 @@
 
         <div class="div_h1_all_form">
             <h1 id="h1_all_form">Authorization - form</h1>
+        </div>
+        <div class="response_message"  th:if="${message}">
+            <h1  th:text="${message}">Authorization - form</h1>
         </div>
 
         <div class="form-floating mb-3">

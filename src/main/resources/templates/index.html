@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -36,7 +36,7 @@
 
                 <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="logout_right">&#10008; Log out </a>
                 </li>
-                <li><a sec:authorize="!isAuthenticated()" th:href="@{/users/registration}">&#9998;Registration</a></li>
+                <li><a sec:authorize="!isAuthenticated()" th:href="@{/users/get/registration/form}">&#9998;Registration</a></li>
 
                 <li><a href="#" sec:authorize="isAuthenticated()" th:href="@{/users/update}"
                        sec:authentication="principal.username" class="my_account">&#10155; User name </a></li>
@@ -63,7 +63,8 @@
             <a href="#" sec:authorize="isAuthenticated()" th:href="@{/buckets/get}"><img class="header_img"
                                                                                          src="/img/backet.jpg"
                                                                                          alt="icon_bucket">
-                <div class="counter"><b>Bucket:</b><b><span th:text="${amount}"></span></b></div>
+<!--                th:text="${amount}"-->
+                <div class="counter"><b>Bucket:</b><b><span th:text="${amount}"  id="counter_in_bucket" ></span></b></div>
             </a>
             <a href="#" sec:authorize="!isAuthenticated()" th:href="@{/login}"><img class="header_img"
                                                                                     src="/img/backet.jpg"
@@ -165,11 +166,14 @@
                 <i class="fa fa-star"></i>
             </div>
             <div class="product-btns">
-                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                <button class="add-to-wishlist"><i class="fa fa-heart-o">
+                    A</i><span
                         class="tooltipp">add to wishlist</span></button>
-                <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                <button class="add-to-compare"><i class="fa fa-exchange">
+                    C</i><span
                         class="tooltipp">add to compare</span></button>
-                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                <button class="quick-view"><i class="fa fa-eye">
+                    Q</i><span class="tooltipp">quick view</span></button>
             </div>
         </div>
         <div class="add-to-cart">
@@ -251,7 +255,7 @@
     <div id="_map">
         <iframe
                 src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2488.312569701565!2d27.656037424440353!3d53.93788443439389!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sby!4v1665990083824!5m2!1sru!2sby"
-                width="30%" height="15%" style="border:1em; border-radius: 0.2em; padding-top: 0.2em;"
+                width="30%" height="20%" style="border:1em; border-radius: 0.2em; padding-top: 0.2em;"
                 allowfullscreen=""
                 loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <a name="show_map"></a>

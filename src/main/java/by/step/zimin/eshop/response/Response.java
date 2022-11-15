@@ -15,4 +15,5 @@ public class Response implements Serializable {
 
     private Integer responseCode;
     private String message;
+    private Long amount;
 }

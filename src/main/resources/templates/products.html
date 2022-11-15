@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -39,7 +39,7 @@
             <div id="image_product"><img th:src="*{'data:image/jpeg;base64,'+{product.imageProduct}}" class="img_on_phones" /></div>
             <div id="image_product2"> <img th:src="*{'data:image2/jpeg;base64,'+{product.imageProduct2}}" class="img_on_phones" /></div>
             <div  id="image_product3"> <img th:src="*{'data:image3/jpeg;base64,'+{product.imageProduct3}}" class="img_on_phones"  /></div>
-            <button  class="button_next">Next &#8250;</button>
+            <button  class="button_next">Next &#8250;</button><span  id="span_product_price" th:text="'$ '+${product.price}"></span>
         </td>
 
         <td>

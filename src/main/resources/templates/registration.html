@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -14,7 +17,8 @@
 <div th:insert="~{fragments/menu::#_nav_menu}"></div>
 <hr/>
 <div class="div_all_form">
-    <form th:action="@{/users/registration}" th:object="${user}" method="post" id="_form">
+<!--    <form th:action="@{users/registration}"  th:object="${user}" method="POST" id="_form" class="form_registration" >-->
+    <form th:action="@{/users/registration}"  th:object="${user}" method="POST" id="_form" class="form_registration" content="application/json">
         <div class="div_h1_all_form">
             <h1 id="h1_all_form">Registration - form</h1>
         </div>
@@ -22,16 +26,16 @@
         <div class="form-floating mb-3">
             <input type="text" class="form-control" name="username" id="username" minlength="5" maxlength="20"
                    required/>
-            <label for="username">username (Name Surname ,from 5 to 20 symbols)</label>
+            <label for="username">username (Name Surname23 (* 5-20 length,* Upper word,* lower word,* at least one digit)</label>
         </div>
 
         <div class="form-floating">
-            <input type="password" class="form-control" name="password" id="floatingPassword" minlength="4"
+            <input type="password" class="form-control" name="password" id="password" minlength="4"
                    maxlength="20"
                    required/>
-            <label for="floatingPassword">Password (min 4 symbols)</label>
+            <label for="password">Password (min 4 symbols)</label>
         </div>
-
+        <br/>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="8" required/>
             <label for="email">email (example@gmail.com)</label>
@@ -45,8 +49,8 @@
             <input type="text" class="form-control" name="phone" id="phone" min="7" max="15" value="+375" required>
             <label for="phone">phone ( +375295557722 )</label>
         </div>
-
-        <button class="form_but" type="submit">Registration</button>
+<!--<button class="form_but" type="button" th:onclick="checkFormAndConfirmationByEmail(`e`)">Registration</button>   th:onclick="registration(`event`)"-->
+        <button class="form_but" type="submit" >Registration</button>
         <br/>
 
     </form>
@@ -55,7 +59,7 @@
 
 
 
-<script src="../static/one/js/script.js"/>
+<script src="/js/script.js"></script>
 </body>
 
 </html>

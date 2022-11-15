@@ -2,15 +2,19 @@ package by.step.zimin.eshop.service.impl;
 
 
 import by.step.zimin.eshop.dto.UserDto;
+import by.step.zimin.eshop.model.Bucket;
 import by.step.zimin.eshop.model.Product;
 import by.step.zimin.eshop.model.Role;
 import by.step.zimin.eshop.model.User;
 import by.step.zimin.eshop.repository.ProductRepository;
 import by.step.zimin.eshop.repository.UserRepository;
+import by.step.zimin.eshop.service.EmailService;
 import by.step.zimin.eshop.service.ProductService;
 import by.step.zimin.eshop.service.UserService;
+import by.step.zimin.eshop.service.VerificationTokenService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,21 +34,24 @@ public class UserServiceImpl implements UserService {
 
 
     private final UserRepository userRepository;
-
+    private final VerificationTokenService verificationTokenService;
     private final PasswordEncoder passwordEncoder;
     private final ProductRepository productRepository;
+    private final EmailService emailService;
 
-
-
-
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ProductRepository productRepository) {
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository, VerificationTokenService verificationTokenService, PasswordEncoder passwordEncoder, ProductRepository productRepository, EmailService emailService) {
 
         this.userRepository = userRepository;
+        this.verificationTokenService = verificationTokenService;
         this.passwordEncoder = passwordEncoder;
-
         this.productRepository = productRepository;
+        this.emailService = emailService;
     }
 
+    public boolean userExists(String email) {
+        return userRepository.findUserByEmail(email).isPresent();
+    }
 
     @Override
     @Transactional
@@ -60,8 +69,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+       return userRepository.save(user);
     }
 
     @Override
@@ -73,7 +82,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByName(String name) {
-        return userRepository.findFirstByUsername(name);
+
+        return  userRepository.findFirstByUsername(name) ;
+
     }
 
     @Override
@@ -81,8 +92,11 @@ public class UserServiceImpl implements UserService {
     public void updateUser(UserDto userDto) {
         if (userDto.getId() != null) {
             Role roleUser = userRepository.findById(userDto.getId()).get().getRole();
-            System.out.println(roleUser);
+            Boolean enable=userRepository.findById(userDto.getId()).get().getEnable();
+            Bucket bucket=userRepository.findById(userDto.getId()).get().getBucket();
             userDto.setRole(roleUser);
+            userDto.setBucket(bucket);
+            userDto.setEnable(enable);
             User user = userDtoToUser(userDto);
             userRepository.save(user);
         }
@@ -101,10 +115,40 @@ public class UserServiceImpl implements UserService {
                 .role(userDto.getRole())
                 .address(userDto.getAddress())
                 .phone(userDto.getPhone())
+                .enable(userDto.getEnable())
+                .bucket(userDto.getBucket())
                 .build();
         return user;
     }
 
+
+    @Override
+    @Transactional
+    public User registration(UserDto userDto) {
+        //password encryption
+        String password = passwordEncoder.encode(userDto.getPassword());
+        userDto.setPassword(password);
+
+        User user = new User();
+        //disable new user before activation
+        user.setEnable(false);
+
+        mapUserDtoToUser(userDto, user);
+        Optional<User> saved = Optional.of(save(user));
+
+        saved.ifPresent(u -> {
+            try {
+                String token = UUID.randomUUID().toString();//random token
+                verificationTokenService.save(saved.get(), token);
+
+                //send verification email
+                emailService.sendHtmlMail(u);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return saved.get();
+    }
 
     @Override
     public UserDto toDto(User user) {
@@ -116,6 +160,8 @@ public class UserServiceImpl implements UserService {
                 .address(user.getAddress())
                 .role(user.getRole())
                 .phone(user.getPhone())
+                .bucket(user.getBucket())
+                .role(user.getRole())
                 .build();
     }
 
@@ -134,11 +180,9 @@ public class UserServiceImpl implements UserService {
         }
         User user = userRepository.findById(userId).get();//находим юзера
         user.getBucket().setProductList(productList);//сеттим список продуктов с удаленным продуктом
-        Product product=productRepository.findById(productId).get();
-        product.setAmount(product.getAmount()+1L);
+        Product product = productRepository.findById(productId).get();
+        product.setAmount(product.getAmount() + 1L);
         productRepository.save(product);
-
-
         userRepository.save(user);//сохраняем
 
         return isRemove;
@@ -151,12 +195,24 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+    @Override
+    public void mapUserDtoToUser(UserDto userDto, User user) {
+        user.setId(userDto.getId());
+        user.setUsername(userDto.getUsername());
+        user.setPhone(userDto.getPhone());
+        user.setPassword(userDto.getPassword());
+        user.setRole(userDto.getRole());
+        user.setAddress(userDto.getAddress());
+        user.setEmail(userDto.getEmail());
+
+    }
+
 
     public Boolean validationUserDto(UserDto userDto) {
 
         if (validationName(userDto.getUsername()) &&
                 validationEmail(userDto.getEmail()) &&
-//        validationPassword(userDto.getPassword())&&
+        validationPassword(userDto.getPassword())&&
                 validationPhone(userDto.getPhone())) {
             return true;
         } else {
@@ -175,12 +231,23 @@ public class UserServiceImpl implements UserService {
 
 
     public Boolean validationName(String name) {
-        String checkName = "([a-zA-Z ]{5,20})";
-        if (name.matches(checkName)) {
-            return true;
-        } else {
-            return false;
+
+        if (name.length() >= 5) {
+            boolean checkUpperCase = false;
+            boolean checkDigit = false;
+            for (int i = 0; i < name.length(); i++) {
+                if (name.charAt(i) >= 65 && name.charAt(i) <= 90) {
+                    checkUpperCase = true;
+                }
+                if (name.charAt(i) >= 48 && name.charAt(i) <= 57) {
+                    checkDigit = true;
+                }
+            }
+            if (checkUpperCase && checkDigit) {
+                return true;
+            }
         }
+        return false;
     }
 
 
@@ -195,17 +262,11 @@ public class UserServiceImpl implements UserService {
 
     public Boolean validationPassword(String password) {
         String pass = password;
-        String check1 = "[A-Z]+";
-        String check2 = "[a-z]+";
-        String check3 = "[\\W]+";
-        if (pass.matches(check1) &&
-                pass.matches(check2) &&
-                pass.matches(check3) &&
-                pass.length() >= 4 &&
-                pass.length() <= 20) {
+
+        if (pass.length()>=4){
             return true;
         } else {
-            return false;
+            throw new RuntimeException("The password cannot be less than four characters.Enter the password  correctly!");
         }
     }
 
