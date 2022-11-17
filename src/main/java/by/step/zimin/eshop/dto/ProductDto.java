@@ -28,7 +28,7 @@ public class ProductDto {
     private Processor processor;
     private Long amount;
 
-//    product details
+    //    product details
     private Color color;
     private Integer countSim;
     private Double displaySize;
@@ -42,7 +42,7 @@ public class ProductDto {
     private Integer accumulatorCapacity;
 
 
-//    processor
+    //    processor
     private String name;
     private Integer countCore;
     private Integer frequency;
@@ -50,4 +50,12 @@ public class ProductDto {
     //category
     private String categoryTitle;
     private String podCategory;
+
+    public Boolean notNull(Object obj) {
+        if (obj != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

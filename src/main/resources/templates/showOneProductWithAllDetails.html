@@ -1,0 +1,168 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>All phones page</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <!--    Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--     Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<div th:insert="~{fragments/menu::#_nav_menu}"></div>
+<hr/>
+<div th:insert="~{index::#fragment_header_bucket}"></div>
+<hr/>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Description</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td scope="row">
+<!--            th:if="${product.notNull({product.imageProduct3})}"-->
+            <div id="image_product" class="div_img_one" ><img class="img_one_product" th:src="*{'data:image/png;base64,'+{product.imageProduct}}"/></div>
+            <div id="image_product2"  class="div_img_one" ><img class="img_one_product" th:src="*{'data:image/png;base64,'+{product.imageProduct2}}"/></div>
+            <div id="image_product3"  class="div_img_one" ><img class="img_one_product" th:src="*{'data:image/png;base64,'+{product.imageProduct3}}"/></div>
+            <button class="button_next">Next &#8250;</button>
+            <span id="span_product_price" th:utext="'$ '+${product.price}"></span>
+
+        </td>
+        <td>
+            <table class="table">
+                <thead class="thead-dark">
+
+                <tr>
+                    <th>Brand and version</th>
+                    <th>Color</th>
+                    <th>Count sim kart</th>
+                    <th>Display size</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${product.title}">title</td>
+                    <td th:text="${product.color}">Color</td>
+                    <td th:text="${product.countSim}">Count sim</td>
+                    <td th:text="${product.displaySize}+' inch'">Display size</td>
+
+                </tr>
+                </tbody>
+            </table>
+
+
+            <!-- <table class="table"> -->
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>PAM memory</th>
+                    <th>RAM memory</th>
+                    <th>Front camera</th>
+                    <th>Rear camera</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${product.inMemory}+' GB.'">title</td>
+                    <td th:text="${product.ramMemory}+' GB.'">Color</td>
+                    <td th:text="${product.frontCamera}+' Mpx'">Count sim</td>
+                    <td th:text="${product.rearCamera}+' Mpx'">Display size</td>
+
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Operation system</th>
+                    <th>Version operation system:</th>
+                    <th>Accumulator capacity:</th>
+                    <th>Date of production</th>
+                </tr>
+
+                <tbody>
+                <td th:text="${product.operationSystem}">OS</td>
+                <td th:text="${product.versionOS}+' v.'">Version OS</td>
+                <td th:text="${product.accumulatorCapacity}+' mA'">Accumulator</td>
+                <td th:text="${product.yearProduction}+' year'">Year Production</td>
+                </tbody>
+            </table>
+
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Processor name:</th>
+                    <th>Count core in processor:</th>
+                    <th>Frequency of processor:</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+
+                    <td th:text="${product.name}">Processor</td>
+                    <td th:text="${product.countCore}">Count core</td>
+                    <td th:text="${product.frequency}+' Hz'">Frequency</td>
+                    <td th:text="${product.price}+ '$'">Price</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                <tr>
+                    <th sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">Delete product</th>
+                    <th sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">Change product</th>
+                    <th>Add to bucket</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <td sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
+                    <button class="form_but"><a class="a_phones_button"
+                                                th:href="@{/products/delete/{id}/{page}(id=${product.id},page='products')}">Delete
+                        product</a></button>
+                </td>
+                <td sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
+                    <button class="form_but"><a
+                                                th:href="@{/products/get/form/change/{id}/{page}(id=${product.id},page='products')}" class="a_phones_button" >Change
+                        product</a></button>
+                </td>
+                <td sec:authorize="isAuthenticated">
+                    <button type="button" class="form_but" id="add_button" th:onclick="addToBucket([[${product.id}]])">
+                        Add to bucket
+                    </button>
+                </td>
+                <td sec:authorize="!isAuthenticated">
+                    <button class="form_but"><a th:href="@{/login}" class="a_phones_button"> &#10155;Please: Log in</a>
+                    </button>
+                </td>
+                </tbody>
+            </table>
+            <!-- </table> -->
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="/js/script.js"></script>
+
+</body>
+
+</html>

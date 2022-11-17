@@ -12,6 +12,7 @@
             integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 
 </head>
+
 <body>
 <!--<div th:insert="~{fragments/menu::#_nav_menu}"></div>-->
 
@@ -34,9 +35,11 @@
                 <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/products/add/form}">&#9776;Add
                     products</a></li>
 
-                <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="logout_right">&#10008; Log out </a>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="logout_right">&#10008; Log out
+                </a>
                 </li>
-                <li><a sec:authorize="!isAuthenticated()" th:href="@{/users/get/registration/form}">&#9998;Registration</a></li>
+                <li><a sec:authorize="!isAuthenticated()"
+                       th:href="@{/users/get/registration/form}">&#9998;Registration</a></li>
 
                 <li><a href="#" sec:authorize="isAuthenticated()" th:href="@{/users/update}"
                        sec:authentication="principal.username" class="my_account">&#10155; User name </a></li>
@@ -63,8 +66,9 @@
             <a href="#" sec:authorize="isAuthenticated()" th:href="@{/buckets/get}"><img class="header_img"
                                                                                          src="/img/backet.jpg"
                                                                                          alt="icon_bucket">
-<!--                th:text="${amount}"-->
-                <div class="counter"><b>Bucket:</b><b><span th:text="${amount}"  id="counter_in_bucket" ></span></b></div>
+                <!--                th:text="${amount}"-->
+                <div class="counter"><b>Bucket:</b><b><span th:text="${amount}" id="counter_in_bucket"></span></b>
+                </div>
             </a>
             <a href="#" sec:authorize="!isAuthenticated()" th:href="@{/login}"><img class="header_img"
                                                                                     src="/img/backet.jpg"
@@ -122,10 +126,9 @@
 
 <!-- WEATHER -->
 <div id="weather_fragment" class="div_weather"><a class="weatherwidget-io"
-                                                  href="https://forecast7.com/ru/53d9027d56/minsk/"
-                                                  data-label_1="MINSK"
-                                                  data-label_2="WEATHER" data-font="Georgia" data-theme="fall-leaves"
-                                                  data-cloudcolor="">MINSK
+                                                  href="https://forecast7.com/ru/53d9027d56/minsk/" data-label_1="MINSK"
+                                                  data-label_2="WEATHER"
+                                                  data-font="Georgia" data-theme="fall-leaves" data-cloudcolor="">MINSK
     WEATHER</a>
     <script>
         !function (d, s, id) {
@@ -141,8 +144,150 @@
 </div>
 <!-- /WEATHER -->
 
-<!--products-->
+
+<!--products and filter-->
 <div class="main_products_flex">
+
+    <!--filter-->
+    <div class="index_filter">
+        <!-- aside Widget -->
+        <div class="aside">
+            <h3 class="aside-title">Categories</h3>
+            <div class="checkbox-filter">
+
+                <div class="input-checkbox">
+                    <input type="checkbox" id="category-1">
+                    <label for="category-1">
+                        <span></span>
+                        LAPTOPS
+                        <small>(120)</small>
+                    </label>
+                </div>
+
+                <div class="input-checkbox">
+                    <input type="checkbox" id="category-2">
+                    <label for="category-2">
+                        <span></span>
+                        SMARTPHONES
+                        <small>(740)</small>
+                    </label>
+                </div>
+
+                <div class="input-checkbox">
+                    <input type="checkbox" id="category-3">
+                    <label for="category-3">
+                        <span></span>
+                        CAMERAS
+                        <small>(1450)</small>
+                    </label>
+                </div>
+
+                <div class="input-checkbox">
+                    <input type="checkbox" id="category-4">
+                    <label for="category-4">
+                        <span></span>
+                        ACCESSORIES
+                        <small>(578)</small>
+                    </label>
+                </div>
+
+                <div class="input-checkbox">
+                    <input type="checkbox" id="category-5">
+                    <label for="category-5">
+                        <span></span>
+                        WATCHES
+                        <small>(120)</small>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- /aside Widget -->
+
+        <!-- aside Widget -->
+        <div class="aside">
+            <h3 class="aside-title">Price</h3>
+            <div class="price-filter">
+                <div class="input-number price-min">
+                    <label for="customRange2" class="form-label">Min:</label>
+                    <input type="range" class="form-range" min="0" max="5000" step="1" id="customRange2">
+                </div>
+            </div>
+
+            <div class="price-filter">
+                <div class="input-number price-max">
+                    <label for="customRange1" class="form-label">Max:</label>
+                    <input type="range" class="form-range" min="0" max="50000" step="1" id="customRange1">
+                </div>
+            </div>
+        </div>
+
+        <!-- /aside Widget -->
+
+        <!-- aside Widget -->
+        <div class="aside">
+            <h3 class="aside-title">Brand</h3>
+            <div class="checkbox-filter">
+                <div class="input-checkbox">
+                    <input type="checkbox" id="brand-1">
+                    <label for="brand-1">
+                        <span></span>
+                        SAMSUNG
+                        <small>(578)</small>
+                    </label>
+                </div>
+                <div class="input-checkbox">
+                    <input type="checkbox" id="brand-2">
+                    <label for="brand-2">
+                        <span></span>
+                        LG
+                        <small>(125)</small>
+                    </label>
+                </div>
+                <div class="input-checkbox">
+                    <input type="checkbox" id="brand-3">
+                    <label for="brand-3">
+                        <span></span>
+                        SONY
+                        <small>(755)</small>
+                    </label>
+                </div>
+                <div class="input-checkbox">
+                    <input type="checkbox" id="brand-4">
+                    <label for="brand-4">
+                        <span></span>
+                        SAMSUNG
+                        <small>(578)</small>
+                    </label>
+                </div>
+                <div class="input-checkbox">
+                    <input type="checkbox" id="brand-5">
+                    <label for="brand-5">
+                        <span></span>
+                        LG
+                        <small>(125)</small>
+                    </label>
+                </div>
+                <div class="input-checkbox">
+                    <input type="checkbox" id="brand-6">
+                    <label for="brand-6">
+                        <span></span>
+                        SONY
+                        <small>(755)</small>
+                    </label>
+                </div>
+                <div class="input-checkbox">
+                    <input type="submit" value="FIND">
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!--/filter-->
+
     <!-- product -->
     <div class="product">
         <div class="product-img">
@@ -154,9 +299,11 @@
         </div>
         <div class="product-body">
             <p class="product-category" th:text="${products[1].category.podCategory}">Category</p>
-            <h3 class="product-name"><a th:text="${products[1].title}">product name goes here</a></h3>
+            <h3 class="product-name"><a th:href="@{/products/get/one/{id}(id=${products[1].id})}"
+                                        th:text="${products[1].title}">product name goes here</a></h3>
             <h4 class="product-price" th:text="'$'+${products[1].price}">$980.00</h4>
-            <del class="product-old-price" th:with="result=${(products[1].price/100)*70}"><span th:text="${result}">$600.00</span>
+            <del class="product-old-price" th:with="result=${(products[1].price/100)*70}"><span
+                    th:text="${result}">$600.00</span>
             </del>
             <div class="product-rating">
                 <i class="fa fa-star"></i>
@@ -167,17 +314,17 @@
             </div>
             <div class="product-btns">
                 <button class="add-to-wishlist"><i class="fa fa-heart-o">
-                    A</i><span
-                        class="tooltipp">add to wishlist</span></button>
+                    A</i><span class="tooltipp">add to wishlist</span></button>
                 <button class="add-to-compare"><i class="fa fa-exchange">
-                    C</i><span
-                        class="tooltipp">add to compare</span></button>
+                    C</i><span class="tooltipp">add to compare</span></button>
                 <button class="quick-view"><i class="fa fa-eye">
-                    Q</i><span class="tooltipp">quick view</span></button>
+                    Q</i><span class="tooltipp"><a
+                        th:href="@{/products/get/one/{id}(id=${products[1].id})}">quick view</a></span></button>
             </div>
         </div>
         <div class="add-to-cart">
-            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[1].id}]])">add to bucket</i></button>
+            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[1].id}]])">add to
+                bucket</i></button>
         </div>
     </div>
     <!-- product -->
@@ -187,13 +334,17 @@
             <div class="product-label">
                 <span class="sale">-30%</span>
                 <span class="new">NEW</span>
+                <span class="sale"><a class="link_more"
+                                      th:href="@{/products/get/one/{id}(id=${products[0].id})}">MORE INF..</a></span>
             </div>
         </div>
         <div class="product-body">
             <p class="product-category" th:text="${products[0].category.podCategory}">Category</p>
-            <h3 class="product-name"><a th:text="${products[0].title}">product name goes here</a></h3>
+            <h3 class="product-name"><a th:href="@{/products/get/one/{id}(id=${products[0].id})}"
+                                        th:text="${products[0].title}">product name goes here</a></h3>
             <h4 class="product-price" th:text="'$'+${products[0].price}">$980.00</h4>
-            <del class="product-old-price" th:with="result=${(products[0].price/100)*70}"><span th:text="${result}">$600.00</span>
+            <del class="product-old-price" th:with="result=${(products[0].price/100)*70}"><span
+                    th:text="${result}">$600.00</span>
             </del>
             <div class="product-rating">
                 <i class="fa fa-star"></i>
@@ -203,31 +354,89 @@
                 <i class="fa fa-star"></i>
             </div>
             <div class="product-btns">
-                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                        class="tooltipp">add to wishlist</span></button>
-                <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                        class="tooltipp">add to compare</span></button>
-                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to
+                            wishlist</span></button>
+                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to
+                            compare</span></button>
+                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
+                            view</span></button>
             </div>
         </div>
         <div class="add-to-cart">
-            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[0].id}]])">add to bucket</i></button>
+            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[0].id}]])">add to
+                bucket</i></button>
         </div>
     </div>
     <!-- product -->
     <div class="product">
         <div class="product-img">
-            <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{products[3].imageProduct}}">
+            <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{products[3].imageProduct}}"/>
+            <div class="product-label">
+                <span class="sale">-30%</span>
+                <span class="new">NEW</span>
+
+            </div>
+        </div>
+        <div class="product-body">
+            <p class="product-category" th:text="${products[3].category.podCategory}">Category</p>
+            <h3 class="product-name"><a th:href="@{/products/get/one/{id}(id=${products[3].id})}"
+                                        th:text="${products[3].title}">product name goes here</a></h3>
+            <h4 class="product-price" th:text="'$'+${products[3].price}">$980.00</h4>
+            <del class="product-old-price" th:with="result=${(products[3].price/100)*70}"><span
+                    th:text="${result}">$600.00</span>
+            </del>
+            <div class="product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+            <div class="product-btns">
+                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to
+                            wishlist</span></button>
+                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to
+                            compare</span></button>
+                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
+                            view</span></button>
+            </div>
+        </div>
+        <div class="add-to-cart">
+            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[3].id}]])">add to
+                bucket</i></button>
+        </div>
+    </div>
+    <!-- product -->
+</div>
+
+<!--red line-->
+<div class="div_img_hot_deal"><h1 class="h1_hot_deal">.</h1></div>
+
+<!--img hot_deal-->
+<div class="img_hot_dial"></div>
+<!--/hot_deal-->
+
+<div class="div_img_hot_deal"><h1 class="h1_hot_deal">.</h1></div>
+<!--/red line-->
+
+<!--products2-->
+<div class="div_products2">
+    <!-- product2 -->
+    <div class="product">
+        <div class="product-img">
+            <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{products[2].imageProduct}}">
             <div class="product-label">
                 <span class="sale">-30%</span>
                 <span class="new">NEW</span>
             </div>
         </div>
         <div class="product-body">
-            <p class="product-category" th:text="${products[3].category.podCategory}">Category</p>
-            <h3 class="product-name"><a th:text="${products[3].title}">product name goes here</a></h3>
-            <h4 class="product-price" th:text="'$'+${products[3].price}">$980.00</h4>
-            <del class="product-old-price" th:with="result=${(products[3].price/100)*70}"><span th:text="${result}">$600.00</span>
+            <p class="product-category" th:text="${products[2].category.podCategory}">Category</p>
+            <h3 class="product-name"><a th:href="@{/products/get/one/{id}(id=${products[2].id})}"
+                                        th:text="${products[2].title}">product name goes here</a></h3>
+            <h4 class="product-price" th:text="'$'+${products[2].price}">$980.00</h4>
+            <del class="product-old-price" th:with="result=${(products[2].price/100)*70}"><span
+                    th:text="${result}">$600.00</span>
             </del>
             <div class="product-rating">
                 <i class="fa fa-star"></i>
@@ -237,31 +446,114 @@
                 <i class="fa fa-star"></i>
             </div>
             <div class="product-btns">
-                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                        class="tooltipp">add to wishlist</span></button>
-                <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                        class="tooltipp">add to compare</span></button>
-                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                <button class="add-to-wishlist"><i class="fa fa-heart-o">
+                    A</i><span class="tooltipp">add to wishlist</span></button>
+                <button class="add-to-compare"><i class="fa fa-exchange">
+                    C</i><span class="tooltipp">add to compare</span></button>
+                <button class="quick-view"><i class="fa fa-eye">
+                    Q</i><span class="tooltipp"><a
+                        th:href="@{/products/get/one/{id}(id=${products[2].id})}">quick view</a></span></button>
             </div>
         </div>
         <div class="add-to-cart">
-            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[3].id}]])">add to bucket</i></button>
+            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[2].id}]])">add to
+                bucket</i></button>
         </div>
     </div>
+    <!-- product2 -->
+    <div class="product">
+        <div class="product-img">
+            <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{products[4].imageProduct}}">
+            <div class="product-label">
+                <span class="sale">-30%</span>
+                <span class="new">NEW</span>
+                <span class="sale"><a class="link_more"
+                                      th:href="@{/products/get/one/{id}(id=${products[4].id})}">MORE INF..</a></span>
+            </div>
+        </div>
+        <div class="product-body">
+            <p class="product-category" th:text="${products[4].category.podCategory}">Category</p>
+            <h3 class="product-name"><a th:href="@{/products/get/one/{id}(id=${products[4].id})}"
+                                        th:text="${products[4].title}">product name goes here</a></h3>
+            <h4 class="product-price" th:text="'$'+${products[4].price}">$980.00</h4>
+            <del class="product-old-price" th:with="result=${(products[4].price/100)*70}"><span
+                    th:text="${result}">$600.00</span>
+            </del>
+            <div class="product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+            <div class="product-btns">
+                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to
+                            wishlist</span></button>
+                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to
+                            compare</span></button>
+                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
+                            view</span></button>
+            </div>
+        </div>
+        <div class="add-to-cart">
+            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[4].id}]])">add to
+                bucket</i></button>
+        </div>
+    </div>
+    <!-- product -->
+    <div class="product">
+        <div class="product-img">
+            <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{products[3].imageProduct}}"/>
+            <div class="product-label">
+                <span class="sale">-30%</span>
+                <span class="new">NEW</span>
 
-
+            </div>
+        </div>
+        <div class="product-body">
+            <p class="product-category" th:text="${products[5].category.podCategory}">Category</p>
+            <h3 class="product-name"><a th:href="@{/products/get/one/{id}(id=${products[5].id})}"
+                                        th:text="${products[5].title}">product name goes here</a></h3>
+            <h4 class="product-price" th:text="'$'+${products[5].price}">$980.00</h4>
+            <del class="product-old-price" th:with="result=${(products[5].price/100)*70}"><span
+                    th:text="${result}">$600.00</span>
+            </del>
+            <div class="product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+            <div class="product-btns">
+                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to
+                            wishlist</span></button>
+                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to
+                            compare</span></button>
+                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
+                            view</span></button>
+            </div>
+        </div>
+        <div class="add-to-cart">
+            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[5].id}]])">add to
+                bucket</i></button>
+        </div>
+    </div>
+    <!-- product -->
 </div>
+<!--/products2-->
+
+<!--google_map-->
 <div>
     <div id="_map">
         <iframe
                 src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2488.312569701565!2d27.656037424440353!3d53.93788443439389!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sby!4v1665990083824!5m2!1sru!2sby"
                 width="30%" height="20%" style="border:1em; border-radius: 0.2em; padding-top: 0.2em;"
-                allowfullscreen=""
-                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <a name="show_map"></a>
     </div>
 </div>
-
+<!--/google_map-->
 
 <!-- NEW DISCOUNTS -->
 <div id="newsletter" class="section">

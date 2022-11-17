@@ -36,10 +36,10 @@
     <tr th:each="phone:${phones}">
 <!--<img th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}" class="img_on_phones"/>-->
         <td scope="row">
-           <div id="image_product"><img th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}" class="img_on_phones" /></div>
-            <div id="image_product2"> <img th:src="*{'data:image2/jpeg;base64,'+{phone.imageProduct2}}" class="img_on_phones" /></div>
-            <div  id="image_product3"> <img th:src="*{'data:image3/jpeg;base64,'+{phone.imageProduct3}}" class="img_on_phones"  /></div>
-            <button  class="button_next">Next &#8250;</button><span  id="span_product_price" th:utext="'$ '+${phone.price}"></span>
+           <div id="div_on_products"><a th:href="@{/products/get/one/{id}(id=${phone.id})}"><img class="img_on_phones" th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}"  /></a></div>
+<!--            <div id="image_product2"> <img th:src="*{'data:image2/jpeg;base64,'+{phone.imageProduct2}}" class="img_on_phones" /></div>-->
+<!--            <div  id="image_product3"> <img th:src="*{'data:image3/jpeg;base64,'+{phone.imageProduct3}}" class="img_on_phones"  /></div>-->
+           <span  id="span_product_price" th:utext="'$ '+${phone.price}"></span>
             </td>
 
         <td>
@@ -114,7 +114,7 @@
 
     </tbody>
 </table>
- <div th:insert="~{fragments/menu::#_nav_menu}"></div>
+
  <script src="/js/script.js"></script>
 
 </body>

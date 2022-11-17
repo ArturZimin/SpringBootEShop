@@ -14,7 +14,7 @@
 
         <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="logout_right">&#10008; Log out </a></li>
         <li><a sec:authorize="!isAuthenticated()" th:href="@{/users/registration}">&#9998;Registration</a></li>
-        <li><a href="#" sec:authorize="isAuthenticated()" th:href="@{/users/update}"   sec:authentication="principal.username" class="my_account">&#10155; User name </a></li>
+        <li><a href="#" sec:authorize="isAuthenticated()" th:href="@{/users/update}"   sec:authentication="principal.username" class="my_account">Hello: &#10155; User name </a></li>
         <li><a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="my_account">&#10155;Please: Log in </a></li>
 
         <li ><a th:href="@{/}">&#10066;Home</a></li>

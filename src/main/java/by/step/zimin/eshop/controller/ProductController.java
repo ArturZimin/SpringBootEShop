@@ -24,6 +24,21 @@ public class ProductController {
     private final BucketService bucketService;
 
 
+    @GetMapping("/get/one/{id}")
+        public String getOneProduct(@PathVariable("id") Long id,Model model,Principal principal){
+       ProductDto productDto= productService.getProductById(id);
+       if (productDto==null){
+           throw new RuntimeException("The product not found!");
+       }
+        if (principal != null) {
+            Long amount = bucketService.getAmountInBucket(principal.getName());
+            model.addAttribute("amount", amount);
+        }
+       model.addAttribute("product", productDto);
+       return "showOneProductWithAllDetails";
+
+    }
+
     @GetMapping("/get/phones")
     public String getAllPhones(Model model, Principal principal) {
         List<ProductDto> listPhones = productService.getPhones();
@@ -74,7 +89,7 @@ public class ProductController {
         return "addProduct";
     }
 
-
+//@RequestParam("image") MultipartFile image, @RequestParam("imageProduct2") MultipartFile image2, @RequestParam("imageProduct3") MultipartFile image3,
     @PostMapping("/add")
     public String addProductByAllProducts(@RequestParam("image") MultipartFile image, @RequestParam("image2") MultipartFile image2, @RequestParam("image3") MultipartFile image3, ProductDto productDto, Model model, Principal principal) throws IOException {
         if (productDto == null) {

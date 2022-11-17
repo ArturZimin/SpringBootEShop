@@ -25,7 +25,14 @@ public class MainController {
     @RequestMapping({"", "/"})  //можно 2 способами
     public String index(Model model, Principal principal) {
         List<ProductDto> list = productService.getAll();
+        int c=0;
+       for(ProductDto p:list){
+           if (p.getImageProduct2().isEmpty()){
+               c++;
+           }
 
+       }
+        System.out.println(" image product count: "+c);
         if (list == null) {
             throw new RuntimeException("The list of products is null!");
         }

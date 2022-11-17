@@ -11,10 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -112,7 +109,7 @@ public class ProductServiceImpl implements ProductService {
                 .id(productDto.getId())
                 .imageProduct(Base64.getEncoder().encodeToString(file.getBytes()))
                 .imageProduct2(Base64.getEncoder().encodeToString(file2.getBytes()))
-                .imageProduct3(Base64.getEncoder().encodeToString(file2.getBytes()))
+                .imageProduct3(Base64.getEncoder().encodeToString(file3.getBytes()))
                 .amount(productDto.getAmount())
                 .price(productDto.getPrice())
                 .currencyType(productDto.getCurrencyType())
@@ -192,9 +189,9 @@ public class ProductServiceImpl implements ProductService {
                     .id(product.getId())
                     .title(product.getTitle())
                     .price(product.getPrice())
-                    .imageProduct(Base64.getEncoder().encodeToString(product.getImageProduct().getBytes()))
-                    .imageProduct2(Base64.getEncoder().encodeToString(product.getImageProduct2().getBytes()))
-                    .imageProduct2(Base64.getEncoder().encodeToString(product.getImageProduct3().getBytes()))
+                    .imageProduct(product.getImageProduct())
+                    .imageProduct2(product.getImageProduct2())
+                    .imageProduct3(product.getImageProduct3())
                     .amount(product.getAmount())
                     .currencyType(product.getCurrencyType())
                     .categoryTitle(product.getCategory().getCategoryTitle())
@@ -218,6 +215,8 @@ public class ProductServiceImpl implements ProductService {
         }
         throw new RuntimeException("The product by id: "+productId+" not found!");
     }
+
+
 
     public List<ProductDto> productListToProductListDto(List<Product> product) {
         List<ProductDto> list = product.stream()

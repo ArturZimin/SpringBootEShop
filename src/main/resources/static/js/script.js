@@ -177,16 +177,15 @@ function registration(e) {
 
 
 
-/**
+
  let image=document.querySelector('#image_product');
  let image2=document.querySelector('#image_product2');
  let image3=document.querySelector('#image_product3');
 
- let count2=0;
+ let count2=1;
  $('.button_next').on('click', function(e){
 
     if(count2==1){
-
        image.style.display="none";
        image2.style.display="block";
         image3.style.display="none";
@@ -197,13 +196,14 @@ function registration(e) {
     }
     if(count2==3){
         image.style.display="block";
-        image2.style.display="none";
+        image2.style.display="none"
         image3.style.display="none";
-        count2=0;
-
     }
     count2++;
 
+    if (count2>=4){
+        count2=1;
+    }
 });
 
 
@@ -217,4 +217,3 @@ function registration(e) {
 
  function setCounterInSpan(number){
     counter.innerHTML=number;}
- */
