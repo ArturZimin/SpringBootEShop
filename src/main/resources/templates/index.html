@@ -23,16 +23,16 @@
     <div id="top-header">
         <div class="container" id="header_nav_fragment">
             <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i>&#9990; Contact</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i>&#128386;Email</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i>&#128376;Address</a></li>
+                <li><a href="#" id="get_phone"><i class="fa fa-phone"></i>&#9990; Contact</a></li>
+                <li><a href="#" id="get_email"><i class="fa fa-envelope-o"></i>&#128386; Email</a></li>
+                <li><a href="#" id="get_address"><i class="fa fa-map-marker"></i>&#128376; Address</a></li>
                 <li><a href="#"><i class="fa fa-dollar"></i>&#36; USD</a></li>
                 <li><a href="#" class="link_weather"><i></i>&#8451; Weather&#9728;</a></li>
 
                 <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/users/get/all}">&rArr;Show all
                     users</a></li>
-                <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users/new}">&#10070;Add user</a></li>
-                <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/products/add/form}">&#9776;Add
+                <li><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users/new}">&#10070; Add user</a></li>
+                <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/products/add/form}">&#9776; Add
                     products</a></li>
 
                 <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="logout_right">&#10008; Log out
@@ -52,6 +52,11 @@
     </div>
     <!-- /TOP HEADER -->
 
+    <!--Hidden elements-->
+    <div class="phone_number"><h2 style="color: white">+375333252505</h2></div>
+    <div class="email_address"><h2 style="color: white">e-shop@gmail.com</h2></div>
+    <div class="address_shop"><h2 style="color: white">Minsk ,Kalinovskogo 111/2</h2></div>
+    <!--/Hidden elements-->
 
     <!-- Bucket and search -->
     <div class="bucket_search">
@@ -84,16 +89,21 @@
         <!-- SEARCH BAR -->
         <div class="header-search" id="fragment_header_search_bar">
             <diV>
-                <form style="padding: 0 ; ">
-                    <select class="input-select">
-                        <option value="0">All Categories</option>
-                        <option value="1">Phone</option>
-                        <option value="2">Notebook</option>
-                        <option value="3">Laptop</option>
-                        <option value="4">Watch</option>
-                        <option value="5">Accessory</option>
-                    </select>
-                    <input type="text" name="search" class="input_search" placeholder="Nokia 3310">
+                <form th:action="@{/products/search/by/?category={category}&title={title}}" method="GET"
+                      style="padding: 0 ; ">
+                    <label>
+                        <select name="category" class="input-select">
+                            <option value="All">All Categories</option>
+                            <option value="Phone">Phone</option>
+                            <option value="Notebook">Notebook</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Watch">Watch</option>
+                            <option value="Accessory">Accessory</option>
+                        </select>
+                    </label>
+                    <label>
+                        <input type="text" name="title" class="input_search" placeholder="   Nokia 3310">
+                    </label>
                     <button class="search-btn" type="submit">Search</button>
                 </form>
             </diV>
@@ -110,14 +120,12 @@
     <div class="nav_nav">
         <!-- NAV -->
         <ul class="main-nav nav navbar-nav">
-
             <li class="active"><a th:href="@{/}">&#10066;Home</a></li>
             <li><a th:href="@{/products/get/products}">&#10066;All products</a></li>
-            <li><a href="#">&#10066;Laptops</a></li>
+            <li><a href="@{/products/get/laptops}">&#10066;Laptops</a></li>
             <li><a th:href="@{/products/get/phones}">&#10066;Phones</a></li>
-            <li><a href="#">&#10066;Cameras</a></li>
-            <li><a href="#">&#10066;Accessories</a></li>
-
+            <li><a href="@{/products/get/cameras}">&#10066;Cameras</a></li>
+            <li><a href="@{/products/get/accessories}">&#10066;Accessories</a></li>
         </ul>
         <!-- /NAV -->
     </div>
@@ -209,14 +217,14 @@
             <div class="price-filter">
                 <div class="input-number price-min">
                     <label for="customRange2" class="form-label">Min:</label>
-                    <input type="range" class="form-range" min="0" max="5000" step="1" id="customRange2">
+                    <input type="range" class="form-range" min="0" max="5000" step="1" id="customRange2" value="0">
                 </div>
             </div>
 
             <div class="price-filter">
                 <div class="input-number price-max">
                     <label for="customRange1" class="form-label">Max:</label>
-                    <input type="range" class="form-range" min="0" max="50000" step="1" id="customRange1">
+                    <input type="range" class="form-range" min="0" max="5000" step="1" id="customRange1" value="5000">
                 </div>
             </div>
         </div>
@@ -558,90 +566,46 @@
 <!-- NEW DISCOUNTS -->
 <div id="newsletter" class="section">
     <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="newsletter">
-                    <p>Sign Up for the <strong>New Discounts</strong></p>
-                    <form>
-                        <input class="input" type="email" placeholder="Enter Your Email">
-                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-                    </form>
-                    <ul class="newsletter-follow">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- /row -->
+    <div class="newsletter">
+        <p>Sign Up for the <strong>New Discounts</strong></p>
+        <form>
+            <input class="input" type="email" placeholder="    Enter Your Email">
+            <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+        </form>
     </div>
-    <!-- /container -->
 </div>
+
 <!-- /NEWSLETTER -->
 
 <!-- FOOTER -->
 <footer id="footer">
-
-
-    <!-- top footer -->
-    <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-3 col-xs-6">
-                    <div class="footer">
-                        <h3 class="footer-title">About Us</h3>
-                        <p></p>
-                        <ul class="footer-links">
-                            <li><a href="#"><i class="fa fa-map-marker"></i> Minsk , ul Kalinowskogo 17/7</a></li>
-                            <li><a href="#"><i class="fa fa-phone"></i>+375333252505</a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i>sm@rt@email.com</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-xs-6">
-                    <div class="footer">
-                        <h3 class="footer-title">Categories</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">Laptops</a></li>
-                            <li><a href="#">Smartphones</a></li>
-                            <li><a href="#">Cameras</a></li>
-                            <li><a href="#">Accessories</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="clearfix visible-xs"></div>
-
-                <div class="col-md-3 col-xs-6">
-                    <div class="footer">
-                        <h3 class="footer-title">Service</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">View Bucket</a></li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /row -->
+    <!-- row -->
+    <div class="row_footer">
+        <div class="column_footer">
+            <div class="div_footer"><h3 class="footer-title">About Us</h3></div>
+            <div class="div_footer"><a class="a_footer" href="#">&#128376; Minsk , ul. Kalinovskogo 111/2</a></div>
+            <div class="div_footer"><a class="a_footer" href="#">&#9990; +375333252505</a></div>
+            <div class="div_footer"><a class="a_footer" href="#">&#128386; e-shop@gmail.com</a></div>
         </div>
-        <!-- /container -->
-    </div>
-    <!-- /top footer -->
 
+        <div class="column_footer">
+            <div class="div_footer"><h3 class="footer-title">Categories</h3></div>
+            <div class="div_footer"><a class="a_footer" href="#">Laptops</a></div>
+            <div class="div_footer"><a class="a_footer" href="#">Smartphones</a></div>
+            <div class="div_footer"><a class="a_footer" href="#">Cameras</a></div>
+            <div class="div_footer"><a class="a_footer" href="#">Accessories</a></div>
+        </div>
+
+        <!--                <div class="clearfix visible-xs"></div>-->
+
+        <div class="column_footer">
+            <div class="div_footer"><h3 class="footer-title">Service</h3></div>
+            <div class="div_footer"><a class="a_footer"  th:href="@{/users/update}" >&#10155; My Account</a></div>
+
+            <div class="div_footer"><a class="a_footer" href="#"  th:href="@{/buckets/get}">View Bucket</a></div>
+        </div>
+    </div>
+    <!-- /row -->
 </footer>
 <!-- /FOOTER -->
 

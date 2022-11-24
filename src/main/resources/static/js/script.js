@@ -174,7 +174,47 @@ function registration(e) {
     }
 });*/
 
+/**============================================================
+ * SHOW PHONE
+ ==============================================================*/
 
+$('#get_phone').on("click",function (){
+    let isNone=$('.phone_number').css('display');
+    if (isNone=='none'){
+
+    $('.phone_number').css("display","block");}else {
+        $('.phone_number').css("display","none");
+    }
+
+});
+
+/**============================================================
+ * SHOW EMAIL
+ ==============================================================*/
+
+$('#get_email').on("click",function (){
+    let isNone=$('.email_address').css('display');
+    if (isNone=='none'){
+
+        $('.email_address').css("display","block");}else {
+        $('.email_address').css("display","none");
+    }
+
+});
+
+/**============================================================
+ * SHOW ADDRESS
+ ==============================================================*/
+
+$('#get_address').on("click",function (){
+    let isNone=$('.address_shop').css('display');
+    if (isNone=='none'){
+
+        $('.address_shop').css("display","block");}else {
+        $('.address_shop').css("display","none");
+    }
+
+});
 
 
 

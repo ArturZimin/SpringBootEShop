@@ -14,7 +14,7 @@ import java.security.Principal;
 @RequestMapping("/buckets")
 public class BucketController {
 
-    private  BucketDto bucketDto;
+    private BucketDto bucketDto;
     private final BucketService bucketService;
 
     public BucketController(BucketService bucketService) {
@@ -23,21 +23,21 @@ public class BucketController {
 
 
     @GetMapping("/get")
-    public String getBucket(Model model, Principal principal){
-        if (principal==null){
-            model.addAttribute("bucket",new BucketDto());
-        }else {
-             bucketDto=bucketService.getBucketByUser(principal.getName());
-            model.addAttribute("bucket",bucketDto);
+    public String getBucket(Model model, Principal principal) {
+        if (principal == null) {
+            model.addAttribute("bucket", new BucketDto());
+        } else {
+            bucketDto = bucketService.getBucketByUser(principal.getName());
+            model.addAttribute("bucket", bucketDto);
         }
         return "bucket";
     }
 
     @GetMapping("/delete/product/{id}")
-    public String deleteProduct(@PathVariable Long id,Model model, Principal principal){
+    public String deleteProduct(@PathVariable Long id, Model model, Principal principal) {
         bucketService.deleteProduct(id, principal.getName());
-        bucketDto=bucketService.getBucketByUser(principal.getName());
-        model.addAttribute("bucket",bucketDto);
+        bucketDto = bucketService.getBucketByUser(principal.getName());
+        model.addAttribute("bucket", bucketDto);
         return "bucket";
     }
 }

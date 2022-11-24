@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 public class BucketDetailsDto {
-
+    private String imageProduct;
     private String title;
     private Long productId;
     private BigDecimal price;
@@ -21,6 +21,7 @@ public class BucketDetailsDto {
     private Double sum;
 
     public BucketDetailsDto(Product product) {
+        this.imageProduct=product.getImageProduct();
         this.title = product.getTitle();
         this.productId = product.getId();
         this.price = product.getPrice();

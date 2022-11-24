@@ -19,6 +19,7 @@ img {
     height: 10em;
     width: 10em;
 }
+
 /**======================================================
 IMAGES
 ========================================================*/
@@ -27,54 +28,60 @@ IMAGES
     max-width: 18em;
     max-height: 18em;
 }
-.div_on_products{
+
+.div_on_products {
     height: 20em;
     width: 20em;
 }
-.div_img_one{
+
+.div_img_one {
     height: 35em;
     width: 35em;
 
 }
 
-.img_one_product{
+.img_one_product {
     max-height: 30em;
     max-width: 32em;
 }
 
-#image_product2{
-    display: none;
-}
-#image_product3{
+#image_product2 {
     display: none;
 }
 
-.img_hot_dial{
+#image_product3 {
+    display: none;
+}
+
+.img_hot_dial {
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    height: 27em;
+    height: 23em;
     background-image: url("/img/hotdeal.png");
+    background-size: contain;
 }
 
-.h1_hot_deal{
+.h1_hot_deal {
     color: #e7e5e5;
     font-size: larger;
 }
-.div_img_hot_deal{
+
+.div_img_hot_deal {
     background-color: #c40303;
     border-radius: 50%;
 }
 
-.div_img_hot_deal :hover{
+.div_img_hot_deal :hover {
     background-color: #f80303;
 
 }
+
 /**===================================================
 MAP
 =====================================================*/
-#_map{
+#_map {
     margin-top: 40px;
 }
 
@@ -122,19 +129,19 @@ li a {
 }
 
 
-.link_more{
+.link_more {
     color: red;
     text-decoration: none;
     font-weight: bold;
 
 }
 
-.link_login{
+.link_login {
     color: white;
     text-decoration: none;
 }
 
-.link_login:hover{
+.link_login:hover {
 
     color: white;
     text-decoration: none;
@@ -162,22 +169,6 @@ li a:hover {
     justify-content: center;
     align-items: center;
 
-}
-
-
-/**=============================================
-NAVIGATION
-================================================*/
-
-
-.nav_nav {
-    display: -ms-flexbox;
-    flex-wrap: nowrap;
-
-}
-
-.active {
-    padding-left: 35.7%;;
 }
 
 
@@ -224,7 +215,7 @@ HEADER SEARCH
     height: 5vh;
     width: 10vw;
     border-radius: 0cm 10cm 10cm 0;
-    background-color: rgb(174, 2, 2);
+    background-color: rgb(191, 4, 4);
     color: white;
 }
 
@@ -261,11 +252,12 @@ ALL FORMS
     margin-right: 15%;
 }
 
-.response_message{
+.response_message {
     background-color: aquamarine;
     border-radius: 10px;
     margin-bottom: 5px;
 }
+
 .div_h1_all_form {
     border-radius: 10px;
     border: 2px black;
@@ -312,8 +304,9 @@ BUTTONS
     background-color: red;
     color: white;
 }
-.button_next{
-    border:0 ;
+
+.button_next {
+    border: 0;
     height: 3em;
     width: 5em;
 
@@ -322,9 +315,9 @@ BUTTONS
 /**=======================================================
 MAIN PRODUCTS index.html
 =============================================================*/
-.main_products_flex{
+.main_products_flex {
 
-    display:flex;
+    display: flex;
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
@@ -353,7 +346,7 @@ MAIN PRODUCTS index.html
     position: relative;
 }
 
-.product .product-img>img {
+.product .product-img > img {
     width: 100%;
 }
 
@@ -363,19 +356,19 @@ MAIN PRODUCTS index.html
     right: 15px;
 }
 
-.product .product-img .product-label>span {
+.product .product-img .product-label > span {
     border: 2px solid;
     padding: 2px 10px;
     font-size: 12px;
 }
 
-.product .product-img .product-label>span.sale {
+.product .product-img .product-label > span.sale {
     background-color: #FFF;
     border-color: #D10024;
     color: #D10024;
 }
 
-.product .product-img .product-label>span.new {
+.product .product-img .product-label > span.new {
     background-color: #D10024;
     border-color: #D10024;
     color: #FFF;
@@ -400,11 +393,11 @@ MAIN PRODUCTS index.html
     font-size: 14px;
 }
 
-.product .product-body .product-name>a {
+.product .product-body .product-name > a {
     font-weight: 700;
 }
 
-.product .product-body .product-name>a:hover, .product .product-body .product-name>a:focus {
+.product .product-body .product-name > a:hover, .product .product-body .product-name > a:focus {
     color: #D10024;
 }
 
@@ -425,7 +418,7 @@ MAIN PRODUCTS index.html
     height: 20px;
 }
 
-.product .product-body .product-rating>i {
+.product .product-body .product-rating > i {
     position: relative;
     width: 14px;
     margin-right: -4px;
@@ -434,7 +427,7 @@ MAIN PRODUCTS index.html
     z-index: 10;
 }
 
-.product .product-body .product-rating>i.fa-star {
+.product .product-body .product-rating > i.fa-star {
     color: #ef233c;
 }
 
@@ -451,7 +444,7 @@ MAIN PRODUCTS index.html
     background-color: #E4E7ED;
 }
 
-.product .product-body .product-btns>button {
+.product .product-body .product-btns > button {
     position: relative;
     width: 40px;
     height: 40px;
@@ -463,13 +456,13 @@ MAIN PRODUCTS index.html
     transition: 0.2s all;
 }
 
-.product .product-body .product-btns>button:hover {
+.product .product-body .product-btns > button:hover {
     background-color: red;
     color: #D10024;
     border-radius: 50%;
 }
 
-.product .product-body .product-btns>button .tooltipp {
+.product .product-body .product-btns > button .tooltipp {
     position: absolute;
     bottom: 100%;
     left: 50%;
@@ -490,7 +483,7 @@ MAIN PRODUCTS index.html
     transition: 0.2s all;
 }
 
-.product .product-body .product-btns>button:hover .tooltipp {
+.product .product-body .product-btns > button:hover .tooltipp {
     opacity: 1;
     visibility: visible;
     -webkit-transform: translate(-50%, -5px);
@@ -534,7 +527,7 @@ MAIN PRODUCTS index.html
     transition: 0.2s all;
 }
 
-.product .add-to-cart .add-to-cart-btn>i {
+.product .add-to-cart .add-to-cart-btn > i {
     position: absolute;
     left: 0;
     top: 0;
@@ -554,10 +547,11 @@ MAIN PRODUCTS index.html
 
 }
 
-.product .add-to-cart .add-to-cart-btn:hover>i {
+.product .add-to-cart .add-to-cart-btn:hover > i {
     opacity: 1;
     visibility: visible;
 }
+
 /**===============================================
 INDEX.htm ADD TO BUCKET BUTTON
 ==================================================*/
@@ -565,7 +559,8 @@ INDEX.htm ADD TO BUCKET BUTTON
     color: white;
     text-decoration: none;
 }
-.a_index_button :hover{
+
+.a_index_button :hover {
     color: red;
     text-decoration: none;
 }
@@ -573,7 +568,7 @@ INDEX.htm ADD TO BUCKET BUTTON
 /**====================================================
 PRODUCT PRICE
 =======================================================*/
-#span_product_price{
+#span_product_price {
     padding-left: 7%;
     color: red;
     text-shadow: #5b5a5a;
@@ -585,23 +580,25 @@ PRODUCT PRICE
 
 }
 
-/*----------------------------*\
-	Aside
-\*----------------------------*/
+/*===================================================*\
+	ASIDE
+\*====================================================*/
 
-.aside+.aside {
+.aside + .aside {
     margin-top: 30px;
 }
 
-.aside>.aside-title {
+.aside > .aside-title {
     text-transform: uppercase;
     font-size: 18px;
     margin: 15px 0px 30px;
 }
 
-/*-- checkbox Filter --*/
+/**================================================================
+ checkbox Filter
+ =================================================================*/
 
-.checkbox-filter>div+div {
+.checkbox-filter > div + div {
     margin-top: 10px;
 }
 
@@ -613,7 +610,9 @@ PRODUCT PRICE
     color: #8D99AE;
 }
 
-/*-- Price Filter --*/
+/**=====================================================
+ Price Filter
+ ======================================================*/
 
 #price-slider {
     margin-bottom: 15px;
@@ -656,7 +655,7 @@ PRODUCT PRICE
     width: calc(50% - 7px);
 }
 
-.index_filter{
+.index_filter {
     padding-left: 3%;
     display: inline-flex;
     justify-content: left;
@@ -664,7 +663,7 @@ PRODUCT PRICE
 }
 
 /*=========================================================
-	10 -> NEWSLETTER
+	 NEWSLETTER
 ===========================================================*/
 
 #newsletter.section {
@@ -705,57 +704,107 @@ PRODUCT PRICE
     width: calc(100% - 160px);
     margin-right: -4px;
     border-radius: 40px 0px 0px 40px;
+    height: 40px;
 }
 
 .newsletter form .newsletter-btn {
     width: 160px;
     height: 40px;
     font-weight: 700;
-    background: #D10024;
+    background:  rgb(191, 4, 4);
     color: #FFF;
     border: none;
     border-radius: 0px 40px 40px 0px;
 }
 
-.newsletter .newsletter-follow {
-    text-align: center;
+.newsletter form .newsletter-btn:hover{
+    background: #D10024;
 }
 
-.newsletter .newsletter-follow li {
-    display: inline-block;
-    margin-right: 5px;
-}
 
-.newsletter .newsletter-follow li:last-child {
-    margin-right: 0px;
-}
 
-.newsletter .newsletter-follow li a {
-    position: relative;
-    display: block;
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    border: 1px solid #E4E7ED;
-    background-color: #FFF;
-    -webkit-transition: 0.2s all;
-    transition: 0.2s all;
-}
-
-.newsletter .newsletter-follow li a:hover, .newsletter .newsletter-follow li a:focus {
-    background-color: #E4E7ED;
-    color: #D10024;
-}
 
 /**===============================================================
 PRODUCT-2 index.html
 ====================================================================*/
-.div_products2{
+.div_products2 {
     display: flex;
     justify-content: center;
-   flex-wrap: wrap;
+    flex-wrap: wrap;
     flex-direction: row;
     margin-left: 1%;
 }
 
+/**=============================================
+NAVIGATION
+================================================*/
+.email_address {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 9%;
+    background-color: #c40303;
+    z-index: 3;
+
+}
+
+.phone_number {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 5%;
+    background-color: #c40303;
+    z-index: 3;
+}
+
+.address_shop {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 19%;
+    background-color: #c40303;
+    z-index: 3;
+}
+
+.nav_nav {
+    display: -ms-flexbox;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.active {
+    padding-left: 26vw;;
+}
+
+/**===============================================
+FOOTER
+================================================*/
+.row_footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: black;
+}
+
+.column_footer {
+    height: 20vh;
+    width: 20vw;
+
+    flex-direction: column;
+    align-items: center;
+}
+.div_footer{
+    margin: 3% 2% ;
+}
+.footer-title{
+    color: white;
+}
+.a_footer{
+    color: #cbcbcb;
+    text-decoration: none;
+}
+.a_footer:hover{
+    color:red;
+}

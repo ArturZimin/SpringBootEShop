@@ -73,13 +73,14 @@ public class BucketServiceImpl implements BucketService {
         Map<Long, BucketDetailsDto> mapByProductId = new HashMap<>();//создаем мапу с ключом ид и значением BucketDetailsDto
 
         List<Product> productList = user.getBucket().getProductList();//находим продуктЛист у юзера
-        for (Product product : productList) {//пперебираем его
+        for (Product product : productList) {//перебираем его
             BucketDetailsDto detailsDto = mapByProductId.get(product.getId());
             //проверяем ли пустая мапа
             if (detailsDto == null) {
 
                 mapByProductId.put(product.getId(), new BucketDetailsDto(product));//добавляем в мапу
             } else {
+                detailsDto.setImageProduct(product.getImageProduct());
                 detailsDto.setAmount(detailsDto.getAmount().add(new BigDecimal(1.0)));//добавляем к количеству + 1
                 detailsDto.setSum(detailsDto.getSum() + Double.valueOf(product.getPrice().toString()));//плюсуем  общую сумму
             }

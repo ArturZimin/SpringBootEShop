@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>All phones page</title>
-
+    <title>Result of search</title>
+    <!--Css-->
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <!--    Bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -21,7 +21,14 @@
 <hr/>
 <div th:insert="~{index::#fragment_header_bucket}"></div>
 <hr/>
-<table class="table" >
+<br/>
+<div th:if="${message}"><h1 style="text-align: center; color: red">Nothing was found according to your request!</h1></div>
+<br th:if="${message}"/>
+<hr th:if="${message}"/>
+<div th:if="${size}"><h2 style="text-align: center; color: lightseagreen" th:text="'Number of products found : '+${size}">4</h2></div>
+<br th:if="${size}"/>
+<hr th:if="${size}"/>
+<table class="table">
     <thead class="thead-dark">
     <tr>
         <th scope="col">Image</th>
@@ -33,19 +40,21 @@
     </thead>
 
     <tbody>
-    <tr th:each="product:${products}">
+    <tr th:if="${products.size()>0}" th:each="product:${products}">
         <!--<img th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}" class="img_on_phones"/>-->
         <td scope="row">
-            <div id="div_on_products"><a th:href="@{/products/get/one/{id}(id=${product.id})}"><img th:src="*{'data:image/jpeg;base64,'+{product.imageProduct}}" class="img_on_phones" /></a></div>
-<!--            <div id="image_product2"> <img th:src="*{'data:image2/jpeg;base64,'+{product.imageProduct2}}" class="img_on_phones" /></div>-->
-<!--            <div  id="image_product3"> <img th:src="*{'data:image3/jpeg;base64,'+{product.imageProduct3}}" class="img_on_phones"  /></div>-->
-            <span  id="span_product_price" th:text="'$ '+${product.price}"></span>
+            <div id="div_on_products"><a th:href="@{/products/get/one/{id}(id=${product.id})}"><img
+                    th:src="*{'data:image/jpeg;base64,'+{product.imageProduct}}" class="img_on_phones"/></a></div>
+            <!--            <div id="image_product2"> <img th:src="*{'data:image2/jpeg;base64,'+{product.imageProduct2}}" class="img_on_phones" /></div>-->
+            <!--            <div  id="image_product3"> <img th:src="*{'data:image3/jpeg;base64,'+{product.imageProduct3}}" class="img_on_phones"  /></div>-->
+            <span id="span_product_price" th:text="'$ '+${product.price}"></span>
         </td>
 
         <td>
-            <table class="table" >
+            <table class="table">
                 <thead class="table-primary">
-                <tr><th>Brand and version</th>
+                <tr>
+                    <th>Brand and version</th>
                     <th>Color</th>
                     <th>Count sim kart</th>
                     <th>Display size</th>
@@ -62,7 +71,8 @@
                 </tr>
                 </tbody>
                 <thead class="table-primary">
-                <tr><th>PAM memory</th>
+                <tr>
+                    <th>PAM memory</th>
                     <th>RAM memory</th>
                     <th>Front camera</th>
                     <th>Rear camera</th>
@@ -100,15 +110,21 @@
             </table>
         </td>
 
-        <td  sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
-            <button class="form_but"><a  class="a_phones_button" th:href="@{/products/delete/{id}/{page}(id=${product.id},page='products')}">Delete product</a></button>
-            <button class="form_but"><a  class="a_phones_button" th:href="@{/products/get/form/change/{id}/{page}(id=${product.id},page='products')}" >Change product</a></button>
+        <td sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
+            <button class="form_but"><a class="a_phones_button"
+                                        th:href="@{/products/delete/{id}/{page}(id=${product.id},page='products')}">Delete
+                product</a></button>
+            <button class="form_but"><a class="a_phones_button"
+                                        th:href="@{/products/get/form/change/{id}/{page}(id=${product.id},page='products')}">Change
+                product</a></button>
         </td>
         <td sec:authorize="isAuthenticated">
-            <button type="button" class="form_but" id="add_button"  th:onclick="addToBucket([[${product.id}]])">Add to bucket</button>
+            <button type="button" class="form_but" id="add_button" th:onclick="addToBucket([[${product.id}]])">Add to
+                bucket
+            </button>
         </td>
         <td sec:authorize="!isAuthenticated">
-            <button class="form_but"><a th:href="@{/login}"  class="a_phones_button"> &#10155;Please: Log in</a></button>
+            <button class="form_but"><a th:href="@{/login}" class="a_phones_button"> &#10155;Please: Log in</a></button>
         </td>
     </tr>
 

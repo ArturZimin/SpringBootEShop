@@ -24,18 +24,36 @@ public class ProductController {
     private final BucketService bucketService;
 
 
-    @GetMapping("/get/one/{id}")
-        public String getOneProduct(@PathVariable("id") Long id,Model model,Principal principal){
-       ProductDto productDto= productService.getProductById(id);
-       if (productDto==null){
-           throw new RuntimeException("The product not found!");
-       }
+    @GetMapping("/search/by/")
+    public String searchByCategoryAndTitle(@RequestParam("category") String category, @RequestParam("title") String title, Model model, Principal principal) {
         if (principal != null) {
             Long amount = bucketService.getAmountInBucket(principal.getName());
             model.addAttribute("amount", amount);
         }
-       model.addAttribute("product", productDto);
-       return "showOneProductWithAllDetails";
+
+       List<ProductDto> productDtos= productService.findProductsByTitleOrCategory(title,category);
+       if (productDtos!=null&&productDtos.size()>0){
+           model.addAttribute("products",productDtos);
+           model.addAttribute("size",productDtos.size());
+           System.out.println(productDtos.size());
+       }else {
+           model.addAttribute("message","Nothing was found according to your request!");
+       }
+        return "resultSearch";
+    }
+
+    @GetMapping("/get/one/{id}")
+    public String getOneProduct(@PathVariable("id") Long id, Model model, Principal principal) {
+        ProductDto productDto = productService.getProductById(id);
+        if (productDto == null) {
+            throw new RuntimeException("The product not found!");
+        }
+        if (principal != null) {
+            Long amount = bucketService.getAmountInBucket(principal.getName());
+            model.addAttribute("amount", amount);
+        }
+        model.addAttribute("product", productDto);
+        return "showOneProductWithAllDetails";
 
     }
 
@@ -83,13 +101,12 @@ public class ProductController {
 //        }
 //        return "The product add to bucket successfully!";
 //    }
-
     @GetMapping("/add/form")
     public String getFormAddProduct() {
         return "addProduct";
     }
 
-//@RequestParam("image") MultipartFile image, @RequestParam("imageProduct2") MultipartFile image2, @RequestParam("imageProduct3") MultipartFile image3,
+    //@RequestParam("image") MultipartFile image, @RequestParam("imageProduct2") MultipartFile image2, @RequestParam("imageProduct3") MultipartFile image3,
     @PostMapping("/add")
     public String addProductByAllProducts(@RequestParam("image") MultipartFile image, @RequestParam("image2") MultipartFile image2, @RequestParam("image3") MultipartFile image3, ProductDto productDto, Model model, Principal principal) throws IOException {
         if (productDto == null) {

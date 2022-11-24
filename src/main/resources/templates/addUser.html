@@ -17,11 +17,11 @@
 <div class="div_all_form">
     <form th:action="@{/users/new}" th:object="${user}" method="post" id="_form">
 
-<br/>
+        <br/>
         <div class="div_h1_all_form">
             <h1 id="h1_all_form">Add new user - form</h1>
         </div>
-        <div >
+        <div>
             <h2 id="h2_all_form">Hello ADMIN!</h2>
         </div>
         <br/>
@@ -35,7 +35,7 @@
                                           th:field="*{password}" minlength="4" required/>
             <label for="password">password (min 4 symbols)</label>
         </div>
-
+        <br/>
         <div class="form-floating mb-3">
             <input type="text" name="address" class="form-control" id="address" th:field="*{address}" required/>
             <label for="address">address (only for deliver ->Minsk region, ul.Kalinina 11/1)</label>
