@@ -2,13 +2,16 @@ package by.step.zimin.eshop.controller;
 
 import by.step.zimin.eshop.dto.ProductDto;
 import by.step.zimin.eshop.service.BucketService;
+import by.step.zimin.eshop.service.HeaderImagesService;
 import by.step.zimin.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
@@ -20,19 +23,19 @@ public class MainController {
 
     private final BucketService bucketService;
     private final ProductService productService;
+    private final HeaderImagesService headerImagesService;
 
 
     @RequestMapping({"", "/"})  //можно 2 способами
-    public String index(Model model, Principal principal) {
-        List<ProductDto> list = productService.getAll();
-        int c=0;
-       for(ProductDto p:list){
-           if (p.getImageProduct2().isEmpty()){
-               c++;
-           }
-
-       }
-        System.out.println(" image product count: "+c);
+    public String index(@RequestParam(required = false) String sortBy, Model model, Principal principal) {
+        List<ProductDto> list = null;
+        if (sortBy==null) {
+            list = productService.getAll();
+        } else if(sortBy.equals("price")) {
+            list =productService.getAllProductsSortByPrice();
+        }else if(sortBy.equals("year")){
+            list =productService.getAllProductsSortByYear();
+        }
         if (list == null) {
             throw new RuntimeException("The list of products is null!");
         }
@@ -40,9 +43,10 @@ public class MainController {
             Long amount = bucketService.getAmountInBucket(principal.getName());
             model.addAttribute("amount", amount);
         }
-
+        String icon = headerImagesService.getIconCompany();
+        model.addAttribute("iconCompany", icon);
         model.addAttribute("products", list);
-
+        System.out.println(sortBy);
         return "index";
     }
 

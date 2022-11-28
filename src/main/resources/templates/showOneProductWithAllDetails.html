@@ -18,7 +18,7 @@
 <body>
 
 <div th:insert="~{fragments/menu::#_nav_menu}"></div>
-<hr/>
+
 <div th:insert="~{index::#fragment_header_bucket}"></div>
 <hr/>
 <table class="table">
@@ -43,7 +43,7 @@
         </td>
         <td>
             <table class="table">
-                <thead class="thead-dark">
+                <thead >
 
                 <tr>
                     <th>Brand and version</th>
@@ -67,7 +67,7 @@
 
             <!-- <table class="table"> -->
             <table class="table">
-                <thead class="thead-dark">
+                <thead >
                 <tr>
                     <th>PAM memory</th>
                     <th>RAM memory</th>
@@ -88,7 +88,7 @@
             </table>
 
             <table class="table">
-                <thead class="thead-dark">
+                <thead >
                 <tr>
                     <th>Operation system</th>
                     <th>Version operation system:</th>
@@ -105,7 +105,7 @@
             </table>
 
             <table class="table">
-                <thead class="thead-dark">
+                <thead >
                 <tr>
                     <th>Processor name:</th>
                     <th>Count core in processor:</th>
@@ -125,7 +125,7 @@
             </table>
 
             <table>
-                <thead>
+                <thead class="thead-dark">
                 <tr>
                     <th sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">Delete product</th>
                     <th sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">Change product</th>
@@ -133,7 +133,7 @@
 
                 </tr>
                 </thead>
-                <tbody>
+                <tbody >
                 <td sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
                     <button class="form_but"><a class="a_phones_button"
                                                 th:href="@{/products/delete/{id}/{page}(id=${product.id},page='products')}">Delete

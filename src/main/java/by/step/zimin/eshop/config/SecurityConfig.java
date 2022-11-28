@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .authorizeRequests(auth -> {
                     try {
                         auth.antMatchers("/products/add/**").hasAnyAuthority(Role.MANAGER.name(), Role.ADMIN.name())//showAllUsers can only manager and ADMIN
-                                .antMatchers("/users/new", "/users/get/all").hasAuthority(Role.ADMIN.name())//and admin
+                                .antMatchers("/users/new", "/users/get/all","/headers/**").hasAuthority(Role.ADMIN.name())//and admin
                                 .antMatchers("/email/activation").hasAnyAuthority(Role.USER.name(),Role.GUEST.name(),Role.ADMIN.name(),Role.MANAGER.name())
                                 .anyRequest().permitAll()//разрешить все
                                 .and()

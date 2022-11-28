@@ -1,23 +1,16 @@
-// $('.img_treasure').slideUp('5000');
-//
-// $('.treasure').slideDown('4000');
+
 /**=======================================================
  * WEATHER appeared
  * =======================================================*/
-let count = 0;
+
 let w = document.querySelector('.div_weather');
 $('.link_weather').on('click', function (e) {
 
-    if (count % 2 != 0) {
+    if (w.style.display==='none') {
 
         w.style.display = "block";
-        // $('.div_weather').css('display','block');
-        count++;
-
     } else {
-        $('.div_weather').css("display", "none");
-        count++;
-
+        w.style.display = "none";
     }
 
 });
@@ -26,9 +19,7 @@ $('.link_weather').on('click', function (e) {
 /**=====================================================
  * Add to bucket without redirect
  * ====================================================*/
-// $('#add_button').on('click', function (e) {
-//     addToBucket(e);
-// });
+
 
 
 function addToBucket(id) {
@@ -74,26 +65,26 @@ function counterPlus(number) {
  * ================================================================*/
 
 function checkFormAndConfirmationByEmail(event) {
-    let username=$('#username').val();
-    let email=$('#email').val();
-    let address=$('#address').val();
-    let password=$('#password').val();
-    let phone=$('#phone').val();
+    let username = $('#username').val();
+    let email = $('#email').val();
+    let address = $('#address').val();
+    let password = $('#password').val();
+    let phone = $('#phone').val();
 
-let user={
-    "username":username,
-        "email":email,
-    "address":address,
-    "password":password,
-    "phone":phone
+    let user = {
+        "username": username,
+        "email": email,
+        "address": address,
+        "password": password,
+        "phone": phone
     };
     let jsonUser = JSON.stringify(user);
 
     let form = document.querySelector(".form_registration");
     let formData = new FormData(form);
 
-    console.log(username+email+address+password+phone);
-    $.ajax( {
+    console.log(username + email + address + password + phone);
+    $.ajax({
         url: "http://localhost:8080/email/confirm",
         method: "POST",
         data: jsonUser,
@@ -124,20 +115,20 @@ function registration(e) {
     let phone = $('#phone').val();
 
 
-    let user={
-        "username":username,
-        "email":email,
-        "address":address,
-        "password":password,
-        "phone":phone
+    let user = {
+        "username": username,
+        "email": email,
+        "address": address,
+        "password": password,
+        "phone": phone
     };
     let jsonUser = JSON.stringify(user);
 
     let form = document.querySelector(".form_registration");
     let formData = new FormData(form);
 
-    console.log(username+email+address+password+phone);
-    $.ajax( {
+    console.log(username + email + address + password + phone);
+    $.ajax({
         url: "http://localhost:8080/users/registration",
         method: "POST",
         data: jsonUser,
@@ -155,35 +146,22 @@ function registration(e) {
     });
 
 }
-/**SEND OBJECT
- * var dataO = {
-    numberId: "1",
-    companyId : "531"
-};
- var data0 = {numberId: "1", companyId : "531"};
- var json = JSON2.stringify(dataO);
-
- $.ajax({
-    type: "POST",
-    url: "TelephoneNumbers.aspx/DeleteNumber",
-    data: json,
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: function(msg) {
-        alert('In Ajax');
-    }
-});*/
 
 /**============================================================
  * SHOW PHONE
  ==============================================================*/
+// $('#win').hide('5000');
+// $('.img2').fadeOut('5000');
+// $('.treasure').slideUp('5000');
 
-$('#get_phone').on("click",function (){
-    let isNone=$('.phone_number').css('display');
-    if (isNone=='none'){
 
-    $('.phone_number').css("display","block");}else {
-        $('.phone_number').css("display","none");
+$('#get_phone').on("click", function () {
+    let isNone = $('.phone_number').css('display');
+    if (isNone == 'none') {
+
+        $('.phone_number').css("display", "block").slideUp(5000);
+    } else {
+        $('.phone_number').css("display", "none");
     }
 
 });
@@ -192,12 +170,13 @@ $('#get_phone').on("click",function (){
  * SHOW EMAIL
  ==============================================================*/
 
-$('#get_email').on("click",function (){
-    let isNone=$('.email_address').css('display');
-    if (isNone=='none'){
+$('#get_email').on("click", function () {
+    let isNone = $('.email_address').css('display');
+    if (isNone == 'none') {
 
-        $('.email_address').css("display","block");}else {
-        $('.email_address').css("display","none");
+        $('.email_address').css("display", "block").slideUp(5000);
+    } else {
+        $('.email_address').css("display", "none");
     }
 
 });
@@ -206,54 +185,58 @@ $('#get_email').on("click",function (){
  * SHOW ADDRESS
  ==============================================================*/
 
-$('#get_address').on("click",function (){
-    let isNone=$('.address_shop').css('display');
-    if (isNone=='none'){
+$('#get_address').on("click", function () {
+    let isNone = $('.address_shop').css('display');
+    if (isNone == 'none') {
 
-        $('.address_shop').css("display","block");}else {
-        $('.address_shop').css("display","none");
+        $('.address_shop').css("display", "block").slideToggle(5000);
+    } else {
+        $('.address_shop').css("display", "none");
     }
 
 });
 
+/**=========================================================================
+ * NEXT IMAGE
+ * ========================================================================*/
 
+let image = document.querySelector('#image_product');
+let image2 = document.querySelector('#image_product2');
+let image3 = document.querySelector('#image_product3');
 
- let image=document.querySelector('#image_product');
- let image2=document.querySelector('#image_product2');
- let image3=document.querySelector('#image_product3');
+let count2 = 1;
+$('.button_next').on('click', function (e) {
 
- let count2=1;
- $('.button_next').on('click', function(e){
-
-    if(count2==1){
-       image.style.display="none";
-       image2.style.display="block";
-        image3.style.display="none";
-    }if(count2==2){
-        image.style.display="none";
-        image2.style.display="none";
-        image3.style.display="block";
+    if (count2 == 1) {
+        image.style.display = "none";
+        image2.style.display = "block";
+        image3.style.display = "none";
     }
-    if(count2==3){
-        image.style.display="block";
-        image2.style.display="none"
-        image3.style.display="none";
+    if (count2 == 2) {
+        image.style.display = "none";
+        image2.style.display = "none";
+        image3.style.display = "block";
+    }
+    if (count2 == 3) {
+        image.style.display = "block";
+        image2.style.display = "none"
+        image3.style.display = "none";
     }
     count2++;
 
-    if (count2>=4){
-        count2=1;
+    if (count2 >= 4) {
+        count2 = 1;
     }
 });
 
 
+let count3 = 0;
+const counter = document.querySelector('span');
 
- let count3=0;
- const counter=document.querySelector('span');
-
- $('#add_button').on('click',function (e) {
-   setCounterInSpan(++count3);
+$('#add_button').on('click', function (e) {
+    setCounterInSpan(++count3);
 });
 
- function setCounterInSpan(number){
-    counter.innerHTML=number;}
+function setCounterInSpan(number) {
+    counter.innerHTML = number;
+}

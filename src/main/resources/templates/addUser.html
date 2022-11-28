@@ -53,7 +53,7 @@
             <label for="email">email (example@gmail.com)</label>
         </div>
 
-
+        <div><h4>Role :</h4></div>
         <div class="form-check">
             <input th:field="*{role}" value="MANAGER" class="form-check-input" type="radio" name="role"
                    id="manager" checked/>
@@ -76,6 +76,18 @@
             <label class="form-check-label" for="admin">admin</label>
         </div>
 
+        <div><h4>Activate the user or not ?</h4></div>
+
+        <div class="form-check">
+            <input th:field="*{enable}" value="true" class="form-check-input" type="radio" name="enable"
+                   id="enable" checked/>
+            <label class="form-check-label" for="admin">true</label>
+        </div>
+        <div class="form-check">
+            <input th:field="*{enable}" value="false" class="form-check-input" type="radio" name="enable"
+                   id="enableFalse" checked/>
+            <label class="form-check-label" for="enableFalse">false</label>
+        </div>
 
         <button class="form_but" type="submit">Add</button>
         <br/>

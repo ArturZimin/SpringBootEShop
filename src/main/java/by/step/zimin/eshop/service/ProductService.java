@@ -31,4 +31,18 @@ public interface ProductService {
 
 
     List<ProductDto> findProductsByTitleOrCategory(String title, String category);
+
+    List<ProductDto> getAllLaptops();
+
+    List<ProductDto> getAllWatches();
+
+    List<ProductDto> getAllAccessories();
+
+    List<ProductDto> getAllTablets();
+
+    List<ProductDto> getAllCameras();
+
+    List<ProductDto> getAllProductsSortByPrice();
+
+    List<ProductDto> getAllProductsSortByYear();
 }

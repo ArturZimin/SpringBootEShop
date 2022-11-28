@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -21,10 +22,10 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final UserService userService;
     private final BucketService bucketService;
-
     private final ProductDetailsService productDetailsService;
     private final ProcessorService processorService;
     private final CategoryService categoryService;
+
 
     public ProductServiceImpl(ProductRepository productRepository, UserService userService, BucketService bucketService, ProductDetailsService productDetailsService, ProcessorService processorService, CategoryService categoryService) {
         this.productRepository = productRepository;
@@ -134,26 +135,20 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> getPhones() {
         List<Product> listPhones = productRepository.findAllByCategory_PodCategory("phone");
-        List<ProductDto> listPhonesDto = productListToProductListDto(listPhones);
-
-        return listPhonesDto;
+        return productListToProductListDto(listPhones);
     }
 
     @Override
+    @Transactional
     public Integer deleteProduct(Long id) {
         Product product = productRepository.findById(id).get();
-        if (product == null) {
-
-            return 404;
-
-        } else {
-            productRepository.delete(product);
-            return 200;
-        }
+        productRepository.delete(product);
+        return 200;
     }
 
 
     @Override
+    @Transactional
     public void minusOneForAmount(Long id) {
         Product product = productRepository.findById(id).get();
         Long amount = product.getAmount();
@@ -168,84 +163,119 @@ public class ProductServiceImpl implements ProductService {
         return product.getAmount();
     }
 
-//    @Override
-//    public Integer changeProductById(Long id) {
-//        Product product=productRepository.findById(id).get();
-//        if (product!=null){
-//
-//        }
-//        return null;
-//    }
+
 
     @Override
     public ProductDto getProductById(Long productId) {
         Product product = productRepository.findById(productId).get();
-        if (product != null) {
 
-            ProductDto productDto = ProductDto.builder()
-                    .id(product.getId())
-                    .title(product.getTitle())
-                    .price(product.getPrice())
-                    .imageProduct(product.getImageProduct())
-                    .imageProduct2(product.getImageProduct2())
-                    .imageProduct3(product.getImageProduct3())
-                    .amount(product.getAmount())
-                    .currencyType(product.getCurrencyType())
-                    .categoryTitle(product.getCategory().getCategoryTitle())
-                    .podCategory(product.getCategory().getPodCategory())
-                    .name(product.getProcessor().getName())
-                    .countCore(product.getProcessor().getCountCore())
-                    .frequency(product.getProcessor().getFrequency())
-                    .accumulatorCapacity(product.getProductDetails().getAccumulatorCapacity())
-                    .versionOS(product.getProductDetails().getVersionOS())
-                    .operationSystem(product.getProductDetails().getOperationSystem())
-                    .rearCamera(product.getProductDetails().getRearCamera())
-                    .frontCamera(product.getProductDetails().getFrontCamera())
-                    .ramMemory(product.getProductDetails().getRamMemory())
-                    .inMemory(product.getProductDetails().getInMemory())
-                    .yearProduction(product.getProductDetails().getYearProduction())
-                    .displaySize(product.getProductDetails().getDisplaySize())
-                    .countSim(product.getProductDetails().getCountSim())
-                    .color(product.getProductDetails().getColor())
-                    .build();
-            return productDto;
-        }
-        throw new RuntimeException("The product by id: " + productId + " not found!");
+        return ProductDto.builder()
+                .id(product.getId())
+                .title(product.getTitle())
+                .price(product.getPrice())
+                .imageProduct(product.getImageProduct())
+                .imageProduct2(product.getImageProduct2())
+                .imageProduct3(product.getImageProduct3())
+                .amount(product.getAmount())
+                .currencyType(product.getCurrencyType())
+                .categoryTitle(product.getCategory().getCategoryTitle())
+                .podCategory(product.getCategory().getPodCategory())
+                .name(product.getProcessor().getName())
+                .countCore(product.getProcessor().getCountCore())
+                .frequency(product.getProcessor().getFrequency())
+                .accumulatorCapacity(product.getProductDetails().getAccumulatorCapacity())
+                .versionOS(product.getProductDetails().getVersionOS())
+                .operationSystem(product.getProductDetails().getOperationSystem())
+                .rearCamera(product.getProductDetails().getRearCamera())
+                .frontCamera(product.getProductDetails().getFrontCamera())
+                .ramMemory(product.getProductDetails().getRamMemory())
+                .inMemory(product.getProductDetails().getInMemory())
+                .yearProduction(product.getProductDetails().getYearProduction())
+                .displaySize(product.getProductDetails().getDisplaySize())
+                .countSim(product.getProductDetails().getCountSim())
+                .color(product.getProductDetails().getColor())
+                .build();
     }
 
     @Override
     public List<ProductDto> findProductsByTitleOrCategory(String title, String category) {
         List<Product> productList;
-        List<ProductDto> productDtos ;
+        List<ProductDto> productDtos;
         if (category.equals("All")) {
             productList = productRepository.findAll();
             productDtos = productListToProductListDto(productList.stream()
                     .filter(product -> product.getTitle().contains(title))
                     .collect(Collectors.toList()));
-            return productDtos ;
+            return productDtos;
         }
-         productList = productRepository.findAllByCategory_PodCategory(category);
+        productList = productRepository.findAllByCategory_PodCategory(category);
         productDtos = productListToProductListDto(productList.stream()
                 .filter(product -> product.getTitle().contains(title))
                 .collect(Collectors.toList()));
         if (productDtos.size() > 0) {
             return productDtos;
         }
-            return null;
+        return null;
+    }
+
+    @Override
+    public List<ProductDto> getAllLaptops() {
+        List<Product> listProduct = productRepository.findAllByCategory_PodCategory("Notebook");
+
+        return productListToProductListDto(listProduct);
     }
 
 
+    @Override
+    public List<ProductDto> getAllWatches() {
+        List<Product> listProduct = productRepository.findAllByCategory_PodCategory("Watch");
+
+        return productListToProductListDto(listProduct);
+    }
+
+    @Override
+    public List<ProductDto> getAllAccessories() {
+        List<Product> listProduct = productRepository.findAllByCategory_PodCategory("Accessory");
+
+        return productListToProductListDto(listProduct);
+    }
+
+    @Override
+    public List<ProductDto> getAllTablets() {
+        List<Product> listProduct = productRepository.findAllByCategory_PodCategory("Tablet");
+
+        return productListToProductListDto(listProduct);
+    }
+
+    @Override
+    public List<ProductDto> getAllCameras() {
+        List<Product> listProduct = productRepository.findAllByCategory_PodCategory("Camera");
+
+        return productListToProductListDto(listProduct);
+    }
+
+    @Override
+    public List<ProductDto> getAllProductsSortByPrice() {
+        List<Product> productDtoList=productRepository.findAllByOrderByPrice();
+        return productListToProductListDto(productDtoList);
+    }
+
+    @Override
+    public List<ProductDto> getAllProductsSortByYear() {
+        List<Product> productDtoList=productRepository.findAllByOrderByProductDetails_YearProductionDesc();
+        return productListToProductListDto(productDtoList);
+    }
 
 
     public List<ProductDto> productListToProductListDto(List<Product> product) {
-        List<ProductDto> list = product.stream()
+        return product.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
-        return list;
+
     }
 
     public Product toProduct(ProductDto productDto) {
-        Product product = Product.builder()
+        return Product.builder()
                 .id(productDto.getId())
                 .title(productDto.getTitle())
                 .price(productDto.getPrice())
@@ -256,11 +286,11 @@ public class ProductServiceImpl implements ProductService {
                 .processor(productDto.getProcessor())
                 .amount(productDto.getAmount())
                 .build();
-        return product;
+
     }
 
     public ProductDto toDto(Product product) {
-        ProductDto dto = ProductDto.builder()
+        return ProductDto.builder()
                 .id(product.getId())
                 .title(product.getTitle())
                 .price(product.getPrice())
@@ -273,6 +303,5 @@ public class ProductServiceImpl implements ProductService {
                 .processor(product.getProcessor())
                 .amount(product.getAmount())
                 .build();
-        return dto;
     }
 }

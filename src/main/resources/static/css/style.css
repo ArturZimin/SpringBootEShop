@@ -69,12 +69,14 @@ IMAGES
 }
 
 .div_img_hot_deal {
+
     background-color: #c40303;
     border-radius: 50%;
 }
 
 .div_img_hot_deal :hover {
     background-color: #f80303;
+    color: #f80303;
 
 }
 
@@ -173,7 +175,7 @@ li a:hover {
 
 
 /**=================================
-HEADER BUCKET
+HEADER BUCKET and image
 =====================================*/
 
 .dropdown-toggle {
@@ -183,12 +185,13 @@ HEADER BUCKET
     text-align: center;
 }
 
-.div_img_hotdeal {
+#fragment_header_bucket {
     display: flex;
-    padding-top: 2px;
+    padding-top: 0.5%;
     justify-content: space-around;
     flex-wrap: nowrap;
-    margin-top: 2.2%;
+    margin-top: 2.4%;
+    background-image: url("/img/background.png");
 
 }
 
@@ -239,7 +242,7 @@ WEATHER
 .div_weather {
     display: none;
     padding-top: 0.2%;
-    flex-basis: 120px;
+   border-radius: 50%;
 }
 
 
@@ -311,6 +314,18 @@ BUTTONS
     width: 5em;
 
 }
+.button_sort_by{
+    color: red;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    background-color: #f1f2f5;
+    border: 0;
+}
+.button_sort_by:hover{
+    background-color: red;
+    color: #e7e5e5;
+}
 
 /**=======================================================
 MAIN PRODUCTS index.html
@@ -321,19 +336,20 @@ MAIN PRODUCTS index.html
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
-    margin: 1%;
+    margin-left: 9%;
+
 
 }
 
 .product {
     position: relative;
-    margin: 5% 2%;
+    margin: 1% 3% 5% 2%;
     -webkit-box-shadow: 0px 0px 0px 0px #E4E7ED, 0px 0px 0px 1px #E4E7ED;
     box-shadow: 0px 0px 0px 0px #E4E7ED, 0px 0px 0px 1px #E4E7ED;
     -webkit-transition: 0.2s all;
     transition: 0.2s all;
-    max-width: 20%;
-    max-height: 20%;
+    width: 23%;
+    height: 15%;
     flex-shrink: 1;
 }
 
@@ -347,7 +363,7 @@ MAIN PRODUCTS index.html
 }
 
 .product .product-img > img {
-    width: 100%;
+    width: 80%;
 }
 
 .product .product-img .product-label {
@@ -654,12 +670,18 @@ PRODUCT PRICE
     display: inline-block;
     width: calc(50% - 7px);
 }
+/**==========================================================
+ FILTER for products index.html
+============================================================*/
 
 .index_filter {
-    padding-left: 3%;
-    display: inline-flex;
+    display: flex;
+    position: absolute;
+    left: 3%;
+    top: 60%;
     justify-content: left;
     flex-direction: column;
+
 }
 
 /*=========================================================
@@ -670,6 +692,7 @@ PRODUCT PRICE
     border-top: 2px solid #E4E7ED;
     border-bottom: 3px solid #D10024;
     margin-top: 30px;
+    height: 20vh;
 }
 
 .newsletter {
@@ -677,6 +700,7 @@ PRODUCT PRICE
 }
 
 .newsletter p {
+    margin-top: 4vh;
     font-size: 24px;
 }
 
@@ -724,16 +748,16 @@ PRODUCT PRICE
 
 
 
-/**===============================================================
-PRODUCT-2 index.html
-====================================================================*/
-.div_products2 {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin-left: 1%;
-}
+/*!**===============================================================*/
+/*PRODUCT-2 index.html*/
+/*====================================================================*!*/
+/*.div_products2 {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    flex-wrap: wrap;*/
+/*    flex-direction: row;*/
+/*    margin-left: 1%;*/
+/*}*/
 
 /**=============================================
 NAVIGATION
@@ -775,7 +799,7 @@ NAVIGATION
 }
 
 .active {
-    padding-left: 26vw;;
+    padding-left: 18%;;
 }
 
 /**===============================================
@@ -789,7 +813,7 @@ FOOTER
 }
 
 .column_footer {
-    height: 20vh;
+    height: 30vh;
     width: 20vw;
 
     flex-direction: column;
@@ -807,4 +831,11 @@ FOOTER
 }
 .a_footer:hover{
     color:red;
+}
+
+/**===========================================================
+BUCKET.html
+===============================================================*/
+.body_bucket{
+    background-image: url("/img/background.png");
 }

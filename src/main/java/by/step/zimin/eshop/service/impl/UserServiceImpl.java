@@ -172,7 +172,7 @@ public class UserServiceImpl implements UserService {
 
         Boolean isRemove = false;
         for (Product p : productList) {
-            if (p.getId() == productId) {
+            if (p.getId().equals(productId)) {
                 productList.remove(p);
                 isRemove = true;
                 break;

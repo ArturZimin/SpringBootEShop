@@ -3,6 +3,7 @@ package by.step.zimin.eshop.controller;
 import by.step.zimin.eshop.dto.BucketDto;
 import by.step.zimin.eshop.dto.ProductDto;
 import by.step.zimin.eshop.service.BucketService;
+import by.step.zimin.eshop.service.HeaderImagesService;
 import by.step.zimin.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,87 @@ public class ProductController {
 
     private final ProductService productService;
     private final BucketService bucketService;
+    private final HeaderImagesService headerImagesService;
 
+
+//@GetMapping("/sort/by/price")
+//public String sortByPrice(Model model,Principal principal){
+//    List<ProductDto> products = productService.getAllProductsSortByPrice();
+//    if (principal != null) {
+//        Long amount = bucketService.getAmountInBucket(principal.getName());
+//        model.addAttribute("amount", amount);
+//    }
+//    String icon=headerImagesService.getIconCompany();
+//    model.addAttribute("iconCompany",icon);
+//    model.addAttribute("products",products);
+//    return "index";
+//}
+
+    @GetMapping("/get/laptops")
+    public String getAllLaptops(Model model,Principal principal){
+        List<ProductDto> listNotebooks = productService.getAllLaptops();
+        if (principal != null) {
+            Long amount = bucketService.getAmountInBucket(principal.getName());
+            model.addAttribute("amount", amount);
+        }
+        String icon=headerImagesService.getIconCompany();
+        model.addAttribute("iconCompany",icon);
+        model.addAttribute("products",listNotebooks);
+       return "laptops";
+    }
+
+
+    @GetMapping("/get/watches")
+    public String getAllWatches(Model model,Principal principal){
+        List<ProductDto> listWatches = productService.getAllWatches();
+        if (principal != null) {
+            Long amount = bucketService.getAmountInBucket(principal.getName());
+            model.addAttribute("amount", amount);
+        }
+        String icon=headerImagesService.getIconCompany();
+        model.addAttribute("iconCompany",icon);
+        model.addAttribute("products",listWatches);
+        return "watches";
+    }
+
+    @GetMapping("/get/accessories")
+    public String getAllAccessories(Model model,Principal principal){
+        List<ProductDto> accessoriesList = productService.getAllAccessories();
+        if (principal != null) {
+            Long amount = bucketService.getAmountInBucket(principal.getName());
+            model.addAttribute("amount", amount);
+        }
+        String icon=headerImagesService.getIconCompany();
+        model.addAttribute("iconCompany",icon);
+        model.addAttribute("products",accessoriesList);
+        return "accessories";
+    }
+
+    @GetMapping("/get/tablets")
+    public String getAllTablets(Model model,Principal principal){
+        List<ProductDto> tabletsList = productService.getAllTablets();
+        if (principal != null) {
+            Long amount = bucketService.getAmountInBucket(principal.getName());
+            model.addAttribute("amount", amount);
+        }
+        String icon=headerImagesService.getIconCompany();
+        model.addAttribute("iconCompany",icon);
+        model.addAttribute("products",tabletsList);
+        return "tablets";
+    }
+
+    @GetMapping("/get/cameras")
+    public String getAllCameras(Model model,Principal principal){
+        List<ProductDto> camerasList = productService.getAllCameras();
+        if (principal != null) {
+            Long amount = bucketService.getAmountInBucket(principal.getName());
+            model.addAttribute("amount", amount);
+        }
+        String icon=headerImagesService.getIconCompany();
+        model.addAttribute("iconCompany",icon);
+        model.addAttribute("products",camerasList);
+        return "cameras";
+    }
 
     @GetMapping("/search/by/")
     public String searchByCategoryAndTitle(@RequestParam("category") String category, @RequestParam("title") String title, Model model, Principal principal) {
@@ -31,12 +112,16 @@ public class ProductController {
             model.addAttribute("amount", amount);
         }
 
+        String icon=headerImagesService.getIconCompany();
        List<ProductDto> productDtos= productService.findProductsByTitleOrCategory(title,category);
        if (productDtos!=null&&productDtos.size()>0){
+
+           model.addAttribute("iconCompany",icon);
            model.addAttribute("products",productDtos);
            model.addAttribute("size",productDtos.size());
            System.out.println(productDtos.size());
        }else {
+           model.addAttribute("iconCompany",icon);
            model.addAttribute("message","Nothing was found according to your request!");
        }
         return "resultSearch";
@@ -52,6 +137,8 @@ public class ProductController {
             Long amount = bucketService.getAmountInBucket(principal.getName());
             model.addAttribute("amount", amount);
         }
+        String icon=headerImagesService.getIconCompany();
+        model.addAttribute("iconCompany",icon);
         model.addAttribute("product", productDto);
         return "showOneProductWithAllDetails";
 
@@ -67,6 +154,8 @@ public class ProductController {
             Long amount = bucketService.getAmountInBucket(principal.getName());
             model.addAttribute("amount", amount);
         }
+        String icon=headerImagesService.getIconCompany();
+        model.addAttribute("iconCompany",icon);
         model.addAttribute("phones", listPhones);
         return "phones";
     }
@@ -78,6 +167,8 @@ public class ProductController {
             Long amount = bucketService.getAmountInBucket(principal.getName());
             model.addAttribute("amount", amount);
         }
+        String icon=headerImagesService.getIconCompany();
+        model.addAttribute("iconCompany",icon);
         model.addAttribute("products", list);//sent list to products.html
         return "products";
     }
@@ -101,6 +192,9 @@ public class ProductController {
 //        }
 //        return "The product add to bucket successfully!";
 //    }
+
+
+
     @GetMapping("/add/form")
     public String getFormAddProduct() {
         return "addProduct";
@@ -149,16 +243,3 @@ public class ProductController {
 //        }
 //    }
 }
-/**
- * @PostMapping("/profile-picture") public ResponseEntity uploadImage(@RequestParam("file") MultipartFile imageFile, @ModelAttribute UserDTO requestDto) {
- * try {
- * UserDTO created  =userDetailsService.saveImg(requestDto, file.getBytes());
- * return new ResponseEntity<>(created, HttpStatus.OK);
- * <p>
- * } catch (IOException e) {
- * // TODO Auto-generated catch block
- * e.printStackTrace();
- * }
- * return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
- * }
- */
