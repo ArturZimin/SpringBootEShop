@@ -58,16 +58,17 @@ public class EmailServiceImpl implements EmailService {
         VerificationToken verificationToken = verificationTokenService.findByUser(user);
         //has if the user has a token
         if(verificationToken!=null){
-            String token=verificationToken.getToken();
-            Context context =new Context();
+            String token=verificationToken.getToken();//generate random token
+            Context context =new Context();//package org.thymeleaf.context;
             context.setVariable("title","Verify your email address");
             context.setVariable("link","http://localhost:8080/account/activation?token="+token);
-            String body=templateEngine.process("verification",context);
-            //Send the verification email
-            MimeMessage message=javaMailSender.createMimeMessage();
+            String body=templateEngine.process("verification",context);//form page for send
+
+            //Send the verification email (form email massage with body)
+            MimeMessage message=javaMailSender.createMimeMessage();//create reference on the message
             MimeMessageHelper helper=new MimeMessageHelper(message,true);
             helper.setTo(user.getEmail());
-            helper.setSubject("email address verification");
+            helper.setSubject("Email address verification");
             helper.setText(body,true);
             javaMailSender.send(message);
         }

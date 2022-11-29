@@ -42,7 +42,7 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
         VerificationToken verificationToken = new VerificationToken(token, user);
 
         //set expiry date to 24 hours
-        verificationToken.setExpiryDate(calculateExpiryDate(24 * 60));
+        verificationToken.setExpiryDate(calculateExpiryDate(24 * 60));//24 hours expiryDate
         verificationTokenRepository.save(verificationToken);
     }
 
@@ -53,9 +53,13 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
 
 
     private Timestamp calculateExpiryDate(int expiryTimeInMinutes) {
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
-        return new Timestamp(cal.getTime().getTime());
+        Calendar cal = Calendar.getInstance();//  // create a new calendar
+        cal.add(Calendar.MINUTE, expiryTimeInMinutes);//add 24*60=1440 minutes(24 hours)
+        return new Timestamp(cal.getTime().getTime());//return time in long
     }
 
 }
+/** add 9 years:
+        cal.add((Calendar.YEAR), 9);
+         print the modified date and time  :
+        System.out.println("" + cal.getTime());  */

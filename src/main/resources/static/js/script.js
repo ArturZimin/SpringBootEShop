@@ -6,11 +6,11 @@
 let w = document.querySelector('.div_weather');
 $('.link_weather').on('click', function (e) {
 
-    if (w.style.display==='none') {
-
-        w.style.display = "block";
-    } else {
+    if (w.style.display==="block") {
         w.style.display = "none";
+
+    } else {
+        w.style.display = "block";
     }
 
 });

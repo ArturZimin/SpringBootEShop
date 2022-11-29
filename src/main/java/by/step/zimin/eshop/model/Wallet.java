@@ -3,6 +3,7 @@ package by.step.zimin.eshop.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -10,14 +11,14 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "processors")
-public class Processor {
+@Table(name = "user_wallet")
+public class Wallet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-   private String name;
-   private Integer countCore;
-   private Integer frequency;
+
+    private BigDecimal amount;
+
 
 }

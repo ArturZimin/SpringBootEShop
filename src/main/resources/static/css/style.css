@@ -697,6 +697,7 @@ PRODUCT PRICE
 
 .newsletter {
     text-align: center;
+
 }
 
 .newsletter p {
@@ -735,7 +736,7 @@ PRODUCT PRICE
     width: 160px;
     height: 40px;
     font-weight: 700;
-    background:  rgb(191, 4, 4);
+    background: rgb(176, 3, 3);
     color: #FFF;
     border: none;
     border-radius: 0px 40px 40px 0px;
@@ -766,7 +767,7 @@ NAVIGATION
     display: none;
     position: absolute;
     left: 0;
-    top: 9%;
+    top: 13%;
     background-color: #c40303;
     z-index: 3;
 
@@ -776,7 +777,7 @@ NAVIGATION
     display: none;
     position: absolute;
     left: 0;
-    top: 5%;
+    top: 9%;
     background-color: #c40303;
     z-index: 3;
 }
@@ -813,7 +814,7 @@ FOOTER
 }
 
 .column_footer {
-    height: 30vh;
+    height: 35vh;
     width: 20vw;
 
     flex-direction: column;

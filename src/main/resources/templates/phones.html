@@ -17,105 +17,124 @@
 </head>
 <body>
 
- <div th:insert="~{fragments/menu::#_nav_menu}"></div>
+<div th:insert="~{fragments/menu::#_nav_menu}"></div>
 
- <div th:insert="~{index::#fragment_header_bucket}"></div>
- <hr/>
-<table class="table" >
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Image</th>
-        <th scope="col">Description</th>
+<div th:insert="~{index::#fragment_header_bucket}"></div>
+<hr/>
+<div>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Description</th>
 
-        <th scope="col" sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">Change or delete product</th>
-        <th scope="col">Add to bucket</th>
-    </tr>
-    </thead>
+            <th scope="col" sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">Change or delete product</th>
+            <th scope="col">Add to bucket</th>
+        </tr>
+        </thead>
 
-    <tbody>
-    <tr th:each="phone:${phones}">
-<!--<img th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}" class="img_on_phones"/>-->
-        <td scope="row">
-           <div id="div_on_products"><a th:href="@{/products/get/one/{id}(id=${phone.id})}"><img class="img_on_phones" th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}"  /></a></div>
-<!--            <div id="image_product2"> <img th:src="*{'data:image2/jpeg;base64,'+{phone.imageProduct2}}" class="img_on_phones" /></div>-->
-<!--            <div  id="image_product3"> <img th:src="*{'data:image3/jpeg;base64,'+{phone.imageProduct3}}" class="img_on_phones"  /></div>-->
-           <span  id="span_product_price" th:utext="'$ '+${phone.price}"></span>
+        <tbody>
+        <tr th:each="phone:${phones}">
+            <!--<img th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}" class="img_on_phones"/>-->
+            <td scope="row">
+                <div id="div_on_products"><a th:href="@{/products/get/one/{id}(id=${phone.id})}"><img
+                        class="img_on_phones"
+                        th:src="*{'data:image/jpeg;base64,'+{phone.imageProduct}}"/></a>
+                </div>
+                <!--            <div id="image_product2"> <img th:src="*{'data:image2/jpeg;base64,'+{phone.imageProduct2}}" class="img_on_phones" /></div>-->
+                <!--            <div  id="image_product3"> <img th:src="*{'data:image3/jpeg;base64,'+{phone.imageProduct3}}" class="img_on_phones"  /></div>-->
+                <span id="span_product_price" th:utext="'$ '+${phone.price}"></span>
             </td>
 
-        <td>
-            <table class="table" >
-                <thead class="table-primary">
-                <tr><th>Brand and version</th>
-                    <th>Color</th>
-                    <th>Count sim kart</th>
-                    <th>Display size</th>
-                    <th>Date of production</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td th:text="${phone.title}">title</td>
-                    <td th:text="${phone.productDetails.color}">Color</td>
-                    <td th:text="${phone.productDetails.countSim}">Count sim</td>
-                    <td th:text="${phone.productDetails.displaySize}+' inch'">Display size</td>
-                    <td th:text="${phone.productDetails.yearProduction}+' year'">Display size</td>
-                </tr>
-                </tbody>
-                <thead class="table-primary">
-                <tr><th>PAM memory</th>
-                    <th>RAM memory</th>
-                    <th>Front camera</th>
-                    <th>Rear camera</th>
-                    <th>Operation system</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td th:text="${phone.productDetails.inMemory}+' GB.'">title</td>
-                    <td th:text="${phone.productDetails.ramMemory}+' GB.'">Color</td>
-                    <td th:text="${phone.productDetails.frontCamera}+' Mpx'">Count sim</td>
-                    <td th:text="${phone.productDetails.rearCamera}+' Mpx'">Display size</td>
-                    <td th:text="${phone.productDetails.operationSystem}">Display size</td>
-                </tr>
-                </tbody>
+            <td>
+                <table class="table">
+                    <thead class="table-primary">
+                    <tr>
+                        <th>Brand and version</th>
+                        <th>Color</th>
+                        <th>Count sim kart</th>
+                        <th>Display size</th>
+                        <th>Date of production</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${phone.title}">title</td>
+                        <td th:text="${phone.productDetails.color}">Color</td>
+                        <td th:text="${phone.productDetails.countSim}">Count sim</td>
+                        <td th:text="${phone.productDetails.displaySize}+' inch'">Display size</td>
+                        <td th:text="${phone.productDetails.yearProduction}+' year'">Display size</td>
+                    </tr>
+                    </tbody>
+                    <thead class="table-primary">
+                    <tr>
+                        <th>PAM memory</th>
+                        <th>RAM memory</th>
+                        <th>Front camera</th>
+                        <th>Rear camera</th>
+                        <th>Operation system</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${phone.productDetails.inMemory}+' GB.'">title</td>
+                        <td th:text="${phone.productDetails.ramMemory}+' GB.'">Color</td>
+                        <td th:text="${phone.productDetails.frontCamera}+' Mpx'">Count sim</td>
+                        <td th:text="${phone.productDetails.rearCamera}+' Mpx'">Display size</td>
+                        <td th:text="${phone.productDetails.operationSystem}">Display size</td>
+                    </tr>
+                    </tbody>
 
-                <thead class="table-primary">
-                <tr>
-                    <th>Version operation system:</th>
-                    <th>Accumulator capacity:</th>
-                    <th>Processor name:</th>
-                    <th>Count core in processor:</th>
-                    <th>Frequency of processor:</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td th:text="${phone.productDetails.versionOS}+' v.'">title</td>
-                    <td th:text="${phone.productDetails.accumulatorCapacity}+' mA'">Color</td>
-                    <td th:text="${phone.processor.name}">Count sim</td>
-                    <td th:text="${phone.processor.countCore}">Display size</td>
-                    <td th:text="${phone.processor.frequency}+' Hz'">Display size</td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
+                    <thead class="table-primary">
+                    <tr>
+                        <th>Version operation system:</th>
+                        <th>Accumulator capacity:</th>
+                        <th>Processor name:</th>
+                        <th>Count core in processor:</th>
+                        <th>Frequency of processor:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${phone.productDetails.versionOS}+' v.'">title</td>
+                        <td th:text="${phone.productDetails.accumulatorCapacity}+' mA'">Color</td>
+                        <td th:text="${phone.processor.name}">Count sim</td>
+                        <td th:text="${phone.processor.countCore}">Display size</td>
+                        <td th:text="${phone.processor.frequency}+' Hz'">Display size</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
 
-        <td  sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
-            <button class="form_but"><a  class="a_phones_button" th:href="@{/products/delete/{id}/{page}(id=${phone.id},page='phones')}">Delete product</a></button>
-            <button class="form_but"><a  class="a_phones_button" th:href="@{/products/get/form/change/{id}/{page}(id=${phone.id},page='phones')}" >Change product</a></button>
-        </td>
-        <td sec:authorize="isAuthenticated">
-            <button type="button" class="form_but" id="add_button"  th:onclick="addToBucket([[${phone.id}]])">Add to bucket</button>
-        </td>
-        <td sec:authorize="!isAuthenticated">
-            <button class="form_but"><a th:href="@{/login}"  class="a_phones_button"> &#10155;Please: Log in</a></button>
-        </td>
-    </tr>
+            <td sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
+                <button class="form_but"><a class="a_phones_button"
+                                            th:href="@{/products/delete/{id}/{page}(id=${phone.id},page='phones')}">Delete
+                    product</a></button>
+                <button class="form_but"><a class="a_phones_button"
+                                            th:href="@{/products/get/form/change/{id}/{page}(id=${phone.id},page='phones')}">Change
+                    product</a></button>
+            </td>
+            <td sec:authorize="isAuthenticated">
+                <button type="button" class="form_but" id="add_button" th:onclick="addToBucket([[${phone.id}]])">Add to
+                    bucket
+                </button>
+            </td>
+            <td sec:authorize="!isAuthenticated">
+                <button class="form_but"><a th:href="@{/login}" class="a_phones_button"> &#10155;Please: Log in</a>
+                </button>
+            </td>
+        </tr>
 
-    </tbody>
-</table>
-
- <script src="/js/script.js"></script>
+        </tbody>
+    </table>
+</div>
+<hr/>
+<div class="div_img_hot_deal"><h1 class="h1_hot_deal">.</h1></div>
+<div th:insert="~{fragments/signUpForDiscounts::.newsletter}" style="margin-bottom: 4%">Discounts</div>
+<div>
+    <div th:insert="~{index::#footer}">Footer</div>
+</div>
+<script src="/js/script.js"></script>
 
 </body>
 </html>

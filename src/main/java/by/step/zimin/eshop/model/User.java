@@ -3,9 +3,11 @@ package by.step.zimin.eshop.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +30,8 @@ public class User {
     @OneToOne(cascade = CascadeType.REMOVE)
     private Bucket bucket;
 
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Wallet wallet;
 
     public  Boolean isEnabled(){
         if (this.enable){

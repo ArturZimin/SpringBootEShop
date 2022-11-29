@@ -41,7 +41,7 @@ public class UserController {
         if (userService.save(userDto)) {
             return "redirect:/";//return index.html  (на основную страницу)
         } else {
-            String response = "Check the entered data! ";
+            String response = "The entered data does not match the requirements! ";
             throw new RuntimeException(response);
         }
     }
@@ -63,7 +63,7 @@ public class UserController {
             model.addAttribute("message", "Success! A verification email has been sent to your email address.");
             return "/login";
         } else {
-            throw new RuntimeException("The data of the user wrong! Try again!");
+            throw new RuntimeException("The entered data does not match the requirements!");
         }
     }
 

@@ -26,7 +26,7 @@
                 <li><a href="#" id="get_phone"><i class="fa fa-phone"></i>&#9990; Contact</a></li>
                 <li><a href="#" id="get_email"><i class="fa fa-envelope-o"></i>&#128386; Email</a></li>
                 <li><a href="#" id="get_address"><i class="fa fa-map-marker"></i>&#128376; Address</a></li>
-                <li><a href="#"><i class="fa fa-dollar"></i>&#36; USD</a></li>
+<!--                <li><a href="#"><i class="fa fa-dollar"></i>&#36; USD</a></li>-->
                 <li><a href="#" class="link_weather"><i></i>&#8451; Weather&#9728;</a></li>
 
                 <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/users/get/all}">&rArr;Show all
@@ -105,7 +105,7 @@
                         </select>
                     </label>
                     <label>
-                        <input type="text" name="title" class="input_search" placeholder="   Nokia 3310">
+                        <input type="text" name="title" class="input_search" placeholder="   Search here">
                     </label>
                     <button class="search-btn" type="submit">Search</button>
                 </form>
@@ -380,143 +380,17 @@
 <div class="div_img_hot_deal"><h1 class="h1_hot_deal">.</h1></div>
 <!--/red line-->
 
-<!--&lt;!&ndash;products2&ndash;&gt;-->
-<!--<div class="div_products2">-->
-<!--    &lt;!&ndash; product2 &ndash;&gt;-->
-<!--    <div class="product">-->
-<!--        <div class="product-img">-->
-<!--            <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{products[2].imageProduct}}">-->
-<!--            <div class="product-label">-->
-<!--                <span class="sale">-30%</span>-->
-<!--                <span class="new">NEW</span>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="product-body">-->
-<!--            <p class="product-category" th:text="${products[2].category.podCategory}">Category</p>-->
-<!--            <h3 class="product-name"><a th:href="@{/products/get/one/{id}(id=${products[2].id})}"-->
-<!--                                        th:text="${products[2].title}">product name goes here</a></h3>-->
-<!--            <h4 class="product-price" th:text="'$'+${products[2].price}">$980.00</h4>-->
-<!--            <del class="product-old-price" th:with="result=${(products[2].price/100)*70}"><span-->
-<!--                    th:text="${result}">$600.00</span>-->
-<!--            </del>-->
-<!--            <div class="product-rating">-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--            </div>-->
-<!--            <div class="product-btns">-->
-<!--                <button class="add-to-wishlist"><i class="fa fa-heart-o">-->
-<!--                    A</i><span class="tooltipp">add to wishlist</span></button>-->
-<!--                <button class="add-to-compare"><i class="fa fa-exchange">-->
-<!--                    C</i><span class="tooltipp">add to compare</span></button>-->
-<!--                <button class="quick-view"><i class="fa fa-eye">-->
-<!--                    Q</i><span class="tooltipp"><a-->
-<!--                        th:href="@{/products/get/one/{id}(id=${products[2].id})}">quick view</a></span></button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="add-to-cart">-->
-<!--            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[2].id}]])">add to-->
-<!--                bucket-->
-<!--            </button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; product2 &ndash;&gt;-->
-<!--    <div class="product">-->
-<!--        <div class="product-img">-->
-<!--            <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{products[4].imageProduct}}">-->
-<!--            <div class="product-label">-->
-<!--                <span class="sale">-30%</span>-->
-<!--                <span class="new">NEW</span>-->
-<!--                <span class="sale"><a class="link_more"-->
-<!--                                      th:href="@{/products/get/one/{id}(id=${products[4].id})}">MORE INF..</a></span>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="product-body">-->
-<!--            <p class="product-category" th:text="${products[4].category.podCategory}">Category</p>-->
-<!--            <h3 class="product-name"><a th:href="@{/products/get/one/{id}(id=${products[4].id})}"-->
-<!--                                        th:text="${products[4].title}">product name goes here</a></h3>-->
-<!--            <h4 class="product-price" th:text="'$'+${products[4].price}">$980.00</h4>-->
-<!--            <del class="product-old-price" th:with="result=${(products[4].price/100)*70}"><span-->
-<!--                    th:text="${result}">$600.00</span>-->
-<!--            </del>-->
-<!--            <div class="product-rating">-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--            </div>-->
-<!--            <div class="product-btns">-->
-<!--                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to-->
-<!--                            wishlist</span></button>-->
-<!--                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to-->
-<!--                            compare</span></button>-->
-<!--                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick-->
-<!--                            view</span></button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="add-to-cart">-->
-<!--            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[4].id}]])">add to-->
-<!--                bucket-->
-<!--            </button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; product &ndash;&gt;-->
-<!--    <div class="product">-->
-<!--        <div class="product-img">-->
-<!--            <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{products[3].imageProduct}}"/>-->
-<!--            <div class="product-label">-->
-<!--                <span class="sale">-30%</span>-->
-<!--                <span class="new">NEW</span>-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="product-body">-->
-<!--            <p class="product-category" th:text="${products[5].category.podCategory}">Category</p>-->
-<!--            <h3 class="product-name"><a th:href="@{/products/get/one/{id}(id=${products[5].id})}"-->
-<!--                                        th:text="${products[5].title}">product name goes here</a></h3>-->
-<!--            <h4 class="product-price" th:text="'$'+${products[5].price}">$980.00</h4>-->
-<!--            <del class="product-old-price" th:with="result=${(products[5].price/100)*70}"><span-->
-<!--                    th:text="${result}">$600.00</span>-->
-<!--            </del>-->
-<!--            <div class="product-rating">-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--                <i class="fa fa-star"></i>-->
-<!--            </div>-->
-<!--            <div class="product-btns">-->
-<!--                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to-->
-<!--                            wishlist</span></button>-->
-<!--                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to-->
-<!--                            compare</span></button>-->
-<!--                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick-->
-<!--                            view</span></button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="add-to-cart">-->
-<!--            <button class="add-to-cart-btn" th:onclick="addToBucket([[${products[5].id}]])">add to-->
-<!--                bucket-->
-<!--            </button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; product &ndash;&gt;-->
-<!--</div>-->
-<!--&lt;!&ndash;/products2&ndash;&gt;-->
-
+<
 <!--google_map-->
-<div>
-    <div id="_map">
-        <iframe
-                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2488.312569701565!2d27.656037424440353!3d53.93788443439389!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sby!4v1665990083824!5m2!1sru!2sby"
-                width="30%" height="20%" style="border:1em; border-radius: 0.2em; padding-top: 0.2em;"
-                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <a name="show_map"></a>
-    </div>
-</div>
+<!--<div>-->
+<!--    <div id="_map">-->
+<!--        <iframe-->
+<!--                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2488.312569701565!2d27.656037424440353!3d53.93788443439389!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sby!4v1665990083824!5m2!1sru!2sby"-->
+<!--                width="30%" height="20%" style="border:1em; border-radius: 0.2em; padding-top: 0.2em;"-->
+<!--                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
+<!--        <a name="show_map"></a>-->
+<!--    </div>-->
+<!--</div>-->
 <!--/google_map-->
 
 <!-- NEW DISCOUNTS -->
@@ -525,8 +399,8 @@
     <div class="newsletter">
         <p>Sign Up for the <strong>New Discounts</strong></p>
         <form>
-            <input class="input" type="email" placeholder="    Enter Your Email">
-            <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+            <input class="input" type="email" placeholder="    Enter your email"/>
+            <button class="newsletter-btn">Subscribe</button>
         </form>
     </div>
 </div>
