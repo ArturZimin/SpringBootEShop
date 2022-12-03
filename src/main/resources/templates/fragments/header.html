@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Header fragment</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+<!-- HEADER -->
+<header id="header_fragment">
+    <!-- Bucket and search -->
+    <div class="bucket_search">
+
+        <div id="fragment_header_bucket2">
+            <a th:href="@{/headers/add/iconCompany}"><img class="header_img" alt="icon"
+                                                          th:src="*{'data:image/png;base64,'+{iconCompany}}"></a>
+            <a th:href="@{/products/get/phones}"><img class="header_img" src="/img/product07.png"></a>
+            <a th:href="@{/products/get/accessories}"><img class="header_img" src="/img/product02.png"></a>
+            <a th:href="@{/products/get/tablets}"><img class="header_img" src="/img/product04.png"></a>
+            <a th:href="@{/products/get/laptops}"><img class="header_img" src="/img/product01.png"></a>
+            <!--            <a th:href="@{/products/get/cameras}"><img class="header_img" src="/img/Sony600.png"></a>-->
+            <a th:href="@{/products/get/watches}"><img class="header_img" src="/img/9253610356766.png"></a>
+            <a href="#" sec:authorize="isAuthenticated()" th:href="@{/buckets/get}"><img class="header_img"
+                                                                                         src="/img/backet.jpg"
+                                                                                         alt="icon_bucket">
+                <!--                th:text="${amount}"-->
+                <div class="counter"><b>Bucket:</b><b><span th:text="${amount}" id="counter_in_bucket"></span></b>
+                </div>
+            </a>
+            <a href="#" sec:authorize="!isAuthenticated()" th:href="@{/login}"><img class="header_img"
+                                                                                    src="/img/backet.jpg"
+                                                                                    alt="icon_bucket">
+            </a>
+        </div>
+
+
+    </div>
+    <!-- Bucket -->
+</header>
+<!-- /HEADER -->
+</body>
+</html>

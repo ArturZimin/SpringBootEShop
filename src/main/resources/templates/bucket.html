@@ -4,49 +4,178 @@
     <meta charset="UTF-8">
     <title>Bucket page</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/styleCreditCart.css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
 </head>
 <body class="body_bucket">
 
 
 <div th:insert="~{fragments/menu::#_nav_menu}"></div>
 <hr/>
-<div style="display: inline-block;float: left; margin-left: 5px;">
+<div style="margin:1% 1% 2% 5%; padding-top: 380px">
 
 
+    <!--    <table border="2" style="background-color: white">-->
+    <!--        <tr>-->
+    <!--&lt;!&ndash;            <td>Image</td>&ndash;&gt;-->
+    <!--            <td>Title</td>-->
+    <!--            <td>Amount</td>-->
+    <!--            <td>Price</td>-->
+    <!--            <td>Sum</td>-->
+    <!--            <td>Remove</td>-->
+    <!--        </tr>-->
+    <!--        <tr th:each="detail:${bucket.details}">-->
+    <!--&lt;!&ndash;            <td ><img style="height: 17vh;width: 17vw" th:src="*{'data:image/png;base64,'+{detail.imageProduct}}"/></td>&ndash;&gt;-->
+    <!--            <td th:text="${detail.title}">Title</td>-->
+    <!--            <td th:text="${detail.amount}">Amount</td>-->
+    <!--            <td th:text="${detail.price}" ?>Price</td>-->
+    <!--            <td th:text="${detail.sum}">Sum</td>-->
+    <!--            <td><a th:href="@{/buckets/delete/product/{id}(id=${detail.productId})}">Remove</a></td>-->
+    <!--        </tr>-->
 
-    <table border="2">
-        <tr>
-<!--            <td>Image</td>-->
-            <td>Title</td>
-            <td>Amount</td>
-            <td>Price</td>
-            <td>Sum</td>
-            <td>Remove</td>
-        </tr>
-        <tr th:each="detail:${bucket.details}">
-<!--            <td ><img style="height: 17vh;width: 17vw" th:src="*{'data:image/png;base64,'+{detail.imageProduct}}"/></td>-->
-            <td th:text="${detail.title}">Title</td>
-            <td th:text="${detail.amount}">Amount</td>
-            <td th:text="${detail.price}" ?>Price</td>
-            <td th:text="${detail.sum}">Sum</td>
-            <td><a th:href="@{/buckets/delete/product/{id}(id=${detail.productId})}">Remove</a></td>
-        </tr>
+    <!--    </table>-->
+    <!--    <br/>-->
+    <!--    <h1>Final sum: <b th:text="${bucket.sum}">1000</b>$</h1>-->
+    <!--    <hr/>-->
+    <!--    <button type="button" class="form_but">Buy</button>-->
+    <!--    <hr/>-->
 
-    </table>
-    <br/>
-    <h1>Final sum: <b th:text="${bucket.sum}">1000</b>$</h1>
-    <hr/>
-    <button type="button" class="form_but">Buy</button>
-    <hr/>
+    <!--    &lt;!&ndash; Order Details &ndash;&gt;-->
+    <div class="order-details" style="width: 50%">
+        <div class="title_order" style=" text-align: center">
+            <h1 class="title" style="margin-top: 5%">Your Order</h1>
+        </div>
+        <div class="order-summary">
+            <div class="order-products">
+                <table th:border="3px" style="width: 100%">
+                    <tr>
+                        <!--            <td>Image</td>-->
+                        <td>Product</td>
+                        <td>Amount</td>
+                        <td>Price</td>
+                        <td>Sum</td>
+                        <td>Remove</td>
+                    </tr>
+                    <tr th:each="detail:${bucket.details}">
+                        <!--            <td ><img style="height: 17vh;width: 17vw" th:src="*{'data:image/png;base64,'+{detail.imageProduct}}"/></td>-->
+                        <td th:text="${detail.title}">Title</td>
+                        <td th:text="${detail.amount}">Amount</td>
+                        <td th:text="${detail.price}" ?>Price</td>
+                        <td th:text="${detail.sum}">Sum</td>
+                        <td><a th:href="@{/buckets/delete/product/{id}(id=${detail.productId})}">Remove</a></td>
+                    </tr>
+
+                </table>
+                <br/>
+                <h1>TOTAL : <b th:text="${bucket.sum}">1000</b>$</h1>
+                <hr/>
+                <button type="button" class="form_but" style="font-size: large;font-family: 'Arial Rounded MT Bold'">
+                    Pay
+                </button>
+                <hr/>
+            </div>
+            <div class="order-col">
+                <div>Shipping</div>
+                <div><strong>FREE</strong></div>
+            </div>
+        </div>
+        <!-- /Order Details -->
+    </div>
 </div>
 
-<div class="treasure"><img class="img_treasure" src="/img/treasure.png" alt=""
-                           style="width: 50%; height: 50%; display: inline-block"></div>
-<hr/>
-<div class="div_img_hot_deal"><h1 class="h1_hot_deal">.</h1></div>
-<div th:insert="~{fragments/signUpForDiscounts::.newsletter}" style="margin-bottom: 4%">Discounts</div>
+<div style="background-color: wheat">
+    <div class="credit-card-wrapper">
+        <div class="credit-card front">
+            <div class="card-title">CREDIT CARD</div>
+
+            <div class="card-number">
+                <div class="card-number-label">CARD NUMBER</div>
+                <div class="card-numbers">
+                    <input type="text" class="tbx-number-0" maxlength='4'/>
+                    <input type="text" class="tbx-number-1" maxlength='4'/>
+                    <input type="text" class="tbx-number-2" maxlength='4'/>
+                    <input type="text" class="tbx-number-3" maxlength='4'/>
+                </div>
+            </div>
+
+            <div class="card-expiration">
+                <div class="card-expiration-label">
+                    <div>VALID</div>
+                    <div>THRU</div>
+                </div>
+                <div class="card-expiration-month">
+                    <div class="card-expiration-month-label">MONTH</div>
+                    <select class='drp-expiration-month'>
+                        <option value="01">01</option>
+                        <option value="02">03</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+                <div class="card-expiration-slash">/</div>
+                <div class="card-expiration-year">
+                    <div class="card-expiration-year-label">YEAR</div>
+                    <select class='drp-expiration-year'>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                    </select>
+                </div>
+                <div><button type="button" style="background-color: white;height: 40px;width: 80px;margin-top: 28%;margin-left: 30%;color: #ef233c;border: 0; border-radius: 5px">Apply</button></div>
+            </div>
+        </div>
+        <div class="credit-card back unfocused">
+            <div class="magnetic-strip"></div>
+            <div class="credit-card-ccv">
+                <div class="credit-card-ccv-label">CCV CODE</div>
+                <div class="credit-card-ccv-strip">
+                    <div class="credit-card-ccv-box"></div>
+                    <input type="text" class="tbx-ccv" maxlength='4'/>
+                    <div class="credit-card-ccv-prefix">XXXX</div>
+                </div>
+            </div>
+
+            <div class="credit-card-ccv" style="margin-top: 20%" >
+                <div class="credit-card-ccv-label" style="color: red;font-weight: bold">CONFIRM CODE</div>
+                <div class="credit-card-ccv-strip">
+                    <div class="credit-card-ccv-box1"></div>
+                    <input type="text" class="tbx-ccv" maxlength='6' minlength="6" style="background-color: white;width: 100px"/>
+                    <div class="credit-card-ccv-prefix" style="color: #ef233c">XXXXXX</div>
+                    <div><button type="button" style="background-color: white;height: 40px;width: 80px;color: #ef233c;border: 0; border-radius: 5px;margin: 2% 0 0 30%;font-weight: bold">Confirm</button></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!--<div class="treasure"><img class="img_treasure" src="/img/treasure.png" alt=""-->
+<!--                           style="width: 50%; height: 50%; display: inline-block"></div>-->
 <div>
-    <div th:insert="~{index::#footer}">Footer</div>
+    <div class="div_img_hot_deal"><h1 class="h1_hot_deal">.</h1></div>
+    <div th:insert="~{fragments/signUpForDiscounts::.newsletter}" style="margin-bottom: 4%">Discounts</div>
+    <div class="div_img_hot_deal"><h1 class="h1_hot_deal">.</h1></div>
+    <div>
+        <div th:insert="~{index::#footer}">Footer</div>
+    </div>
 </div>
 </body>
 </html>

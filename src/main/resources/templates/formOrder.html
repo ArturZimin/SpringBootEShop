@@ -4,10 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Authorization - form</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
-
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 
 </head>
@@ -15,12 +13,70 @@
 <body>
 
 
-<hr/>
-<div class="div_img_hot_deal"><h1 class="h1_hot_deal">.</h1></div>
-<div th:insert="~{fragments/signUpForDiscounts::.newsletter}" style="margin-bottom: 4%">Discounts</div>
-<div>
-    <div th:insert="~{index::#footer}">Footer</div>
-</div>
+    <div class="credit-card-wrapper">
+        <div class="credit-card front">
+            <div class="card-title">CREDIT CARD</div>
+
+            <div class="card-number">
+                <div class="card-number-label">CARD NUMBER</div>
+                <div class="card-numbers">
+                    <input type="text" class="tbx-number-0" maxlength='4'/>
+                    <input type="text" class="tbx-number-1" maxlength='4'/>
+                    <input type="text" class="tbx-number-2" maxlength='4'/>
+                    <input type="text" class="tbx-number-3" maxlength='4'/>
+                </div>
+            </div>
+
+            <div class="card-expiration">
+                <div class="card-expiration-label">
+                    <div>VALID</div>
+                    <div>THRU</div>
+                </div>
+                <div class="card-expiration-month">
+                    <div class="card-expiration-month-label">MONTH</div>
+                    <select class='drp-expiration-month'>
+                        <option value="01">01</option>
+                        <option value="02">03</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+                <div class="card-expiration-slash">/</div>
+                <div class="card-expiration-year">
+                    <div class="card-expiration-year-label">YEAR</div>
+                    <select class='drp-expiration-year'>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="credit-card back unfocused">
+            <div class="magnetic-strip"></div>
+            <div class="credit-card-ccv">
+                <div class="credit-card-ccv-label">CCV CODE</div>
+                <div class="credit-card-ccv-strip">
+                    <div class="credit-card-ccv-box"></div>
+                    <input type="text" class="tbx-ccv" maxlength='4'/>
+                    <div class="credit-card-ccv-prefix">XXXX</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="/script.js"></script>
 </body>
 
 </html>

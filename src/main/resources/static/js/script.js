@@ -239,4 +239,34 @@ $('#add_button').on('click', function (e) {
 
 function setCounterInSpan(number) {
     counter.innerHTML = number;
-}
+};
+
+
+
+/**============================================================
+ * CREDIT CART
+ * ============================================================*/
+var CreditCard = (function() {
+
+    var init = function() {
+        $('.credit-card.front input, .credit-card.front  select').on('focus', front_focus);
+        $('.credit-card.back input').on('focus', back_focus);
+    };
+
+    var front_focus = function() {
+        $('.credit-card.back').addClass('unfocused');
+        $(this).closest('.credit-card').removeClass('unfocused');
+    };
+
+    var back_focus = function() {
+        $('.credit-card.front').addClass('unfocused');
+        $(this).closest('.credit-card').removeClass('unfocused');
+    };
+
+    return {
+        init: init
+    }
+
+}());
+
+$(CreditCard.init);

@@ -194,7 +194,13 @@ HEADER BUCKET and image
     background-image: url("/img/background.png");
 
 }
-
+#fragment_header_bucket2 {
+    display: flex;
+    /*padding-top: 0.5%;*/
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    /*margin-top: 2.4%;*/
+}
 hr {
     margin-bottom: 0.2%;
 }
@@ -698,6 +704,7 @@ PRODUCT PRICE
 .newsletter {
     text-align: center;
 
+
 }
 
 .newsletter p {
@@ -834,9 +841,95 @@ FOOTER
     color:red;
 }
 
+.copyright{
+    background: black;
+    color: white;
+    text-align: center;
+    height: 6vh;
+}
+.copyright:hover{
+
+    color: red;
+
+}
+.it_step_link{
+    text-decoration: none;
+    color: #e70505;
+}
 /**===========================================================
 BUCKET.html
 ===============================================================*/
 .body_bucket{
     background-image: url("/img/background.png");
 }
+/*=========================================================
+	BUCKET ORDER
+===========================================================*/
+
+.billing-details {
+    margin-bottom: 30px;
+}
+
+.shiping-details {
+    margin-bottom: 30px;
+}
+
+.order-details {
+    position: relative;
+    padding: 0px 30px 30px;
+    border-right: 1px solid #E4E7ED;
+    border-left: 1px solid #E4E7ED;
+    border-bottom: 1px solid #E4E7ED;
+
+    background-color: white;
+}
+
+
+.order-summary {
+    margin: 15px 0px;
+}
+
+.order-summary .order-col {
+    display: table;
+    width: 100%;
+}
+
+
+
+.order-summary .order-col>div {
+    display: table-cell;
+    padding: 10px 0px;
+}
+
+.order-summary .order-col>div:first-child {
+    width: calc(100% - 150px);
+}
+
+.order-summary .order-col>div:last-child {
+    width: 150px;
+    text-align: right;
+}
+
+.order-summary .order-col .order-total {
+    font-size: 24px;
+    color: #D10024;
+}
+
+.order-details .payment-method {
+    margin: 30px 0px;
+}
+
+.order-details .order-submit {
+    display: block;
+    margin-top: 30px;
+}
+.title_order{
+    margin-top: 5%;
+}
+
+.div_credit_cart{
+    background-image:url("/img/creditCart.png") ;
+    width: 40%;
+    height: 30vh;
+}
+

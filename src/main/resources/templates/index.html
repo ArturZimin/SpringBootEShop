@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Main page</title>
+
     <!-- Correct stylesheet -->
-    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 
     <!--     Jquery -->
     <script src="https://code.jquery.com/jquery-3.6.1.js"
@@ -26,7 +27,7 @@
                 <li><a href="#" id="get_phone"><i class="fa fa-phone"></i>&#9990; Contact</a></li>
                 <li><a href="#" id="get_email"><i class="fa fa-envelope-o"></i>&#128386; Email</a></li>
                 <li><a href="#" id="get_address"><i class="fa fa-map-marker"></i>&#128376; Address</a></li>
-<!--                <li><a href="#"><i class="fa fa-dollar"></i>&#36; USD</a></li>-->
+                <!--                <li><a href="#"><i class="fa fa-dollar"></i>&#36; USD</a></li>-->
                 <li><a href="#" class="link_weather"><i></i>&#8451; Weather&#9728;</a></li>
 
                 <li><a sec:authorize="hasAnyAuthority('ADMIN','MANAGER')" th:href="@{/users/get/all}">&rArr;Show all
@@ -441,6 +442,10 @@
         </div>
     </div>
     <!-- /row -->
+    <div class="copyright"><span class="copyright">
+
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script>  by ZIMIN A.(Junior Java Developer <a class="it_step_link" href="https://itstep.by/">ITStep Academy</a>) Minsk, Belarus </span>
+    </div>
 </footer>
 <!-- /FOOTER -->
 
