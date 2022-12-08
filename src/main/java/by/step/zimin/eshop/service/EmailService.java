@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import java.io.FileNotFoundException;
-@Service
+
 public interface EmailService {
     void sendEmail(UserDto userDto);
 

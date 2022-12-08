@@ -77,7 +77,6 @@ public class BucketServiceImpl implements BucketService {
             BucketDetailsDto detailsDto = mapByProductId.get(product.getId());
             //проверяем ли пустая мапа
             if (detailsDto == null) {
-
                 mapByProductId.put(product.getId(), new BucketDetailsDto(product));//добавляем в мапу
             } else {
                 detailsDto.setImageProduct(product.getImageProduct());
@@ -114,4 +113,6 @@ public class BucketServiceImpl implements BucketService {
         }
 
     }
+
+
 }

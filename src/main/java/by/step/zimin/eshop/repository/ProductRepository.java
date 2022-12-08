@@ -4,6 +4,8 @@ import by.step.zimin.eshop.dto.ProductDto;
 import by.step.zimin.eshop.model.Category;
 import by.step.zimin.eshop.model.Product;
 import by.step.zimin.eshop.model.ProductDetails;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.sql.Date;
@@ -26,4 +28,5 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     List<Product> findAllByOrderByPrice();
 
     List<Product> findAllByOrderByProductDetails_YearProductionDesc();
+   Page<Product> findByOrderByTitle(Pageable page);
 }

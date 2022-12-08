@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name = "products")
 public class Product {
 
@@ -44,6 +45,8 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     private Processor processor;
 
+
+
     public BigDecimal getPrice() {
         if (this.price == null) {
             return new BigDecimal("0.0");
@@ -53,21 +56,21 @@ public class Product {
     }
 
     public String getImageProduct() {
-        if (imageProduct==null){
+        if (imageProduct == null) {
             return "";
         }
         return imageProduct;
     }
 
     public String getImageProduct2() {
-        if (imageProduct2==null){
+        if (imageProduct2 == null) {
             return "";
         }
         return imageProduct2;
     }
 
     public String getImageProduct3() {
-        if (imageProduct3==null){
+        if (imageProduct3 == null) {
             return "";
         }
         return imageProduct3;

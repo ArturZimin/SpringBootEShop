@@ -6,6 +6,8 @@ import by.step.zimin.eshop.service.HeaderImagesService;
 import by.step.zimin.eshop.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +29,7 @@ public class MainController {
 
 
     @RequestMapping({"", "/"})  //можно 2 способами
-    public String index(@RequestParam(required = false) String sortBy, Model model, Principal principal) {
+    public String index(@RequestParam(required = false) String sortBy,@RequestParam(required = false) Integer page,@RequestParam(required = false) Integer size, Model model, Principal principal) {
         List<ProductDto> list = null;
         if (sortBy==null) {
             list = productService.getAll();
@@ -49,6 +51,39 @@ public class MainController {
         System.out.println(sortBy);
         return "index";
     }
+
+//    @RequestMapping({"", "/"})  //можно 2 способами
+//    public String index(@RequestParam(required = false) String sortBy, @RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size, Model model, Principal principal) {
+//
+//        List<ProductDto> list=null;
+//        if (page==null){
+//            page=0;
+//        }
+//        if (size==null){
+//            size=11;
+//        }
+//        Page pages = productService.findByOrderByTitle(page,size);
+//
+//        if(sortBy.equals("price")) {
+//            list =productService.getAllProductsSortByPrice();
+//        }else if(sortBy.equals("year")){
+//            list =productService.getAllProductsSortByYear();
+//        }
+//        if (list == null) {
+//            throw new RuntimeException("The list of products is null!");
+//        }
+//        if (principal != null) {
+//            Long amount = bucketService.getAmountInBucket(principal.getName());
+//            model.addAttribute("amount", amount);
+//        }
+//        String icon = headerImagesService.getIconCompany();
+//        model.addAttribute("iconCompany", icon);
+//        model.addAttribute("products", pages.getContent());
+//        model.addAttribute("totalElements",pages.getTotalElements());
+//        model.addAttribute("countPages",pages.getTotalPages());
+//        System.out.println(sortBy);
+//        return "index";
+//    }
 
     @RequestMapping("/login") //если запрос по ссылке на логин
     public String login() {

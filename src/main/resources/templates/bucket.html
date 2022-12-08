@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="/css/styleCreditCart.css"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--     Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 
 
 </head>
@@ -14,35 +17,8 @@
 
 <div th:insert="~{fragments/menu::#_nav_menu}"></div>
 <hr/>
-<div style="margin:1% 1% 2% 5%; padding-top: 380px">
+<div class="order_bucket_form" >
 
-
-    <!--    <table border="2" style="background-color: white">-->
-    <!--        <tr>-->
-    <!--&lt;!&ndash;            <td>Image</td>&ndash;&gt;-->
-    <!--            <td>Title</td>-->
-    <!--            <td>Amount</td>-->
-    <!--            <td>Price</td>-->
-    <!--            <td>Sum</td>-->
-    <!--            <td>Remove</td>-->
-    <!--        </tr>-->
-    <!--        <tr th:each="detail:${bucket.details}">-->
-    <!--&lt;!&ndash;            <td ><img style="height: 17vh;width: 17vw" th:src="*{'data:image/png;base64,'+{detail.imageProduct}}"/></td>&ndash;&gt;-->
-    <!--            <td th:text="${detail.title}">Title</td>-->
-    <!--            <td th:text="${detail.amount}">Amount</td>-->
-    <!--            <td th:text="${detail.price}" ?>Price</td>-->
-    <!--            <td th:text="${detail.sum}">Sum</td>-->
-    <!--            <td><a th:href="@{/buckets/delete/product/{id}(id=${detail.productId})}">Remove</a></td>-->
-    <!--        </tr>-->
-
-    <!--    </table>-->
-    <!--    <br/>-->
-    <!--    <h1>Final sum: <b th:text="${bucket.sum}">1000</b>$</h1>-->
-    <!--    <hr/>-->
-    <!--    <button type="button" class="form_but">Buy</button>-->
-    <!--    <hr/>-->
-
-    <!--    &lt;!&ndash; Order Details &ndash;&gt;-->
     <div class="order-details" style="width: 50%">
         <div class="title_order" style=" text-align: center">
             <h1 class="title" style="margin-top: 5%">Your Order</h1>
@@ -71,9 +47,10 @@
                 <br/>
                 <h1>TOTAL : <b th:text="${bucket.sum}">1000</b>$</h1>
                 <hr/>
-                <button type="button" class="form_but" style="font-size: large;font-family: 'Arial Rounded MT Bold'">
+
+               <button  id="btn_pay" type="button" class="form_but" style="font-size: large;font-family: 'Arial Rounded MT Bold'"> <a href="#" class="a_btn_pay">
                     Pay
-                </button>
+               </a> </button>
                 <hr/>
             </div>
             <div class="order-col">
@@ -85,18 +62,17 @@
     </div>
 </div>
 
-<div style="background-color: wheat">
+<div class="credit_cart_general" >
     <div class="credit-card-wrapper">
         <div class="credit-card front">
-            <div class="card-title">CREDIT CARD</div>
-
-            <div class="card-number">
+            <div class="card-title" >CREDIT CARD: <span class="visa_icon" style="color: blue;font-size: xx-large;text-shadow: white " ></span></div>
+            <div class="card-number" >
                 <div class="card-number-label">CARD NUMBER</div>
                 <div class="card-numbers">
-                    <input type="text" class="tbx-number-0" maxlength='4'/>
-                    <input type="text" class="tbx-number-1" maxlength='4'/>
-                    <input type="text" class="tbx-number-2" maxlength='4'/>
-                    <input type="text" class="tbx-number-3" maxlength='4'/>
+                    <input type="text" class="tbx-number-0" minlength="4" maxlength='4' required form="form_credit_cart"/>
+                    <input type="text" class="tbx-number-1" minlength="4" maxlength='4' required form="form_credit_cart"/>
+                    <input type="text" class="tbx-number-2" minlength="4" maxlength='4' required form="form_credit_cart"/>
+                    <input type="text" class="tbx-number-3" minlength="4" maxlength='4' required form="form_credit_cart"/>
                 </div>
             </div>
 
@@ -107,7 +83,7 @@
                 </div>
                 <div class="card-expiration-month">
                     <div class="card-expiration-month-label">MONTH</div>
-                    <select class='drp-expiration-month'>
+                    <select class='drp-expiration-month' form="form_credit_cart">
                         <option value="01">01</option>
                         <option value="02">03</option>
                         <option value="03">03</option>
@@ -125,7 +101,7 @@
                 <div class="card-expiration-slash">/</div>
                 <div class="card-expiration-year">
                     <div class="card-expiration-year-label">YEAR</div>
-                    <select class='drp-expiration-year'>
+                    <select class='drp-expiration-year' form="form_credit_cart">
                         <option value="22">22</option>
                         <option value="23">23</option>
                         <option value="24">24</option>
@@ -137,7 +113,7 @@
                         <option value="30">30</option>
                     </select>
                 </div>
-                <div><button type="button" style="background-color: white;height: 40px;width: 80px;margin-top: 28%;margin-left: 30%;color: #ef233c;border: 0; border-radius: 5px">Apply</button></div>
+                <div><button type="submit" class="btn_apply_bucket" form="form_credit_cart" >Apply</button></div>
             </div>
         </div>
         <div class="credit-card back unfocused">
@@ -146,23 +122,25 @@
                 <div class="credit-card-ccv-label">CCV CODE</div>
                 <div class="credit-card-ccv-strip">
                     <div class="credit-card-ccv-box"></div>
-                    <input type="text" class="tbx-ccv" maxlength='4'/>
+                    <input type="text" class="tbx-ccv"minlength="3" maxlength='4' required form="form_credit_cart"/>
                     <div class="credit-card-ccv-prefix">XXXX</div>
                 </div>
             </div>
 
-            <div class="credit-card-ccv" style="margin-top: 20%" >
+            <div class="credit-card-ccv" id="block_confirm" style="margin-top: 20%" >
                 <div class="credit-card-ccv-label" style="color: red;font-weight: bold">CONFIRM CODE</div>
                 <div class="credit-card-ccv-strip">
                     <div class="credit-card-ccv-box1"></div>
                     <input type="text" class="tbx-ccv" maxlength='6' minlength="6" style="background-color: white;width: 100px"/>
                     <div class="credit-card-ccv-prefix" style="color: #ef233c">XXXXXX</div>
-                    <div><button type="button" style="background-color: white;height: 40px;width: 80px;color: #ef233c;border: 0; border-radius: 5px;margin: 2% 0 0 30%;font-weight: bold">Confirm</button></div>
+                    <div><button type="button" class="btn_confirm">Confirm</button></div>
 
                 </div>
             </div>
         </div>
     </div>
+
+    <form  id="form_credit_cart" hidden></form>
 
 
 </div>
@@ -177,5 +155,6 @@
         <div th:insert="~{index::#footer}">Footer</div>
     </div>
 </div>
+<script src="/js/script.js"></script>
 </body>
 </html>

@@ -1,6 +1,9 @@
 package by.step.zimin.eshop.service;
 
 import by.step.zimin.eshop.dto.ProductDto;
+import by.step.zimin.eshop.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -17,11 +20,12 @@ public interface ProductService {
 
     Integer deleteProduct(Long id);
 
-    
+    Page<ProductDto> findByOrderByTitle(Integer page, Integer size);
 
     void minusOneForAmount(Long id);
 
-
+    List<Product> productListDTOToProductList(List<ProductDto> product);
+    List<ProductDto> productListToProductListDto(List<Product> product);
 
     Long getAmount(Long id);
 

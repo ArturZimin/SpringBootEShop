@@ -160,3 +160,134 @@ input, select {
     -webkit-transform: skew(10deg, 0);
     transform: skew(10deg, 0);
 }
+
+.order_bucket_form{
+    margin:1% 1% 2% 5%;
+    /*padding-top: 380px;*/
+}
+.credit_cart_general{
+    background-color: wheat;
+    display: none;
+}
+.btn_apply_bucket{
+    background-color: white;
+    height: 40px;width: 80px;
+    margin-top: 28%;
+    margin-left: 30%;
+    color: #ef233c;
+    border: 0;
+    border-radius: 5px;
+}
+
+.btn_apply_bucket{
+    color: red;
+    background-color: white;
+}
+
+.btn_apply_bucket:hover{
+
+    color: white;
+    background-color: red;
+}
+
+.btn_confirm{
+    background-color: white;
+    height: 40px;
+    width: 80px;
+    color: red;
+    border: 0;
+    border-radius: 5px;
+    margin: 2% 0 0 30%;
+    font-weight: bold;
+}
+
+.btn_confirm:hover{
+    color: white;
+   background-color: #c40303;
+}
+/**===========================================================
+BUCKET.html
+===============================================================*/
+.body_bucket{
+    background-image: url("/img/background.png");
+}
+/*=========================================================
+	BUCKET ORDER
+===========================================================*/
+
+.billing-details {
+    margin-bottom: 30px;
+}
+
+.shiping-details {
+    margin-bottom: 30px;
+}
+
+.order-details {
+    position: relative;
+    padding: 0px 30px 30px;
+    border-right: 1px solid #E4E7ED;
+    border-left: 1px solid #E4E7ED;
+    border-bottom: 1px solid #E4E7ED;
+
+    background-color: white;
+}
+
+
+.order-summary {
+    margin: 15px 0px;
+}
+
+.order-summary .order-col {
+    display: table;
+    width: 100%;
+}
+
+
+
+.order-summary .order-col>div {
+    display: table-cell;
+    padding: 10px 0px;
+}
+
+.order-summary .order-col>div:first-child {
+    width: calc(100% - 150px);
+}
+
+.order-summary .order-col>div:last-child {
+    width: 150px;
+    text-align: right;
+}
+
+.order-summary .order-col .order-total {
+    font-size: 24px;
+    color: #D10024;
+}
+
+.order-details .payment-method {
+    margin: 30px 0px;
+}
+
+.order-details .order-submit {
+    display: block;
+    margin-top: 30px;
+}
+.title_order{
+    margin-top: 5%;
+}
+
+.div_credit_cart{
+    background-image:url("/img/creditCart.png") ;
+    width: 40%;
+    height: 30vh;
+}
+
+#block_confirm{
+    display: none;
+}
+
+.a_btn_pay{
+    color: white;
+    text-decoration: none;
+}
+

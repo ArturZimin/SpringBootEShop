@@ -1,5 +1,7 @@
 package by.step.zimin.eshop.controller;
 
+import by.step.zimin.eshop.service.BucketService;
+import by.step.zimin.eshop.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +15,13 @@ import java.security.Principal;
 @RequestMapping("/orders")
 public class OrderController {
 
-    @GetMapping("/get/form")
-    public String getFormOrder(Model model, Principal principal){
-        //model.addAttribute("userName",principal.getName());
-        return "formOrder";
+    private final BucketService bucketService;
+    private final OrderService orderService;
+
+    @GetMapping("/create/new")
+    public void getFormOrder(Model model, Principal principal){
+        orderService.createOrder(principal.getName());
+
     }
 
 }

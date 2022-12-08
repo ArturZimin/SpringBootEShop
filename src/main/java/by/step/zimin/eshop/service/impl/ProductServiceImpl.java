@@ -6,7 +6,11 @@ import by.step.zimin.eshop.model.*;
 import by.step.zimin.eshop.repository.ProductRepository;
 import by.step.zimin.eshop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -87,7 +92,6 @@ public class ProductServiceImpl implements ProductService {
                 .yearProduction(productDto.getYearProduction())
                 .build();
 
-        System.out.println(productDetails);
         productDetailsService.addProductDetails(productDetails);
 
         Processor processor = Processor.builder()
@@ -95,8 +99,6 @@ public class ProductServiceImpl implements ProductService {
                 .countCore(productDto.getCountCore())
                 .frequency(productDto.getFrequency())
                 .build();
-
-        System.out.println(processor);
         processorService.addProcessor(processor);
 
         Category category = Category.builder()
@@ -104,7 +106,6 @@ public class ProductServiceImpl implements ProductService {
                 .podCategory(productDto.getPodCategory())
                 .build();
 
-        System.out.println(category);
         categoryService.addCategory(category);
 
         Product product = Product.builder()
@@ -145,6 +146,19 @@ public class ProductServiceImpl implements ProductService {
         productRepository.delete(product);
         return 200;
     }
+
+    @Override
+    public Page<ProductDto> findByOrderByTitle(Integer page, Integer size) {
+        Page<Product> firstNineProducts=productRepository.findByOrderByTitle(PageRequest.of(page,size));
+      return firstNineProducts.map(new Function<Product, ProductDto>() {
+          @Override
+          public ProductDto apply(Product product) {
+              return toDto(product);
+          }
+      });
+    }
+
+
 
 
     @Override
@@ -270,6 +284,13 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDto> productListToProductListDto(List<Product> product) {
         return product.stream()
                 .map(this::toDto)
+                .collect(Collectors.toList());
+
+    }
+
+    public List<Product> productListDTOToProductList(List<ProductDto> product) {
+        return product.stream()
+                .map(this::toProduct)
                 .collect(Collectors.toList());
 
     }

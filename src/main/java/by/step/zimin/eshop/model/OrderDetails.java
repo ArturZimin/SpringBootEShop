@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,4 +29,7 @@ public class OrderDetails {
 
     private Long amount;
     private BigDecimal price;
+
+
+
 }
