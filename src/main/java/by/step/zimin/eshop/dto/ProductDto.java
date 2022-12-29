@@ -1,10 +1,7 @@
 package by.step.zimin.eshop.dto;
 
 import by.step.zimin.eshop.model.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -13,6 +10,7 @@ import java.time.Year;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Builder
 public class ProductDto {
 
@@ -50,6 +48,10 @@ public class ProductDto {
     //category
     private String categoryTitle;
     private String podCategory;
+
+    //discount
+    private Discount discount;
+
 
     public Boolean notNull(Object obj) {
         if (obj != null) {

@@ -45,7 +45,8 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     private Processor processor;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Discount discount;
 
     public BigDecimal getPrice() {
         if (this.price == null) {

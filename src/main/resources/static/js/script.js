@@ -300,6 +300,23 @@ $('.tbx-number-0').on('input',function (event){
 });
 
 
+/**=================================================================
+ * Price min and max
+ ==================================================================*/
+function showValueMin(number){
+    let min=$('.input_price_min');
+    min.val(number +'$');
+}
+function showValueMax(number){
+    let min=$('.input_price_max');
+    min.val(number +'$');
+}
+
+
+
+
+
+
 /**===============================================================
  * VALIDATE MASTERCARD
  * ==============================================================*/

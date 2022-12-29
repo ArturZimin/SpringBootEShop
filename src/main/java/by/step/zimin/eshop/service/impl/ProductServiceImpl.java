@@ -108,6 +108,10 @@ public class ProductServiceImpl implements ProductService {
 
         categoryService.addCategory(category);
 
+        Discount discount=Discount.builder()
+                .discount(productDto.getDiscount().getDiscount())
+                .build();
+
         Product product = Product.builder()
                 .id(productDto.getId())
                 .imageProduct(Base64.getEncoder().encodeToString(file.getBytes()))
@@ -118,6 +122,7 @@ public class ProductServiceImpl implements ProductService {
                 .currencyType(productDto.getCurrencyType())
                 .productDetails(productDetails)
                 .category(category)
+                .discount(discount)
                 .processor(processor)
                 .title(productDto.getTitle())
                 .build();
@@ -306,6 +311,7 @@ public class ProductServiceImpl implements ProductService {
                 .productDetails(productDto.getProductDetails())
                 .processor(productDto.getProcessor())
                 .amount(productDto.getAmount())
+                .discount(productDto.getDiscount())
                 .build();
 
     }
@@ -323,6 +329,7 @@ public class ProductServiceImpl implements ProductService {
                 .productDetails(product.getProductDetails())
                 .processor(product.getProcessor())
                 .amount(product.getAmount())
+                .discount(product.getDiscount())
                 .build();
     }
 }
