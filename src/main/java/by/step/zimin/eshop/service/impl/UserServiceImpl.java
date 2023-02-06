@@ -14,6 +14,9 @@ import by.step.zimin.eshop.service.UserService;
 import by.step.zimin.eshop.service.VerificationTokenService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,6 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +34,12 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@Log4j2
 public class UserServiceImpl implements UserService {
+
+    //private static final Logger log= LoggerFactory.getLogger(ProductServiceImpl.class);
+
+
 
 
     private final UserRepository userRepository;
@@ -49,6 +58,8 @@ public class UserServiceImpl implements UserService {
         this.emailService = emailService;
     }
 
+    @Override
+    @Transactional
     public boolean userExists(String email) {
         return userRepository.findUserByEmail(email).isPresent();
     }
@@ -78,9 +89,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
+
     }
 
     @Override
+    @Transactional
     public User findByName(String name) {
 
         return  userRepository.findFirstByUsername(name) ;
@@ -147,6 +160,7 @@ public class UserServiceImpl implements UserService {
                 e.printStackTrace();
             }
         });
+        log.info("New user was registered "+saved.get()+" "+ LocalDateTime.now());
         return saved.get();
     }
 
@@ -185,6 +199,7 @@ public class UserServiceImpl implements UserService {
         productRepository.save(product);
         userRepository.save(user);//сохраняем
 
+        log.info("Product was delete "+productId+ " from user "+user);
         return isRemove;
     }
 

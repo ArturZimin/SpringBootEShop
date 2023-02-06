@@ -5,6 +5,9 @@ import by.step.zimin.eshop.model.VerificationToken;
 import by.step.zimin.eshop.repository.UserRepository;
 import by.step.zimin.eshop.repository.VerificationTokenRepository;
 import by.step.zimin.eshop.service.VerificationTokenService;
+import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +17,10 @@ import java.util.Optional;
 
 
 @Service
+@Log4j2
 public class VerificationTokenServiceImpl implements VerificationTokenService {
+
+
 
     private final VerificationTokenRepository verificationTokenRepository;
     private final UserRepository userRepository;
@@ -44,6 +50,7 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
         //set expiry date to 24 hours
         verificationToken.setExpiryDate(calculateExpiryDate(24 * 60));//24 hours expiryDate
         verificationTokenRepository.save(verificationToken);
+        log.info("Save user with token "+verificationToken);
     }
 
     @Transactional
@@ -57,6 +64,8 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
         cal.add(Calendar.MINUTE, expiryTimeInMinutes);//add 24*60=1440 minutes(24 hours)
         return new Timestamp(cal.getTime().getTime());//return time in long
     }
+
+
 
 }
 /** add 9 years:

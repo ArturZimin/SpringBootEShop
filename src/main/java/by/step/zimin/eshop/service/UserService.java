@@ -6,7 +6,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService extends UserDetailsService {
+public interface UserService extends UserDetailsService{
+
+
+    boolean userExists(String email);
 
     boolean save(UserDto userDto);
 
@@ -15,6 +18,7 @@ public interface UserService extends UserDetailsService {
     List<UserDto> getAllUser();
 
     User registration(UserDto userDto);
+
     User findByName(String name);
 
     void updateUser(UserDto userDto);

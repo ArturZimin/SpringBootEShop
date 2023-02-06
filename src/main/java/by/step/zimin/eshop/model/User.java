@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -39,6 +40,19 @@ public class User {
         }else {
             return false;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(address, user.address) && Objects.equals(phone, user.phone) && Objects.equals(email, user.email) && Objects.equals(enable, user.enable) && role == user.role && Objects.equals(bucket, user.bucket) && Objects.equals(wallet, user.wallet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, address, phone, email, enable, role, bucket, wallet);
     }
 }
 

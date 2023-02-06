@@ -50,7 +50,7 @@ public class ProductDto {
     private String podCategory;
 
     //discount
-    private Discount discount;
+    private Integer discount;
 
 
     public Boolean notNull(Object obj) {

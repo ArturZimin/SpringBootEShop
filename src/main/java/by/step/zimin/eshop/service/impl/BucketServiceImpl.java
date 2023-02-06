@@ -10,6 +10,9 @@ import by.step.zimin.eshop.repository.BucketRepository;
 import by.step.zimin.eshop.repository.ProductRepository;
 import by.step.zimin.eshop.service.BucketService;
 import by.step.zimin.eshop.service.UserService;
+import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +25,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@Log4j2
 public class BucketServiceImpl implements BucketService {
+
 
     private final BucketRepository bucketRepository;
     private final ProductRepository productRepository;
@@ -86,6 +91,7 @@ public class BucketServiceImpl implements BucketService {
         }
         bucketDto.setDetails(new ArrayList<>(mapByProductId.values()));// создаем новый список ,добавляем значения из мапы ,сетим детали корзины в корзину дто
         bucketDto.aggregate();//собираем корзину для представления пользователю
+
         return bucketDto;
     }
 

@@ -161,13 +161,13 @@
 
 <div class="index_filter">
     <!-- aside Widget -->
-    <form>
+    <form  method="get" th:action="@{/products/search/by/all/filter}" id="form_filter"></form>
         <div class="aside">
             <h3 class="aside-title">Categories</h3>
             <div class="checkbox-filter">
 
                 <div class="input-checkbox">
-                    <input type="checkbox" id="category-1">
+                    <input type="checkbox" id="category-1" name="laptops" form="form_filter" />
                     <label for="category-1">
                         <span></span>
                         LAPTOPS
@@ -176,7 +176,7 @@
                 </div>
 
                 <div class="input-checkbox">
-                    <input type="checkbox" id="category-3">
+                    <input type="checkbox" id="category-3" name="phones" form="form_filter"/>
                     <label for="category-3">
                         <span></span>
                         PHONES
@@ -184,7 +184,7 @@
                     </label>
                 </div>
                 <div class="input-checkbox">
-                    <input type="checkbox" id="category-2">
+                    <input type="checkbox" id="category-2" name="tablets" form="form_filter"/>
                     <label for="category-2">
                         <span></span>
                         TABLETS
@@ -193,7 +193,7 @@
                 </div>
 
                 <div class="input-checkbox">
-                    <input type="checkbox" id="category-4">
+                    <input type="checkbox" id="category-4"/>
                     <label for="category-4">
                         <span></span>
                         CAMERAS
@@ -202,7 +202,7 @@
                 </div>
 
                 <div class="input-checkbox">
-                    <input type="checkbox" id="category-5">
+                    <input type="checkbox" id="category-5"/>
                     <label for="category-5">
                         <span></span>
                         ACCESSORIES
@@ -211,7 +211,7 @@
                 </div>
 
                 <div class="input-checkbox">
-                    <input type="checkbox" id="category-6">
+                    <input type="checkbox" id="category-6"/>
                     <label for="category-6">
                         <span></span>
                         WATCHES
@@ -229,7 +229,7 @@
                 <div class="input-number price-min">
                     <label for="customRange2" class="form-label">Min:</label>
                     <input class="input_price_min" type="text" style="height: 20px;width:50px; color: darkblue;font-size: large; border: 0; " placeholder="0$" readonly/>
-                    <input type="range" class="form-range" min="0" max="5000" step="1" id="customRange2" value="0" oninput="showValueMin(this.value)" onchange="showValueMin(this.value)" />
+                    <input type="range" class="form-range" min="0" max="5000" step="1" id="customRange2" value="0" oninput="showValueMin(this.value)" onchange="showValueMin(this.value)" name="min" form="form_filter" />
                 </div>
             </div>
 
@@ -237,7 +237,7 @@
                 <div class="input-number price-max">
                     <label for="customRange1" class="form-label">Max:</label>
                     <input class="input_price_max" type="text" style="height: 20px;width:50px; color: darkblue;font-size: large; border: 0; " placeholder="5000$" readonly/>
-                    <input type="range" class="form-range" min="0" max="5000" step="1" id="customRange1" value="5000" oninput="showValueMax(this.value)" onchange="showValueMax(this.value)"/>
+                    <input type="range" class="form-range" min="0" max="5000" step="1" id="customRange1" value="5000" oninput="showValueMax(this.value)" onchange="showValueMax(this.value)" name="max" form="form_filter"/>
                 </div>
             </div>
         </div>
@@ -248,14 +248,14 @@
             <h3 class="aside-title">Sort by :</h3>
             <div>
                 <form th:action="@{/}" method="GET" enctype="multipart/form-data" th:enctype="UTF-8">
-                    <input type="hidden" name="sortBy" value="price">
+                    <input type="hidden" name="sortBy" value="price"/>
                     <button class="button_sort_by" type="submit">PRICE &#8595;</button>
                 </form>
             </div>
             <br/>
             <div>
                 <form th:action="@{/}" method="GET" enctype="multipart/form-data" th:enctype="UTF-8">
-                    <input type="hidden" name="sortBy" value="year">
+                    <input type="hidden" name="sortBy" value="year"/>
                     <button class="button_sort_by" type="submit">NEW &#8595;</button>
                 </form>
             </div>
@@ -268,7 +268,7 @@
             <h3 class="aside-title">Brand</h3>
             <div class="checkbox-filter">
                 <div class="input-checkbox">
-                    <input type="checkbox" id="brand-1">
+                    <input type="checkbox" id="brand-1"/>
                     <label for="brand-1">
                         <span></span>
                         SAMSUNG
@@ -276,7 +276,7 @@
                     </label>
                 </div>
                 <div class="input-checkbox">
-                    <input type="checkbox" id="brand-2">
+                    <input type="checkbox" id="brand-2"/>
                     <label for="brand-2">
                         <span></span>
                         HP
@@ -284,7 +284,7 @@
                     </label>
                 </div>
                 <div class="input-checkbox">
-                    <input type="checkbox" id="brand-3">
+                    <input type="checkbox" id="brand-3"/>
                     <label for="brand-3">
                         <span></span>
                         SONY
@@ -292,7 +292,7 @@
                     </label>
                 </div>
                 <div class="input-checkbox">
-                    <input type="checkbox" id="brand-4">
+                    <input type="checkbox" id="brand-4"/>
                     <label for="brand-4">
                         <span></span>
                         ASUS
@@ -300,7 +300,7 @@
                     </label>
                 </div>
                 <div class="input-checkbox">
-                    <input type="checkbox" id="brand-5">
+                    <input type="checkbox" id="brand-5"/>
                     <label for="brand-5">
                         <span></span>
                         APPLE
@@ -308,7 +308,7 @@
                     </label>
                 </div>
                 <div class="input-checkbox">
-                    <input type="checkbox" id="brand-6">
+                    <input type="checkbox" id="brand-6"/>
                     <label for="brand-6">
                         <span></span>
                         DELL
@@ -319,9 +319,9 @@
         </div>
         <br/>
         <div>
-            <button class="form_but" type="submit">Apply</button>
+            <button class="form_but" type="submit" form="form_filter" >Apply</button>
         </div>
-    </form>
+
 </div>
 <!--/filter-->
 
@@ -332,8 +332,8 @@
         <div class="product-img">
             <!--            <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{products[1].imageProduct}}">-->
             <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{product.imageProduct}}"/>
-            <div class="product-label" th:if="${product.discount!=null}" >
-                <span class="sale"  th:text="'-'+${product.discount.discount+'%'}">-30%</span>
+            <div class="product-label" th:if="${product.discount>0}" >
+                <span class="sale"  th:text="'-'+${product.discount+'%'}">-30%</span>
                 <span class="new">NEW</span>
             </div>
         </div>
@@ -341,8 +341,9 @@
             <p class="product-category" th:text="${product.category.podCategory}">Category</p>
             <h3 class="product-name"><a th:href="@{/products/get/one/{id}(id=${product.id})}"
                                         th:text="${product.title}">product name goes here</a></h3>
-            <h4 class="product-price" th:text="'$'+${product.price}">$980.00</h4><del th:if="${product.discount!=null}">
-            <del class="product-old-price"  th:with="result=${(product.price/100)*(100 - product.discount.discount)}"><span
+            <h4 class="product-price" th:text="'$'+${product.price}">$980.00</h4>
+            <del th:if="${product.discount>0}">
+            <del class="product-old-price"  th:with="result=${(product.price/100)*(100 - product.discount)}"><span
                     th:text="${result}">$600.00</span>
             </del></del>
             <div class="product-rating">
@@ -460,4 +461,3 @@
 </html>
 
 
-<

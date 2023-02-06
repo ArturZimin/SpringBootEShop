@@ -4,6 +4,9 @@ import by.step.zimin.eshop.model.*;
 import by.step.zimin.eshop.repository.OrderRepository;
 import by.step.zimin.eshop.service.*;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +20,12 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
+@Log4j2
 public class OrderServiceImpl implements OrderService {
+
+    //private static final Logger log= LoggerFactory.getLogger(OrderServiceImpl.class);
+
+
     @Autowired
     private final UserService userService;
     @Autowired
@@ -26,6 +34,8 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     @Autowired
     private final OrderDetailsService orderDetailsService;
+
+
 
 
     @Override

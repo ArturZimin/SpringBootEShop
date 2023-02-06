@@ -10,11 +10,15 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ProductService {
+    Product toProduct(ProductDto productDto);
+
+    ProductDto toDto(Product product);
+
     List<ProductDto> getAll();
 
     void addProductToUserBucket(Long productId, String username);
 
-    Boolean addProduct(MultipartFile file,MultipartFile file2,MultipartFile file3,ProductDto productDto) throws IOException;
+    Boolean addProduct(MultipartFile file, MultipartFile file2, MultipartFile file3, ProductDto productDto) throws IOException;
 
     List<ProductDto> getPhones();
 
@@ -25,6 +29,7 @@ public interface ProductService {
     void minusOneForAmount(Long id);
 
     List<Product> productListDTOToProductList(List<ProductDto> product);
+
     List<ProductDto> productListToProductListDto(List<Product> product);
 
     Long getAmount(Long id);

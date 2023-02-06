@@ -45,8 +45,20 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     private Processor processor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Discount discount;
+
+    public Product(Long id, String title, BigDecimal price, CurrencyType currencyType, Long amount, Category category, ProductDetails productDetails, Processor processor, Discount discount) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.currencyType = currencyType;
+        this.amount = amount;
+        this.category = category;
+        this.productDetails = productDetails;
+        this.processor = processor;
+        this.discount = discount;
+    }
 
     public BigDecimal getPrice() {
         if (this.price == null) {

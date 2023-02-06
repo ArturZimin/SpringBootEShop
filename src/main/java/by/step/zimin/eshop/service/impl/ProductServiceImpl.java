@@ -5,6 +5,9 @@ import by.step.zimin.eshop.dto.ProductDto;
 import by.step.zimin.eshop.model.*;
 import by.step.zimin.eshop.repository.ProductRepository;
 import by.step.zimin.eshop.service.*;
+import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -22,7 +26,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
+@Log4j2
 public class ProductServiceImpl implements ProductService {
+
+//    private static final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
+
 
     private final ProductRepository productRepository;
     private final UserService userService;
@@ -49,6 +57,7 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException("The products not found!");
         }
 
+        log.info("The method getAll() found: " + productList);
         return productListToProductListDto(productList);
     }
 
@@ -108,9 +117,14 @@ public class ProductServiceImpl implements ProductService {
 
         categoryService.addCategory(category);
 
-        Discount discount=Discount.builder()
-                .discount(productDto.getDiscount().getDiscount())
-                .build();
+        Discount discount = new Discount();
+        if (productDto.getDiscount() != null) {
+            discount.setDiscount(productDto.getDiscount());
+        }else if(productDto.getDiscount() == null){
+            discount.setDiscount(0);
+        }
+
+
 
         Product product = Product.builder()
                 .id(productDto.getId())
@@ -129,18 +143,15 @@ public class ProductServiceImpl implements ProductService {
 
 
         Product productSaved = productRepository.save(product);
-        if (productSaved.getId() != null) {
+
             return true;
-        } else {
-            return false;
-        }
 
     }
 
 
     @Override
     public List<ProductDto> getPhones() {
-        List<Product> listPhones = productRepository.findAllByCategory_PodCategory("phone");
+        List<Product> listPhones = productRepository.findAllByCategory_PodCategory("Phone");
         return productListToProductListDto(listPhones);
     }
 
@@ -154,16 +165,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<ProductDto> findByOrderByTitle(Integer page, Integer size) {
-        Page<Product> firstNineProducts=productRepository.findByOrderByTitle(PageRequest.of(page,size));
-      return firstNineProducts.map(new Function<Product, ProductDto>() {
-          @Override
-          public ProductDto apply(Product product) {
-              return toDto(product);
-          }
-      });
+        Page<Product> firstNineProducts = productRepository.findByOrderByTitle(PageRequest.of(page, size));
+        return firstNineProducts.map(new Function<Product, ProductDto>() {
+            @Override
+            public ProductDto apply(Product product) {
+                return toDto(product);
+            }
+        });
     }
-
-
 
 
     @Override
@@ -181,7 +190,6 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id).get();
         return product.getAmount();
     }
-
 
 
     @Override
@@ -275,13 +283,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> getAllProductsSortByPrice() {
-        List<Product> productDtoList=productRepository.findAllByOrderByPrice();
+        List<Product> productDtoList = productRepository.findAllByOrderByPrice();
         return productListToProductListDto(productDtoList);
     }
 
     @Override
     public List<ProductDto> getAllProductsSortByYear() {
-        List<Product> productDtoList=productRepository.findAllByOrderByProductDetails_YearProductionDesc();
+        List<Product> productDtoList = productRepository.findAllByOrderByProductDetails_YearProductionDesc();
         return productListToProductListDto(productDtoList);
     }
 
@@ -300,7 +308,10 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Override
     public Product toProduct(ProductDto productDto) {
+       Discount discountDto = new Discount();
+       discountDto.setDiscount(productDto.getDiscount());
         return Product.builder()
                 .id(productDto.getId())
                 .title(productDto.getTitle())
@@ -311,12 +322,20 @@ public class ProductServiceImpl implements ProductService {
                 .productDetails(productDto.getProductDetails())
                 .processor(productDto.getProcessor())
                 .amount(productDto.getAmount())
-                .discount(productDto.getDiscount())
+                .discount(discountDto)
                 .build();
 
     }
 
+    @Override
     public ProductDto toDto(Product product) {
+        Discount discountProduct=new Discount();
+        if (product.getDiscount()==null){
+            discountProduct.setDiscount(0);
+        }else  if (product.getDiscount().getDiscount()!=null){
+            discountProduct.setDiscount(product.getDiscount().getDiscount());
+        }
+
         return ProductDto.builder()
                 .id(product.getId())
                 .title(product.getTitle())
@@ -329,7 +348,7 @@ public class ProductServiceImpl implements ProductService {
                 .productDetails(product.getProductDetails())
                 .processor(product.getProcessor())
                 .amount(product.getAmount())
-                .discount(product.getDiscount())
+                .discount(discountProduct.getDiscount())
                 .build();
     }
 }

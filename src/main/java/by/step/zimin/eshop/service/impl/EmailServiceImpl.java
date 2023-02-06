@@ -5,6 +5,8 @@ import by.step.zimin.eshop.model.User;
 import by.step.zimin.eshop.model.VerificationToken;
 import by.step.zimin.eshop.service.EmailService;
 import by.step.zimin.eshop.service.VerificationTokenService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -23,6 +25,8 @@ import java.io.FileNotFoundException;
 
 @Service
 public class EmailServiceImpl implements EmailService {
+
+    private static final Logger log= LoggerFactory.getLogger(EmailServiceImpl.class);
 
 
     private JavaMailSender javaMailSender;
