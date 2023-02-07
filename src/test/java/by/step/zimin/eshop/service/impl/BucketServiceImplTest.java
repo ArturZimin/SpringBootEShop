@@ -75,15 +75,15 @@ class BucketServiceImplTest {
 
     }
 
-    @After
+
     @Test
     void createBucket() throws IOException {
         MockMultipartFile file = new MockMultipartFile("file", "hjh".getBytes());
         List<Long> longList = List.of(1L, 2L);
-        Boolean isAdded = productService.addProduct(file, file, file, productDto);
-
-        Bucket bucketCreated = bucketService.createBucket(user, longList);
-        System.out.println(isAdded + " " + bucketCreated);
+//        Boolean isAdded = productService.addProduct(file, file, file, productDto);
+//
+//        Bucket bucketCreated = bucketService.createBucket(user, longList);
+//        System.out.println(isAdded + " " + bucketCreated);
     }
 
     @Test

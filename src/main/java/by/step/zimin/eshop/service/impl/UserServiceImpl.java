@@ -290,6 +290,7 @@ public class UserServiceImpl implements UserService {
      * находим юзера в bd
      */
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findFirstByUsername(username);
         if (user == null) {

@@ -36,11 +36,9 @@ public class OrderServiceImpl implements OrderService {
     private final OrderDetailsService orderDetailsService;
 
 
-
-
     @Override
     @Transactional
-    public void createOrder(String name) {
+    public Order createOrder(String name) {
         User user = userService.findByName(name);
         List<Product> productList = user.getBucket().getProductList();
 
@@ -52,8 +50,14 @@ public class OrderServiceImpl implements OrderService {
                 .updated(LocalDateTime.of(LocalDate.now(), LocalTime.now()))
                 .user(user)
                 .build();
-        orderRepository.save(order);
+        Order saved = orderRepository.save(order);
+        return saved;
+    }
 
+    @Override
+    @Transactional
+    public Order findOrderByUsername(String userName) {
+        return orderRepository.findOrderByUser_Username(userName);
     }
 
 

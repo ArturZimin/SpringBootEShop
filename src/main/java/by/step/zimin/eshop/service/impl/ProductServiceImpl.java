@@ -49,8 +49,14 @@ public class ProductServiceImpl implements ProductService {
         this.categoryService = categoryService;
     }
 
+    @Override
+    @Transactional
+    public void save(Product product){
+        productRepository.save(product);
+    }
 
     @Override
+    @Transactional
     public List<ProductDto> getAll() {
         List<Product> productList = productRepository.findAll();
         if (productList == null) {
