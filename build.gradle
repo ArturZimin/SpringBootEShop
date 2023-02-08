@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.4'
 	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
 	id 'java'
+	id 'application'
 }
 
 group = 'by.step.zimin.eshop'
@@ -56,6 +57,8 @@ dependencies {
 
 
 }
+
+mainClassName = 'by.step.zimin.eshop.EshopApplication'
 
 tasks.named('test') {
 	useJUnitPlatform()
