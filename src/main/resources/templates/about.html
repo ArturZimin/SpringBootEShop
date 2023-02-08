@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>All phones page</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <!--    Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--     Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div th:insert="~{fragments/menu::#_nav_menu}"></div>
+
+<div th:insert="~{index::#fragment_header_bucket}"></div>
+<hr/>
+<div>
+
+
+    <div class="div_all_form">
+        <h1>About us</h1>
+        <hr/>
+        <p>Our company has been selling electronic equipment for over 10 years. We offer a good range and
+            competitive
+            prices for machinery. We work with the delivery of goods throughout the country. Thanks for choosing us!
+            You can leave your suggestion or feedback, we will be happy to help you!</p>
+        <br/>
+        <form method="form" class="improve">
+            <div><label>Tell us what you would like to improve in our
+                store?</label></div>
+            <input
+                    type="text" height="80px" width="150px" maxlength="300"/>
+            <button type="submit" class="form_but">Send</button>
+        </form>
+        <br/>
+        <form method="form" class="improve">
+            <div><label>Leave a review please:</label></div>
+            <input type="text" style="width: 150px;height:70px;border-radius: 3px " maxlength="300"/>
+            <br/>
+            <div><label>Rate our store please</label></div>
+            <input type="range" height="80px" width="150px" class="form-range" oninput="showValueMin(this.value)" onchange="showValueMin(this.value)" min="0" max="5" step="1" th:value="0"
+                   id="customRange2"
+                   value="0"/>
+            <button type="submit" class="form_but">Review</button>
+        </form>
+    </div>
+    <br/>
+
+
+</div>
+<hr/>
+<div class="div_img_hot_deal"><h1 class="h1_hot_deal">.</h1></div>
+<div th:insert="~{fragments/signUpForDiscounts::.newsletter}" style="margin-bottom: 4%">Discounts</div>
+<div>
+    <div th:insert="~{index::#footer}">Footer</div>
+</div>
+<script src="/js/script.js"></script>
+
+</body>
+</html>

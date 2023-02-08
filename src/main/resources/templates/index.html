@@ -63,8 +63,10 @@
     <div class="bucket_search">
 
         <div id="fragment_header_bucket">
-            <a th:href="@{/headers/add/iconCompany}"><img class="header_img" alt="icon"
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/headers/add/iconCompany}"><img class="header_img" alt="icon"
                                                           th:src="*{'data:image/png;base64,'+{iconCompany}}"></a>
+            <a sec:authorize="!isAuthenticated()" th:href="@{/users/page/company/about}"><img class="header_img" src="/img/s-mart.png" alt="icon"></a>
+            <a sec:authorize="hasAnyAuthority('USER')" th:href="@{/users/page/company/about}"><img class="header_img" src="/img/s-mart.png" alt="icon"></a>
             <a th:href="@{/products/get/phones}"><img class="header_img" src="/img/product07.png"></a>
             <a th:href="@{/products/get/accessories}"><img class="header_img" src="/img/product02.png"></a>
             <a th:href="@{/products/get/tablets}"><img class="header_img" src="/img/product04.png"></a>
@@ -328,7 +330,8 @@
 <!--products-->
 <div class="main_products_flex">
     <!-- product -->
-    <div class="product" th:each="product:${products}">
+    <div class="product" th:if="${products.size()!=0}" th:each="product:${products}">
+
         <div class="product-img">
             <!--            <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{products[1].imageProduct}}">-->
             <img src="/img/product03.png" alt="" th:src="*{'data:image/jpeg;base64,'+{product.imageProduct}}"/>
@@ -370,6 +373,9 @@
 
     </div>
     <!--        /product-->
+
+    <div   th:if="${products.size()==0}" style="height: 1300px"><h1 style="font-size: xxx-large;color: red">Not found products!</h1></div>
+
 
 </div>
 <!--   /products-->

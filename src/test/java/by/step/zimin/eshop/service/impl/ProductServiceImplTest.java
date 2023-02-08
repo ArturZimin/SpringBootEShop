@@ -89,7 +89,7 @@ class ProductServiceImplTest {
         this.productDetails.setColor(Color.BLUE);
         this.productDetails.setId(1l);
         this.productDetails.setAccumulatorCapacity(2200);
-        
+
         this.product2 = new Product();
         this.product2.setId(2L);
         this.product2.setCategory(category);
@@ -115,7 +115,6 @@ class ProductServiceImplTest {
     }
 
     @Test
-    @Transactional
     void addProductToUserBucket() throws IOException,RuntimeException {
 
         MockMultipartFile file = new MockMultipartFile("file", "hjh".getBytes());
@@ -144,7 +143,6 @@ class ProductServiceImplTest {
 
 
     @Test
-    @Transactional
     void addProduct() throws IOException {
         MockMultipartFile file = new MockMultipartFile("file", "hjh".getBytes());
         productService.addProduct(file, file, file, productService.toDto(product));

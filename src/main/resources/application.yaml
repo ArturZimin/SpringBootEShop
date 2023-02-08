@@ -27,8 +27,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   main:
     allow-circular-references: true
-
-
+server:
+  port: 8080
 
 
 
@@ -71,3 +71,4 @@ spring:
 #  spring.mail.properties.mail.smtp.auth=true
 #  spring.mail.properties.mail.smtp.starttls.enable=true
 #  spring.mail.properties.mail.smtp.starttls.required=true
+

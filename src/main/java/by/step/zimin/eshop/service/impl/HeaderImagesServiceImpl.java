@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -35,7 +36,7 @@ public class HeaderImagesServiceImpl implements HeaderImagesService {
                     .iconCompany(Base64.getEncoder().encodeToString(file.getBytes()))
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
+           log.warn("IOException",e.getStackTrace());
         }
         if (headerImagesDto!=null) {
             headerImagesRepository.save(toHeaderImages(headerImagesDto));
@@ -46,10 +47,18 @@ public class HeaderImagesServiceImpl implements HeaderImagesService {
 
     @Override
     public String getIconCompany() {
-    HeaderImages headerImages=  headerImagesRepository.findById(1L).get();
-    HeaderImagesDto headerImagesDto=toHeaderImagesDto(headerImages);
+        Optional<HeaderImages> headerImages = headerImagesRepository.findById(1L);
+        HeaderImagesDto headerImagesDto = null;
+        if (headerImages.isEmpty()) {
+            return null;
+        } else if (headerImages.isPresent()) {
+            headerImagesDto = toHeaderImagesDto(headerImages.get());
+        }
         return headerImagesDto.getIconCompany();
     }
+
+
+
 
     public HeaderImages toHeaderImages(HeaderImagesDto headerImagesDto){
         return  HeaderImages.builder()

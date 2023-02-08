@@ -11,9 +11,13 @@
     <!-- Bucket and search -->
     <div class="bucket_search">
 
+
         <div id="fragment_header_bucket2">
-            <a th:href="@{/headers/add/iconCompany}"><img class="header_img" alt="icon"
-                                                          th:src="*{'data:image/png;base64,'+{iconCompany}}"></a>
+            <a th:if="${iconCompany!=null}" th:href="@{/headers/add/iconCompany}"><img class="header_img" alt="icon"
+                                                                                       th:src="*{'data:image/png;base64,'+{iconCompany}}"></a>
+            <a th:if="${iconCompany==null}"><img class="header_img"
+                                                 src="/img/s-mart.png"
+                                                 alt="icon"></a>
             <a th:href="@{/products/get/phones}"><img class="header_img" src="/img/product07.png"></a>
             <a th:href="@{/products/get/accessories}"><img class="header_img" src="/img/product02.png"></a>
             <a th:href="@{/products/get/tablets}"><img class="header_img" src="/img/product04.png"></a>

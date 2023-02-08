@@ -24,6 +24,8 @@
 <div>
     <table class="table">
         <thead class="thead-dark">
+
+        <tr th:if="${phones.size()==0}"><td style="font-size: xxx-large;color: #c40303">Not found products!</td></tr>
         <tr>
             <th scope="col">Image</th>
             <th scope="col">Description</th>

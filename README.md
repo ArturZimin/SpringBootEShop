@@ -12,7 +12,8 @@
 - Email notification of new discounts
 
 ### Tech stack:
-+ Java 11SE
++ JDKs\corretto-11
++ Java 11 SE
 + Spring (Web,Data,Security,Boot)
 + Spring Mail Sender
 + Thymeleaf
@@ -22,47 +23,24 @@
 
 ### Application launch:
 1. Use link for clone and launch in IDE:    [github](https://github.com/ArturZimin/SpringBootEShop.git)
-2. Create database and fix data in the file application.yaml: ``` datasource:
-   url: jdbc:mysql://localhost:3306/eshopdb
-   username: root
-   password: 7001  ```
-3. Run application from bash: (gradle)
-### Screenshots of user API
-![MainPage](src/main/resources/static/imgPresentation/indexPage.png)
- ***
- ![MainPage](src/main/resources/static/imgPresentation/indexPage2.png)
- ***
- ![MainPage](src/main/resources/static/imgPresentation/indexFooter.png)
-***
-![MainPage](src/main/resources/static/imgPresentation/detailsShow.png)
-***
-![MainPage](src/main/resources/static/imgPresentation/sortByDate.png)
-***
-![MainPage](src/main/resources/static/imgPresentation/watcesPage.png)
-***
-![MainPage](src/main/resources/static/imgPresentation/formOrder.png)
-***
-
-![MainPage](src/main/resources/static/imgPresentation/addProductPage.png)
-
-***
-![MainPage](src/main/resources/static/imgPresentation/addUserOnlyAdmin.png
-)
-***
-![MainPage](src/main/resources/static/imgPresentation/ChangeDataOfUserPage.png)
-***
-![MainPage](src/main/resources/static/imgPresentation/chengeLogoOfStore.png
-)
-***
-![MainPage](src/main/resources/static/imgPresentation/showAllUsers.png)
-***
-![MainPage](src/main/resources/static/imgPresentation/registrationPage.png)
-***
-![MainPage](src/main/resources/static/imgPresentation/authorization.png)
-***
-![MainPage](src/main/resources/static/imgPresentation/confirmRegistration.png)
-***
-![MainPage](src/main/resources/static/imgPresentation/actvationPage.png)
-***
-### Reference on video (Linkedin)
-https://www.linkedin.com/posts/artur-zimin-719294212_this-is-my-final-project-activity-7012022145912332288-h6-i?utm_source=share&utm_medium=member_desktop
+2. Set up MySql: mysql.com
+3. Create database:
+   ```  cd C:\Program Files\MySQL\MySQL Server 8.0\bin  ```&#9166;
+   ```  mysql -u name -p ```&#9166;
+   ```   Enter password: ****```&#9166;
+   ```    create database eshopdb;```&#9166;
+4. Fix data in the file application.yaml:  
+   ```  
+   datasource:
+    url: jdbc:mysql://localhost:3306/eshopdb
+    username: ****
+    password: ****
+   jpa:
+    hibernate:
+      ddl-auto: create 
+5. Run application from bash:   
+    -  cd C:\Users\IdeaProjects\E-SHOP &#9166;  (directory of app)
+    -  gradlew run &#9166; (run app)
+6. Run test from bash:     
+    -  cd C:\Users\IdeaProjects\E-SHOP &#9166;  (directory of app)
+    -  gradlew test &#9166; (run test)

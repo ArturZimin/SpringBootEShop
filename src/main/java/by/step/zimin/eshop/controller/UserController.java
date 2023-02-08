@@ -23,6 +23,10 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping(value = "/page/company/about")
+    public String getPageAboutCompany(){
+        return "about";
+    }
 
     @GetMapping(value = "/get/registration/form")
     public String getRegistrationForm() {

@@ -22,7 +22,7 @@ public class EshopApplication {
 
 
         PasswordEncoder encoder = context.getBean(PasswordEncoder.class);
-        System.out.println(encoder.encode("1111"));//чтобы посмотреть пороль закодированный
+        System.out.println(encoder.encode("1111"));//чтобы посмотреть пароль закодированный
 
 //        log.trace("Trace level log message");
 //        log.debug("Debug level log message");
