@@ -36,7 +36,7 @@ public class HeaderImagesServiceImpl implements HeaderImagesService {
                     .iconCompany(Base64.getEncoder().encodeToString(file.getBytes()))
                     .build();
         } catch (IOException e) {
-           log.warn("IOException",e.getStackTrace());
+          e.getStackTrace();
         }
         if (headerImagesDto!=null) {
             headerImagesRepository.save(toHeaderImages(headerImagesDto));

@@ -8,6 +8,8 @@ import by.step.zimin.eshop.model.User;
 import java.util.List;
 
 public interface BucketService {
+    List<Product> getProductById(List<Long> productsIds);
+
     Bucket createBucket(User user, List<Long> productIds);
 
     void addProduct(Bucket bucket, List<Long> productIds);
@@ -15,7 +17,8 @@ public interface BucketService {
     BucketDto getBucketByUser(String name);
 
     void deleteProduct(Long id, String name);
-    Long getAmountInBucket( String name);
+
+    Long getAmountInBucket(String name);
 
 
 }

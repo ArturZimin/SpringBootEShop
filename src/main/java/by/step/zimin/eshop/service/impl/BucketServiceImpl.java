@@ -51,6 +51,8 @@ public class BucketServiceImpl implements BucketService {
         return bucketRepository.save(bucket);
     }
 
+    @Override
+    @Transactional
     public List<Product> getProductById(List<Long> productsIds) {
         return productsIds.stream()
                 .map(productRepository::getReferenceById)//get reference on the Product, by id
@@ -68,6 +70,7 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
+    @Transactional
     public BucketDto getBucketByUser(String name) {
         User user = userService.findByName(name);//находим узера
         if (user == null || user.getBucket() == null) {//проверяем на налл
@@ -111,10 +114,10 @@ public class BucketServiceImpl implements BucketService {
         User user = userService.findByName(name);//находим узера
         if (user == null || user.getBucket() == null) {//проверяем на налл
             return 0L;
-        }else{
+        } else {
 
-            Integer amount= user.getBucket().getProductList().size();
-            Long result=amount.longValue();
+            Integer amount = user.getBucket().getProductList().size();
+            Long result = amount.longValue();
             return result;
         }
 

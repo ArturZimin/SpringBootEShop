@@ -33,7 +33,7 @@ public class EmailController {
         try {
             emailService.sendEmail(userDto);
         } catch (MailException mailException) {
-            LOG.error("Error while sending out email..{}", mailException.getStackTrace());
+//            LOG.error("Error while sending out email..{}", mailException.getStackTrace());
             return new Response(500, "Error while sending out email..{}",null);
         }
 
@@ -50,7 +50,7 @@ public class EmailController {
             emailService.sendEmailWithAttachment(email, "Order Confirmation",
                     "F:\\HibernateSpring\\Spring projects\\eshop\\src\\main\\java\\by\\step\\zimin\\eshop\\file\\thanksForOrder.txt");
         } catch (FileNotFoundException | MessagingException mailException) {
-            LOG.error("Error while sending out email..{}", mailException.getStackTrace());
+//            LOG.error("Error while sending out email..{}", mailException.getStackTrace());
             return new ResponseEntity<>("Unable to send email", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

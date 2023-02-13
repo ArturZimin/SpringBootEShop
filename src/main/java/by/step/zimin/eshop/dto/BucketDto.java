@@ -16,11 +16,12 @@ public class BucketDto {
 
     private Integer amountProducts;
     private Double sum;
-    private List<BucketDetailsDto> details=new ArrayList<>();
+    private List<BucketDetailsDto> details = new ArrayList<>();
 
 
 
     public void aggregate(){
+
         this.amountProducts=details.size();//Returns:the number of elements in this list
         this.sum=details.stream()
                 .map(BucketDetailsDto::getSum)//достаем сумму

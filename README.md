@@ -17,13 +17,13 @@
 + Spring (Web,Data,Security,Boot)
 + Spring Mail Sender
 + Thymeleaf
-+ MySql db
++ MySql db version:8
 + Lombok
 + Flyway
 
 ### Application launch:
 1. Use link for clone and launch in IDE:    [github](https://github.com/ArturZimin/SpringBootEShop.git)
-2. Set up MySql: mysql.com
+2. Set up MySql: [MySql](https://www.mysql.com)
 3. Create database:
    ```  cd C:\Program Files\MySQL\MySQL Server 8.0\bin  ```&#9166;
    ```  mysql -u name -p ```&#9166;
