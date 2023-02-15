@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
 
 //    private static final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
 
-
+    private final DiscountService discountService;
     private final ProductRepository productRepository;
     private final UserService userService;
     private final BucketService bucketService;
@@ -40,7 +40,8 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryService categoryService;
 
 
-    public ProductServiceImpl(ProductRepository productRepository, UserService userService, BucketService bucketService, ProductDetailsService productDetailsService, ProcessorService processorService, CategoryService categoryService) {
+    public ProductServiceImpl(DiscountService discountService, ProductRepository productRepository, UserService userService, BucketService bucketService, ProductDetailsService productDetailsService, ProcessorService processorService, CategoryService categoryService) {
+        this.discountService = discountService;
         this.productRepository = productRepository;
         this.userService = userService;
         this.bucketService = bucketService;
@@ -51,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public void save(Product product){
+    public void save(Product product) {
         productRepository.save(product);
     }
 
@@ -123,13 +124,10 @@ public class ProductServiceImpl implements ProductService {
 
         categoryService.addCategory(category);
 
-        Discount discount = new Discount();
-        if (productDto.getDiscount() != null) {
-            discount.setDiscount(productDto.getDiscount());
-        }else if(productDto.getDiscount() == null){
-            discount.setDiscount(0);
-        }
-
+        Discount discount = Discount.builder()
+                .discount(productDto.getDiscount())
+                .build();
+        discountService.save(discount);
 
 
         Product product = Product.builder()
@@ -150,7 +148,7 @@ public class ProductServiceImpl implements ProductService {
 
         Product productSaved = productRepository.save(product);
 
-            return true;
+        return true;
 
     }
 
@@ -316,8 +314,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product toProduct(ProductDto productDto) {
-       Discount discountDto = new Discount();
-       discountDto.setDiscount(productDto.getDiscount());
+        Discount discountDto = new Discount();
+        discountDto.setDiscount(productDto.getDiscount());
         return Product.builder()
                 .id(productDto.getId())
                 .title(productDto.getTitle())
@@ -335,12 +333,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto toDto(Product product) {
-        Discount discountProduct=new Discount();
-        if (product.getDiscount()==null){
-            discountProduct.setDiscount(0);
-        }else  if (product.getDiscount().getDiscount()!=null){
-            discountProduct.setDiscount(product.getDiscount().getDiscount());
-        }
+//        Discount discountProduct=new Discount();
+//        if (product.getDiscount()==null){
+//            discountProduct.setDiscount(0);
+//        }else  if (product.getDiscount().getDiscount()!=null){
+//            discountProduct.setDiscount(product.getDiscount().getDiscount());
+//        }
 
         return ProductDto.builder()
                 .id(product.getId())
@@ -354,7 +352,7 @@ public class ProductServiceImpl implements ProductService {
                 .productDetails(product.getProductDetails())
                 .processor(product.getProcessor())
                 .amount(product.getAmount())
-                .discount(discountProduct.getDiscount())
+                .discount(product.getDiscount().getDiscount())
                 .build();
     }
 }

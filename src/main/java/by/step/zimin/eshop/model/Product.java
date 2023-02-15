@@ -18,13 +18,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Long amount;
 
-    private String title;
-
-    private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private CurrencyType currencyType;
-
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private String imageProduct;
@@ -34,16 +31,16 @@ public class Product {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private String imageProduct3;
-
-    private Long amount;
+    private BigDecimal price;
+    private String title;
 
     @OneToOne(fetch = FetchType.LAZY)
     private Category category;
-
-    @OneToOne
-    private ProductDetails productDetails;
     @ManyToOne(fetch = FetchType.LAZY)
     private Processor processor;
+    @OneToOne
+    private ProductDetails productDetails;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Discount discount;

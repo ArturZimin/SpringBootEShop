@@ -1,34 +1,39 @@
 version: "3.8"
 
 services:
-
+# name container
   springboot-app:
     container_name: springboot-app
     image: springboot-app
     restart: always
     build: .
     ports:
-      - 8000-8999:8080
+      - 8080:8080
     depends_on:
-      - mysqldb
+      - db
+    volumes:
+    - ./app:/var/www
     environment:
-      MYSQL_HOST: mysqldb
+      MYSQL_HOST: db
       MYSQL_PASSWORD: 7001
       MYSQL_PORT: 3306
       MYSQL_ALLOW_EMPTY_PASSWORD:
-
-  mysqldb:
-    container_name: mysqldb
-    image: mysql
+# name container
+  db:
+    container_name: db
+    image: mysql:8.0
     volumes:
       - db:/var/lib/mysql
     restart: always
     ports:
       - 3307:3306
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     environment:
-      MYSQL_DATABASE: eshopdb
+      MYSQL_DATABASE: mysqldbd
       MYSQL_ROOT_PASSWORD: 7001
       MYSQL_PASSWORD: 7001
+
+
 
 
 

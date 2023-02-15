@@ -34,6 +34,10 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+// https://mvnrepository.com/artifact/org.flywaydb/flyway-core
+	implementation 'org.flywaydb:flyway-core:9.14.0'
+
+	implementation 'org.flywaydb:flyway-mysql:9.14.0'
 
 
 	testImplementation 'org.junit.platform:junit-platform-runner:1.9.2'
