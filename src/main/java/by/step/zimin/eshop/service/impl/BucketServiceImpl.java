@@ -87,13 +87,15 @@ public class BucketServiceImpl implements BucketService {
             if (detailsDto == null) {
                 mapByProductId.put(product.getId(), new BucketDetailsDto(product));//добавляем в мапу
             } else {
+
                 detailsDto.setImageProduct(product.getImageProduct());
-                detailsDto.setAmount(detailsDto.getAmount().add(new BigDecimal(1.0)));//добавляем к количеству + 1
-                detailsDto.setSum(detailsDto.getSum() + Double.valueOf(product.getPrice().toString()));//плюсуем  общую сумму
+                detailsDto.setAmount(detailsDto.getAmount().add(new BigDecimal("1.0")));//добавляем к количеству + 1
+                detailsDto.setSum(detailsDto.getSum() + Double.parseDouble(product.getPrice().toString()));//плюсуем  общую сумму
             }
         }
         bucketDto.setDetails(new ArrayList<>(mapByProductId.values()));// создаем новый список ,добавляем значения из мапы ,сетим детали корзины в корзину дто
         bucketDto.aggregate();//собираем корзину для представления пользователю
+
 
         return bucketDto;
     }

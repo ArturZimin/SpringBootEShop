@@ -344,11 +344,12 @@
             <p class="product-category" th:text="${product.category.podCategory}">Category</p>
             <h3 class="product-name"><a th:href="@{/products/get/one/{id}(id=${product.id})}"
                                         th:text="${product.title}">product name goes here</a></h3>
-            <h4 class="product-price" th:text="'$'+${product.price}">$980.00</h4>
-            <del th:if="${product.discount>0}">
-            <del class="product-old-price"  th:with="result=${(product.price/100)*(100 - product.discount)}"><span
-                    th:text="${result}">$600.00</span>
-            </del></del>
+            <h4 th:if="${product.discount<1}" class="product-price" th:text="'$'+${product.price}">$980.00</h4>
+            <del th:if="${product.discount>0}" class="product-old-price" th:text="'$'+${product.price}">$980.00</del>
+
+            <h4 th:if="${product.discount>0}" class="product-price"  th:with="result=${(product.price/100)*(100 - product.discount)}"><span
+                    th:text="'$'+${result}">$600.00</span>
+            </h4>
             <div class="product-rating">
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>

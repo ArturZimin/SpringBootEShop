@@ -30,6 +30,7 @@
                         <!--            <td>Image</td>-->
                         <td>Product</td>
                         <td>Amount</td>
+                        <td>Discount</td>
                         <td>Price</td>
                         <td>Sum</td>
                         <td>Remove</td>
@@ -38,6 +39,8 @@
                         <!--            <td ><img style="height: 17vh;width: 17vw" th:src="*{'data:image/png;base64,'+{detail.imageProduct}}"/></td>-->
                         <td th:text="${detail.title}">Title</td>
                         <td th:text="${detail.amount}">Amount</td>
+                        <td th:if="${detail.discount.discount==null}">0 %</td>
+                        <td th:if="${detail.discount.discount!=null}" th:text="${detail.discount.discount+' %'}" >Discount</td>
                         <td th:text="${detail.price}" ?>Price</td>
                         <td th:text="${detail.sum}">Sum</td>
                         <td><a th:href="@{/buckets/delete/product/{id}(id=${detail.productId})}">Remove</a></td>

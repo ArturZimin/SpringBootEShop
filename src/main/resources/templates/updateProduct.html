@@ -178,6 +178,12 @@
             </div>
         </div>
 
+        <div class="form-floating " th:object="${discount}">
+            <div class="form-floating mb-3">
+                <input type="number" name="discount" id="discount" class="form-control" min="0" max="100" required value="0"/>
+                <label for="discount">discount (5%)</label>
+            </div>
+        </div>
 
         <button class="form_but" type="submit">add product</button>
         <br/>

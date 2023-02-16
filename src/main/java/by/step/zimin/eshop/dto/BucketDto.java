@@ -1,5 +1,6 @@
 package by.step.zimin.eshop.dto;
 
+import by.step.zimin.eshop.model.Discount;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class BucketDto {
     private Double sum;
     @Builder.Default
     private List<BucketDetailsDto> details = new ArrayList<>();
+    private Discount discount;
 
 
 
