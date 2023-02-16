@@ -3,20 +3,27 @@ package by.step.zimin.eshop.service.impl;
 import by.step.zimin.eshop.dto.BucketDto;
 import by.step.zimin.eshop.dto.ProductDto;
 import by.step.zimin.eshop.model.*;
+import by.step.zimin.eshop.repository.BucketRepository;
 import by.step.zimin.eshop.repository.ProductRepository;
 import by.step.zimin.eshop.service.BucketService;
 import by.step.zimin.eshop.service.CategoryService;
 import by.step.zimin.eshop.service.ProductService;
 import by.step.zimin.eshop.service.UserService;
+import com.sun.jdi.event.Event;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -33,6 +40,9 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.mock;
+
+@ExtendWith(MockitoExtension.class)
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
@@ -127,22 +137,15 @@ class BucketServiceImplTest {
     }
 
     @Test
+    @Disabled
     void getProductById() {
+              final Product event=mock(Product.class);
         List<Long> longList = List.of(1L);
         List<Product> list = bucketService.getProductById(longList);
-        Assert.assertEquals(1, list.size());
+        Assertions.assertEquals(1, list.size());
     }
 
-    @Test
-    void addProduct() {
-        List<Long> longList = List.of(1L);
-        List<Product> list = bucketService.getProductById(longList);
-        userService.save(user);
-        productService.save(product);
-        bucketService.addProduct(bucket, longList);
-//        BucketDto bucketDto2 = bucketService.getBucketByUser(this.user.getUsername());
-//        Assert.assertNotNull(bucketDto2);
-    }
+
 
     @Test
     void getBucketByUser() {

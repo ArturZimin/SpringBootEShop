@@ -16,6 +16,7 @@ public class BucketDto {
 
     private Integer amountProducts;
     private Double sum;
+    @Builder.Default
     private List<BucketDetailsDto> details = new ArrayList<>();
 
 
